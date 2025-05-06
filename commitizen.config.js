@@ -65,8 +65,7 @@ const COMMIT_QUESTION_LIST = [
     type: 'input',
     name: 'subject',
     message: '2️⃣ 커밋 메시지를 입력하세요:',
-    validate: (input) =>
-      input.length > 0 && input.length <= MAX_COMMIT_MESSAGE_LENGTH,
+    validate: (input) => input.length > 0 && input.length <= MAX_COMMIT_MESSAGE_LENGTH,
   },
 ];
 
