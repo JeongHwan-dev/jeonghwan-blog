@@ -2,5 +2,5 @@
   "prettier.requireConfig": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.userWords": ["jeonghwan"]
+  "cSpell.userWords": ["jeonghwan", "pretendard"]
 }
