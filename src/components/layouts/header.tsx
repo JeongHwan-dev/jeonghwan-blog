@@ -51,7 +51,13 @@ function Header() {
     <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b-1 border-dashed backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-2 border-x-1 border-dashed px-4 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
-          <Image src="/images/img-jeonghwan-avatar.svg" alt="logo" width={44} height={44} />
+          <Image
+            src="/images/img-jeonghwan-avatar.svg"
+            alt="Avatar of Jeonghwan"
+            width={44}
+            height={44}
+            quality={100}
+          />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
@@ -61,7 +67,7 @@ function Header() {
               <Link
                 key={label}
                 href={href}
-                className="hover:text-foreground/100 text-foreground/80 transition-colors"
+                className="hover:text-foreground/100 active:text-foreground/100 text-foreground/80 transition-colors"
               >
                 {label}
               </Link>
@@ -93,7 +99,7 @@ function Header() {
                   <Link
                     key={label}
                     href={href}
-                    className="hover:bg-accent hover:text-foreground/100 text-foreground/80 flex items-center justify-center rounded py-2 transition"
+                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center rounded py-2 transition"
                   >
                     {label}
                   </Link>
@@ -105,9 +111,9 @@ function Header() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:bg-accent hover:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
+                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
                   >
-                    <Icon />
+                    <Icon width={20} height={20} />
                     {label}
                   </Link>
                 ))}
