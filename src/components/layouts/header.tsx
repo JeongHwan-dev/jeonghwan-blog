@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Linkedin, Menu } from 'lucide-react';
 import type { ElementType } from 'react';
@@ -10,6 +9,7 @@ import {
   DrawerTrigger,
   VisuallyHidden,
 } from '@/components';
+import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 
 interface SocialLink {
   label: string;
@@ -51,13 +51,7 @@ function Header() {
     <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b-1 border-dashed backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-2 border-x-1 border-dashed px-4 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
-          <Image
-            src="/images/img-jeonghwan-avatar.svg"
-            alt="Avatar of Jeonghwan"
-            width={44}
-            height={44}
-            quality={100}
-          />
+          <JeonghwanAvatar width={44} height={44} />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
