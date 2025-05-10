@@ -28,7 +28,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ko">
       <body className={`${pretendard.variable} antialiased`}>
         <Header />
-        {children}
+        <main className="container flex min-h-screen flex-col border-x-1 border-dashed">
+          {children}
+        </main>
       </body>
     </html>
   );
