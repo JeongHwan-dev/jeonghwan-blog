@@ -1,10 +1,11 @@
-import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
-import type {
-  PageObjectResponse,
-  PersonUserObjectResponse,
-  RichTextItemResponse,
+import {
+  Client,
+  type PageObjectResponse,
+  type PersonUserObjectResponse,
+  type RichTextItemResponse,
 } from '@notionhq/client';
+import { NotionToMarkdown } from 'notion-to-md';
+
 import type { Article, ArticleTagFilterItem } from './notion-services.types';
 
 const notion = new Client({
@@ -14,10 +15,10 @@ const notion = new Client({
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export const getArticleMetadata = ({
-  id,
-  properties,
   cover,
+  id,
   last_edited_time: modifiedDate,
+  properties,
 }: PageObjectResponse): Article => {
   const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
 
@@ -55,15 +56,15 @@ export const getArticleMetadata = ({
   const thumbnailImageUrl = getThumbnailImageUrl(cover);
 
   return {
-    id,
-    title,
-    description,
-    thumbnailImageUrl,
-    tagList,
     author,
     date,
+    description,
+    id,
     modifiedDate,
     slug,
+    tagList,
+    thumbnailImageUrl,
+    title,
   };
 };
 
@@ -81,10 +82,10 @@ export const getPublishedArticleList = async (tag?: string): Promise<Article[]> 
         ...(!!tag && tag !== '전체'
           ? [
               {
-                property: 'Tags',
                 multi_select: {
                   contains: tag,
                 },
+                property: 'Tags',
               },
             ]
           : []),
@@ -92,8 +93,8 @@ export const getPublishedArticleList = async (tag?: string): Promise<Article[]> 
     },
     sorts: [
       {
-        property: 'Date',
         direction: 'descending',
+        property: 'Date',
       },
     ],
   });
@@ -104,8 +105,8 @@ export const getPublishedArticleList = async (tag?: string): Promise<Article[]> 
 };
 
 export type ArticleWithMarkdown = {
-  markdown: string;
   article: Article;
+  markdown: string;
 };
 
 export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdown> => {
@@ -132,8 +133,8 @@ export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdow
   const { parent } = n2m.toMarkdownString(mdBlocks);
 
   return {
-    markdown: parent,
     article: getArticleMetadata(results[0] as PageObjectResponse),
+    markdown: parent,
   };
 };
 
@@ -150,14 +151,14 @@ export const getArticleTagFilterList = async (): Promise<ArticleTagFilterItem[]>
     {} as Record<string, number>,
   );
   const allTagFilterItem: ArticleTagFilterItem = {
+    count: articleList.length,
     id: 'all',
     name: '전체',
-    count: articleList.length,
   };
   const tagFilterList: ArticleTagFilterItem[] = Object.entries(tagCount).map(([name, count]) => ({
+    count,
     id: name,
     name,
-    count,
   }));
   const sortedTagFilterList = tagFilterList.sort((a, b) => a.name.localeCompare(b.name));
 

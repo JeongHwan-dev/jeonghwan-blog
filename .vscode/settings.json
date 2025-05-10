@@ -1,11 +1,13 @@
 {
   "prettier.requireConfig": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": true
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "cSpell.userWords": ["jeonghwan", "pretendard", "notionhq"],
-  "css.lint.unknownAtRules": "ignore"
+  "cSpell.userWords": ["jeonghwan", "pretendard", "notionhq", "vaul"],
+  "css.lint.unknownAtRules": "ignore",
+  "eslint.useFlatConfig": true
 }

@@ -4,7 +4,7 @@ interface VisuallyHiddenProps extends PropsWithChildren {
   as?: 'div' | 'span';
 }
 
-function VisuallyHidden({ children, as: Component = 'div' }: VisuallyHiddenProps) {
+function VisuallyHidden({ as: Component = 'div', children }: VisuallyHiddenProps) {
   return <Component className="sr-only">{children}</Component>;
 }
 
