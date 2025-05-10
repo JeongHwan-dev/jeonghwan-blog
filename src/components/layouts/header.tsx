@@ -51,7 +51,7 @@ const SOCIAL_LINK_LIST: SocialLink[] = [
 function Header() {
   return (
     <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b-1 border-dashed backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-2 border-x-1 border-dashed px-4 md:gap-4">
+      <div className="container mx-auto flex h-14 items-center justify-between gap-2 border-x-1 border-dashed md:gap-4">
         <Link className="mr-4 flex items-center gap-0.5" href="/">
           <JeonghwanAvatar height={44} width={44} />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
