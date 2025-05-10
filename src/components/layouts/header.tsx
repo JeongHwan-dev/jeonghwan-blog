@@ -1,6 +1,8 @@
-import Link from 'next/link';
-import { Github, Linkedin, Menu } from 'lucide-react';
 import type { ElementType } from 'react';
+
+import { Github, Linkedin, Menu } from 'lucide-react';
+import Link from 'next/link';
+
 import {
   Button,
   Drawer,
@@ -11,38 +13,38 @@ import {
 } from '@/components';
 import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 
-interface SocialLink {
-  label: string;
+interface PageNavLink {
   href: string;
-  icon: ElementType;
+  label: string;
 }
 
-interface PageNavLink {
-  label: string;
+interface SocialLink {
   href: string;
+  icon: ElementType;
+  label: string;
 }
 
 const PAGE_NAV_LINK_LIST: PageNavLink[] = [
   {
-    label: '블로그',
     href: '/',
+    label: '블로그',
   },
   {
-    label: '개발자 소개',
     href: '/about',
+    label: '개발자 소개',
   },
 ];
 
 const SOCIAL_LINK_LIST: SocialLink[] = [
   {
-    label: 'GitHub',
     href: 'https://github.com/jeonghwan-dev',
     icon: Github,
+    label: 'GitHub',
   },
   {
-    label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/jeonghwan-dev/',
     icon: Linkedin,
+    label: 'LinkedIn',
   },
 ];
 
@@ -50,8 +52,8 @@ function Header() {
   return (
     <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b-1 border-dashed backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-2 border-x-1 border-dashed px-4 md:gap-4">
-        <Link href="/" className="mr-4 flex items-center gap-0.5">
-          <JeonghwanAvatar width={44} height={44} />
+        <Link className="mr-4 flex items-center gap-0.5" href="/">
+          <JeonghwanAvatar height={44} width={44} />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
@@ -59,9 +61,9 @@ function Header() {
           <nav className="hidden items-center gap-4 text-sm sm:flex">
             {PAGE_NAV_LINK_LIST.map(({ href, label }) => (
               <Link
-                key={label}
-                href={href}
                 className="hover:text-foreground/100 active:text-foreground/100 text-foreground/80 transition-colors"
+                href={href}
+                key={label}
               >
                 {label}
               </Link>
@@ -69,9 +71,9 @@ function Header() {
           </nav>
 
           <nav className="hidden items-center gap-0.5 sm:flex">
-            {SOCIAL_LINK_LIST.map(({ icon: Icon, label, href }) => (
-              <Button key={label} asChild variant="ghost" size="icon">
-                <Link href={href} target="_blank" rel="noopener noreferrer">
+            {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
+              <Button asChild key={label} size="icon" variant="ghost">
+                <Link href={href} rel="noopener noreferrer" target="_blank">
                   <Icon />
                 </Link>
               </Button>
@@ -80,7 +82,7 @@ function Header() {
 
           <Drawer>
             <DrawerTrigger asChild>
-              <Button variant="ghost" type="button" size="icon" className="sm:hidden">
+              <Button className="sm:hidden" size="icon" type="button" variant="ghost">
                 <Menu />
               </Button>
             </DrawerTrigger>
@@ -91,23 +93,23 @@ function Header() {
               <div className="mx-auto flex w-full flex-col gap-2 p-6">
                 {PAGE_NAV_LINK_LIST.map(({ href, label }) => (
                   <Link
-                    key={label}
-                    href={href}
                     className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center rounded py-2 transition"
+                    href={href}
+                    key={label}
                   >
                     {label}
                   </Link>
                 ))}
 
-                {SOCIAL_LINK_LIST.map(({ label, href, icon: Icon }) => (
+                {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                   <Link
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
+                    href={href}
+                    key={label}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
-                    <Icon width={20} height={20} />
+                    <Icon height={20} width={20} />
                     {label}
                   </Link>
                 ))}
