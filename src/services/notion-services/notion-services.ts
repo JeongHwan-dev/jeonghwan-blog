@@ -1,10 +1,10 @@
 import { Client } from '@notionhq/client';
+import { NotionToMarkdown } from 'notion-to-md';
 import type {
   PageObjectResponse,
   PersonUserObjectResponse,
   RichTextItemResponse,
 } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
 import type { Article, ArticleTagFilterItem } from './notion-services.types';
 
 const notion = new Client({
@@ -103,12 +103,12 @@ export const getPublishedArticleList = async (tag?: string): Promise<Article[]> 
     .map(getArticleMetadata);
 };
 
-export const getArticleBySlug = async (
-  slug: string,
-): Promise<{
+export type ArticleWithMarkdown = {
   markdown: string;
   article: Article;
-}> => {
+};
+
+export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdown> => {
   const { results } = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
     filter: {
