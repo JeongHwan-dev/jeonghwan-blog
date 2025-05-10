@@ -6,6 +6,6 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "cSpell.userWords": ["jeonghwan", "pretendard"],
+  "cSpell.userWords": ["jeonghwan", "pretendard", "notionhq"],
   "css.lint.unknownAtRules": "ignore"
 }
