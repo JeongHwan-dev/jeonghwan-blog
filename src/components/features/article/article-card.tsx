@@ -14,7 +14,7 @@ function ArticleCard({ date, description, tagList, thumbnailImageUrl, title }: A
   return (
     <Card className="group bg-card/50 border-border/40 hover:border-primary/20 w-full gap-0 overflow-hidden border p-0 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:shadow-lg">
       {thumbnailImageUrl && (
-        <div className="relative aspect-[2/1] overflow-hidden">
+        <div className="relative aspect-[16/9] overflow-hidden">
           <div className="from-background/20 absolute inset-0 z-10 bg-gradient-to-t to-transparent" />
           <Image
             alt={title}
