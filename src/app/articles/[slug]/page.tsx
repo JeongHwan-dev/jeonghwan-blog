@@ -4,12 +4,13 @@ import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
 import { CalendarDays } from 'lucide-react';
 import { MDXRemote } from 'next-mdx-remote-client/rsc';
 import Image from 'next/image';
+import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
-import { AspectRatio, Badge, Separator } from '@/components';
+import { ArticleTagBadge, AspectRatio, Separator } from '@/components';
 import { formatDate } from '@/lib/utils';
 import { getArticleBySlug } from '@/services';
 
@@ -47,7 +48,22 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             <div className="space-y-2">
               <h1 className="text-4xl font-bold">{article.title}</h1>
               <div className="flex gap-2">
-                {article.tagList?.map((tag) => <Badge key={tag}>{tag}</Badge>)}
+                {article.tagList?.map((tag) => (
+                  <Link
+                    href={{
+                      pathname: '/',
+                      query: {
+                        tag,
+                      },
+                    }}
+                    key={tag}
+                  >
+                    <ArticleTagBadge
+                      className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                      tag={tag}
+                    />
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="text-muted-foreground flex gap-4 text-sm">
