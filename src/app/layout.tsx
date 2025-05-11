@@ -27,6 +27,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko">
+      <head>
+        <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
+        <link
+          href="https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+      </head>
       <body className={`${pretendard.variable} antialiased`}>
         <Header />
         <main className="container flex min-h-screen flex-col border-x-1 border-dashed">
