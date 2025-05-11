@@ -138,3 +138,13 @@ body {
 .container {
   @apply mx-auto w-full max-w-7xl px-4;
 }
+
+.tossface {
+  font-family:
+    var(--font-pretendard),
+    Tossface,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+}
