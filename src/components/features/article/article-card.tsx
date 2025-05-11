@@ -5,14 +5,28 @@ import Image from 'next/image';
 
 import type { Article } from '@/services';
 
-import { Badge, Card, CardContent } from '@/components';
-import { formatDate } from '@/lib/utils';
+import { ArticleTagBadge, Card, CardContent } from '@/components';
+import { cn, formatDate } from '@/lib/utils';
 
 interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {}
 
-function ArticleCard({ date, description, tagList, thumbnailImageUrl, title }: ArticleCardProps) {
+function ArticleCard({
+  className,
+  date,
+  description,
+  tagList = [],
+  thumbnailImageUrl,
+  title,
+  ...rest
+}: ArticleCardProps) {
   return (
-    <Card className="group bg-card/50 border-border/40 hover:border-primary/20 w-full gap-0 overflow-hidden border p-0 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:shadow-lg">
+    <Card
+      className={cn(
+        'group bg-card/50 border-border/40 hover:border-primary/20 w-full gap-0 overflow-hidden border p-0 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:shadow-lg',
+        className,
+      )}
+      {...rest}
+    >
       {thumbnailImageUrl && (
         <div className="relative aspect-[16/9] overflow-hidden">
           <div className="from-background/20 absolute inset-0 z-10 bg-gradient-to-t to-transparent" />
@@ -27,17 +41,13 @@ function ArticleCard({ date, description, tagList, thumbnailImageUrl, title }: A
       )}
       <CardContent className="flex flex-grow flex-col justify-between p-6">
         <div>
-          <div className="mb-4 flex flex-wrap gap-2">
-            {tagList?.map((tag) => (
-              <Badge
-                className="bg-primary/10 text-primary hover:bg-primary/20 font-medium transition-colors"
-                key={tag}
-                variant="secondary"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          {tagList.length > 0 && (
+            <div className="mb-4 flex flex-wrap gap-2">
+              {tagList.map((tag) => (
+                <ArticleTagBadge key={tag} tag={tag} />
+              ))}
+            </div>
+          )}
           <h2 className="group-hover:text-primary mb-2 text-xl font-bold tracking-tight transition-colors">
             {title}
           </h2>
