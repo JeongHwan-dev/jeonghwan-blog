@@ -10,6 +10,8 @@ export interface Article {
   title: string;
 }
 
+export type ArticleSort = 'latest' | 'oldest';
+
 export interface ArticleTagFilterItem {
   count: number;
   id: string;
