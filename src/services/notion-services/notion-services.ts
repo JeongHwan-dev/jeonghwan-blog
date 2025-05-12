@@ -6,7 +6,7 @@ import {
 } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
-import type { Article, ArticleTagFilterItem } from './notion-services.types';
+import type { Article, ArticleSort, ArticleTagFilterItem } from './notion-services.types';
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -68,7 +68,10 @@ export const getArticleMetadata = ({
   };
 };
 
-export const getPublishedArticleList = async (tag?: string): Promise<Article[]> => {
+export const getPublishedArticleList = async (
+  tag?: string,
+  sort?: ArticleSort,
+): Promise<Article[]> => {
   const { results } = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
     filter: {
@@ -93,7 +96,7 @@ export const getPublishedArticleList = async (tag?: string): Promise<Article[]> 
     },
     sorts: [
       {
-        direction: 'descending',
+        direction: sort === 'latest' ? 'descending' : 'ascending',
         property: 'Date',
       },
     ],

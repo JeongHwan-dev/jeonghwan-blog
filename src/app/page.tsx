@@ -1,26 +1,19 @@
 import Link from 'next/link';
 
-import {
-  ArticleCard,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components';
-import { getArticleTagFilterList, getPublishedArticleList } from '@/services';
+import { ArticleCard } from '@/components';
+import { type ArticleSort, getArticleTagFilterList, getPublishedArticleList } from '@/services';
 
-import { TagFilterCard } from './_components';
+import { SortSelect, TagFilterCard } from './_components';
 
 interface HomePageProps {
-  searchParams: Promise<{ tag?: string }>;
+  searchParams: Promise<{ sort?: ArticleSort; tag?: string }>;
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  const { tag = '전체' } = await searchParams;
+  const { sort = 'latest', tag = '전체' } = await searchParams;
 
   const [articleList, tagFilterList] = await Promise.all([
-    getPublishedArticleList(tag),
+    getPublishedArticleList(tag, sort),
     getArticleTagFilterList(),
   ]);
 
@@ -35,15 +28,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <h2 className="text-3xl font-bold tracking-tight">
             {tag === '전체' ? '전체 글' : `${tag} 관련 글`}
           </h2>
-          <Select defaultValue="latest">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="정렬 방식 선택" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="latest">최신순</SelectItem>
-              <SelectItem value="oldest">오래된순</SelectItem>
-            </SelectContent>
-          </Select>
+          <SortSelect />
         </div>
 
         <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
