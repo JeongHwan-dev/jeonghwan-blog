@@ -32,7 +32,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
 
         <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {articleList.map((article) => (
+          {articleList.map((article, index) => (
             <li key={article.id}>
               <Link className="flex h-full w-full" href={`/articles/${article.slug}`}>
                 <ArticleCard
@@ -41,6 +41,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                   description={article.description}
                   slug={article.slug}
                   tagList={article.tagList}
+                  thumbnailImagePriority={index < 4}
                   thumbnailImageUrl={article.thumbnailImageUrl}
                   title={article.title}
                 />

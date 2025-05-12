@@ -8,13 +8,16 @@ import type { Article } from '@/services';
 import { ArticleTagBadge, Card, CardContent } from '@/components';
 import { cn, formatDate } from '@/lib/utils';
 
-interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {}
+interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {
+  thumbnailImagePriority?: boolean;
+}
 
 function ArticleCard({
   className,
   date,
   description,
   tagList = [],
+  thumbnailImagePriority = false,
   thumbnailImageUrl,
   title,
   ...rest
@@ -34,6 +37,7 @@ function ArticleCard({
             alt={title}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             fill
+            priority={thumbnailImagePriority}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             src={thumbnailImageUrl}
           />
