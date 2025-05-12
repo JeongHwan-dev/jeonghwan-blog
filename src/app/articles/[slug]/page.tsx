@@ -45,26 +45,24 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             </AspectRatio>
           )}
           <div className="space-y-4">
-            <div className="space-y-2">
-              <h1 className="text-4xl font-bold">{article.title}</h1>
-              <div className="flex gap-2">
-                {article.tagList?.map((tag) => (
-                  <Link
-                    href={{
-                      pathname: '/',
-                      query: {
-                        tag,
-                      },
-                    }}
-                    key={tag}
-                  >
-                    <ArticleTagBadge
-                      className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
-                      tag={tag}
-                    />
-                  </Link>
-                ))}
-              </div>
+            <h1 className="text-4xl font-bold">{article.title}</h1>
+            <div className="flex gap-2">
+              {article.tagList?.map((tag) => (
+                <Link
+                  href={{
+                    pathname: '/',
+                    query: {
+                      tag,
+                    },
+                  }}
+                  key={tag}
+                >
+                  <ArticleTagBadge
+                    className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                    tag={tag}
+                  />
+                </Link>
+              ))}
             </div>
             <div className="text-muted-foreground flex gap-4 text-sm">
               <div className="flex items-center gap-1">
