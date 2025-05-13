@@ -31,7 +31,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   });
 
   return (
-    <div className="container-padding tossface py-8">
+    <div className="tossface">
       <div className="grid grid-cols-[1fr_240px] gap-8">
         <section>
           {article.thumbnailImageUrl !== undefined && (

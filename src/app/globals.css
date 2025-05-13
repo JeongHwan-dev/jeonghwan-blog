@@ -136,12 +136,12 @@ body {
 }
 
 .container {
-  @apply mx-auto w-full max-w-7xl;
+  @apply mx-auto w-full max-w-7xl px-5 lg:px-6;
 }
 
-.container-padding {
+/* .container-padding {
   @apply px-5;
-}
+} */
 
 .tossface {
   font-family:
