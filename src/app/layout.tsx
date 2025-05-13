@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 
 import './globals.css';
 
-import { Header } from '@/components';
+import { Footer, Header } from '@/components';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -40,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <main className="container flex min-h-screen flex-col border-x-1 border-dashed">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

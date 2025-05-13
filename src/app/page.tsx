@@ -18,7 +18,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   ]);
 
   return (
-    <div className="grid grid-cols-[200px_1fr] gap-6 py-8">
+    <div className="container-padding grid grid-cols-[200px_1fr] gap-6 py-8">
       <aside>
         <TagFilterCard selectedTag={tag} tagFilterList={tagFilterList} />
       </aside>
