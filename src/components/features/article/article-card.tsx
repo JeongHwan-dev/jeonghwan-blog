@@ -25,7 +25,7 @@ function ArticleCard({
   return (
     <Card
       className={cn(
-        'group bg-card/50 border-border/40 hover:border-primary/20 w-full gap-0 overflow-hidden border p-0 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:shadow-lg',
+        'group bg-card/50 border-border hover:border-primary/20 w-full cursor-pointer gap-0 overflow-hidden border p-0 shadow-none backdrop-blur-sm transition-all duration-300',
         className,
       )}
       {...rest}
@@ -43,7 +43,7 @@ function ArticleCard({
           />
         </div>
       )}
-      <CardContent className="flex flex-grow flex-col justify-between p-6">
+      <CardContent className="flex flex-grow flex-col justify-between p-5">
         <div>
           {tagList.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
@@ -56,10 +56,10 @@ function ArticleCard({
             {title}
           </h2>
           {description && (
-            <p className="text-muted-foreground mt-2 line-clamp-2 leading-relaxed">{description}</p>
+            <p className="text-muted-foreground line-clamp-2 leading-relaxed">{description}</p>
           )}
         </div>
-        <div className="text-muted-foreground mt-6 flex items-center gap-x-4 text-sm">
+        <div className="text-muted-foreground mt-4 flex items-center gap-x-4 text-sm">
           {date && (
             <div className="flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
