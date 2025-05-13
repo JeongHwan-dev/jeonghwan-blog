@@ -1,35 +1,35 @@
 🔧 chore:
-  - head-branch: ['chore']
+  - head-branch: ['chore/']
 
 👷 ci:
-  - head-branch: ['ci']
+  - head-branch: ['ci/']
 
 📝 docs:
-  - head-branch: ['docs']
+  - head-branch: ['docs/']
 
 ✨ feat:
-  - head-branch: ['feat']
+  - head-branch: ['feat/']
 
 🐛 fix:
-  - head-branch: ['fix']
+  - head-branch: ['fix/']
 
 🚑 hotfix:
-  - head-branch: ['hotfix']
+  - head-branch: ['hotfix/']
 
 ⚡ perf:
-  - head-branch: ['perf']
+  - head-branch: ['perf/']
 
 ♻️ refactor:
-  - head-branch: ['refactor']
+  - head-branch: ['refactor/']
 
 🗑️ remove:
-  - head-branch: ['remove']
+  - head-branch: ['remove/']
 
 ⏪ revert:
-  - head-branch: ['revert']
+  - head-branch: ['revert/']
 
 💄 style:
-  - head-branch: ['style']
+  - head-branch: ['style/']
 
 ✅ test:
-  - head-branch: ['test']
+  - head-branch: ['test/']
