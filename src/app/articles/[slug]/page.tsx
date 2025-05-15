@@ -11,7 +11,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 import { ArticleTagBadge, AspectRatio, Separator } from '@/components';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 import { getArticleBySlug } from '@/services';
 
 import { TableOfContentsCard } from './_components';
@@ -74,6 +74,16 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           <Separator className="my-8" />
           <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
             <MDXRemote
+              components={{
+                img: ({ alt, className, src, ...props }) => (
+                  <img
+                    alt={alt || ''}
+                    className={cn('rounded-md', className)}
+                    src={src}
+                    {...props}
+                  />
+                ),
+              }}
               options={{
                 mdxOptions: {
                   rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode],
