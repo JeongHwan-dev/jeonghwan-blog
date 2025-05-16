@@ -43,6 +43,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  /* Custom Variables */
   --header-height: calc(var(--spacing) * 14);
   --footer-height: calc(var(--spacing) * 14);
   --sticky-offset: calc(var(--spacing) * 8);
@@ -137,12 +138,8 @@ body {
 }
 
 .container {
-  @apply mx-auto w-full max-w-7xl px-5 lg:px-6;
+  @apply mx-auto w-full max-w-7xl px-5 lg:px-6 xl:border-x-1 xl:border-dashed;
 }
-
-/* .container-padding {
-  @apply px-5;
-} */
 
 .tossface {
   font-family:
