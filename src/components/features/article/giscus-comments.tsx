@@ -2,6 +2,11 @@
 
 import Giscus from '@giscus/react';
 
+/**
+ * Renders the Giscus comment widget configured for the current page.
+ *
+ * Integrates the Giscus commenting system using repository and category information from environment variables, with comments mapped by pathname and the interface displayed in Korean.
+ */
 function GiscusComments() {
   return (
     <Giscus

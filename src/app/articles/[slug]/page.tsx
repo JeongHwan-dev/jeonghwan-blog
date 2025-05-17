@@ -22,6 +22,12 @@ interface ArticleDetailPageProps {
   }>;
 }
 
+/**
+ * Renders a detailed article page based on the provided slug, including the article content, metadata, tags, table of contents, and a comments section.
+ *
+ * @param params - An object containing a promise that resolves to the article's slug.
+ * @returns The complete article detail page as a React element.
+ */
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   const { slug } = await params;
   const { article, markdown } = await getArticleBySlug(slug);
