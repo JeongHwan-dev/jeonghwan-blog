@@ -10,7 +10,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
-import { ArticleTagBadge, AspectRatio, Separator } from '@/components';
+import { ArticleTagBadge, AspectRatio, GiscusComments, Separator } from '@/components';
 import { cn, formatDate } from '@/lib/utils';
 import { getArticleBySlug } from '@/services';
 
@@ -93,6 +93,8 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               source={markdown}
             />
           </div>
+          <Separator className="my-16" />
+          <GiscusComments />
         </section>
 
         {data?.toc !== undefined && (
