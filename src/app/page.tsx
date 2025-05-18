@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import { ArticleCard } from '@/components';
-import { type ArticleSort, getArticleTagFilterList, getPublishedArticleList } from '@/services';
+import { type ArticleSort, getPublishedArticleList } from '@/services';
 
 import { ProfileCard, SortSelect, TagFilterCard } from './_components';
 
@@ -12,15 +13,12 @@ interface HomePageProps {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { sort = 'latest', tag = '전체' } = await searchParams;
 
-  const [articleList, tagFilterList] = await Promise.all([
-    getPublishedArticleList(tag, sort),
-    getArticleTagFilterList(),
-  ]);
+  const articleList = await getPublishedArticleList(tag, sort);
 
   return (
     <div className="grid grid-cols-[220px_1fr_220px] gap-6">
       <aside>
-        <TagFilterCard selectedTag={tag} tagFilterList={tagFilterList} />
+        <TagFilterCard selectedTag={tag} />
       </aside>
 
       <div className="space-y-8">
