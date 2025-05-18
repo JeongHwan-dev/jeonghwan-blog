@@ -16,7 +16,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const articleList = await getPublishedArticleList(tag, sort);
 
   return (
-    <div className="grid grid-cols-[220px_1fr_220px] gap-6">
+    <div className="grid grid-cols-[200px_1fr_200px] gap-6">
       <aside>
         <TagFilterCard selectedTag={tag} />
       </aside>
@@ -29,7 +29,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <SortSelect />
         </div>
 
-        <ul className="grid grid-cols-1 gap-4">
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {articleList.map((article, index) => (
             <li key={article.id}>
               <Link className="flex h-full w-full" href={`/articles/${article.slug}`}>
