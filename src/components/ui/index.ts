@@ -5,3 +5,4 @@ export * from './card';
 export * from './drawer';
 export * from './select';
 export * from './separator';
+export * from './skeleton';
