@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArticleCard } from '@/components';
 import { type ArticleSort, getArticleTagFilterList, getPublishedArticleList } from '@/services';
 
-import { SortSelect, TagFilterCard } from './_components';
+import { ProfileCard, SortSelect, TagFilterCard } from './_components';
 
 interface HomePageProps {
   searchParams: Promise<{ sort?: ArticleSort; tag?: string }>;
@@ -18,7 +18,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   ]);
 
   return (
-    <div className="grid grid-cols-[200px_1fr] gap-6">
+    <div className="grid grid-cols-[220px_1fr_220px] gap-6">
       <aside>
         <TagFilterCard selectedTag={tag} tagFilterList={tagFilterList} />
       </aside>
@@ -31,7 +31,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <SortSelect />
         </div>
 
-        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4">
           {articleList.map((article, index) => (
             <li key={article.id}>
               <Link className="flex h-full w-full" href={`/articles/${article.slug}`}>
@@ -50,6 +50,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           ))}
         </ul>
       </div>
+
+      <aside>
+        <ProfileCard />
+      </aside>
     </div>
   );
 }
