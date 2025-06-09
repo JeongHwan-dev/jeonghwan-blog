@@ -5,7 +5,7 @@ function Footer() {
     <footer className="h-[var(--footer-height)] w-full border-t-1 border-dashed">
       <div className="container flex h-full items-center">
         <span className="text-muted-foreground text-sm">
-          {`Copyright © ${PROFILE.englishName}. All Rights Reserved.`}
+          {`© 2025. ${PROFILE.englishName}. All rights reserved.`}
         </span>
       </div>
     </footer>
