@@ -4,4 +4,10 @@ export {
   getArticleTagFilterList,
   getPublishedArticleList,
 } from './notion-services';
-export type { Article, ArticleSort, ArticleTagFilterItem } from './notion-services.types';
+export type {
+  Article,
+  ArticleSort,
+  ArticleTagFilterItem,
+  GetPublishedArticleListRequestParams,
+  GetPublishedArticleListResponse,
+} from './notion-services.types';

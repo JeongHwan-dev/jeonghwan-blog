@@ -17,3 +17,16 @@ export interface ArticleTagFilterItem {
   id: string;
   name: string;
 }
+
+export interface GetPublishedArticleListRequestParams {
+  pageSize?: number;
+  sort?: string;
+  startCursor?: string;
+  tag?: string;
+}
+
+export interface GetPublishedArticleListResponse {
+  articleList: Article[];
+  hasMore: boolean;
+  nextCursor: null | string;
+}
