@@ -1,12 +1,18 @@
 'use client';
 
+import type { ComponentProps } from 'react';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import type { ArticleSort } from '@/services';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 
-function SortSelect() {
+interface SortSelectProps extends ComponentProps<typeof Select> {
+  className?: string;
+}
+
+function SortSelect({ className, ...props }: SortSelectProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -20,8 +26,8 @@ function SortSelect() {
   };
 
   return (
-    <Select onValueChange={handleSelectValueChange} value={selectedSort}>
-      <SelectTrigger className="w-[180px]">
+    <Select onValueChange={handleSelectValueChange} value={selectedSort} {...props}>
+      <SelectTrigger className={className}>
         <SelectValue placeholder="정렬 방식 선택" />
       </SelectTrigger>
       <SelectContent>

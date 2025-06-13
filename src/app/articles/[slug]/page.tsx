@@ -32,7 +32,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
   return (
     <div className="tossface">
-      <div className="grid grid-cols-[1fr_240px] gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
         <section>
           {article.thumbnailImageUrl !== undefined && (
             <AspectRatio className="bg-muted mb-6 rounded-md" ratio={16 / 9}>
@@ -45,7 +45,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             </AspectRatio>
           )}
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">{article.title}</h1>
+            <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
             <div className="flex gap-2">
               {article.tagList?.map((tag) => (
                 <Link
@@ -71,7 +71,14 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               </div>
             </div>
           </div>
-          <Separator className="my-8" />
+          <Separator className="my-6 lg:my-8" />
+
+          {data?.toc !== undefined && (
+            <div className="mb-6 md:hidden">
+              <TableOfContentsCard itemList={data.toc} />
+            </div>
+          )}
+
           <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
             <MDXRemote
               components={{
@@ -98,7 +105,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         </section>
 
         {data?.toc !== undefined && (
-          <aside className="relative">
+          <aside className="relative hidden md:block">
             <TableOfContentsCard className="sticky top-[var(--sticky-top)]" itemList={data.toc} />
           </aside>
         )}
