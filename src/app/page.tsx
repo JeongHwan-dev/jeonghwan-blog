@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import { Suspense } from 'react';
 
-import { ArticleCard } from '@/components';
+import { ArticleList, ArticleListSkeleton } from '@/components';
 import { type ArticleSort, getPublishedArticleList } from '@/services';
 
 import { ProfileCard, SortSelect, TagFilterCard } from './_components';
@@ -13,7 +12,7 @@ interface HomePageProps {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { sort = 'latest', tag = '전체' } = await searchParams;
 
-  const articleList = await getPublishedArticleList(tag, sort);
+  const articleListPromise = getPublishedArticleList({ sort, tag });
 
   return (
     <div className="grid grid-cols-[200px_1fr_200px] gap-6">
@@ -28,25 +27,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           </h2>
           <SortSelect />
         </div>
-
-        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {articleList.map((article, index) => (
-            <li key={article.id}>
-              <Link className="flex h-full w-full" href={`/articles/${article.slug}`}>
-                <ArticleCard
-                  author={article.author}
-                  date={article.date}
-                  description={article.description}
-                  slug={article.slug}
-                  tagList={article.tagList}
-                  thumbnailImagePriority={index < 4}
-                  thumbnailImageUrl={article.thumbnailImageUrl}
-                  title={article.title}
-                />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={<ArticleListSkeleton />}>
+          <ArticleList articleListPromise={articleListPromise} />
+        </Suspense>
       </div>
 
       <aside>

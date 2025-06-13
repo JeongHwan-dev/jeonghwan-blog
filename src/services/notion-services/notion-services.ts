@@ -6,7 +6,12 @@ import {
 } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
-import type { Article, ArticleSort, ArticleTagFilterItem } from './notion-services.types';
+import type {
+  Article,
+  ArticleTagFilterItem,
+  GetPublishedArticleListRequestParams,
+  GetPublishedArticleListResponse,
+} from './notion-services.types';
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -68,11 +73,13 @@ export const getArticleMetadata = ({
   };
 };
 
-export const getPublishedArticleList = async (
-  tag?: string,
-  sort?: ArticleSort,
-): Promise<Article[]> => {
-  const { results } = await notion.databases.query({
+export const getPublishedArticleList = async ({
+  pageSize = 8,
+  sort = 'latest',
+  startCursor,
+  tag = '전체',
+}: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
+  const response = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
     filter: {
       and: [
@@ -94,17 +101,25 @@ export const getPublishedArticleList = async (
           : []),
       ],
     },
+    page_size: pageSize,
     sorts: [
       {
         direction: sort === 'latest' ? 'descending' : 'ascending',
         property: 'Date',
       },
     ],
+    start_cursor: startCursor,
   });
 
-  return results
+  const articleList = response.results
     .filter((page): page is PageObjectResponse => 'properties' in page)
     .map(getArticleMetadata);
+
+  return {
+    articleList,
+    hasMore: response.has_more,
+    nextCursor: response.next_cursor,
+  };
 };
 
 export type ArticleWithMarkdown = {
@@ -142,7 +157,10 @@ export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdow
 };
 
 export const getArticleTagFilterList = async (): Promise<ArticleTagFilterItem[]> => {
-  const articleList = await getPublishedArticleList();
+  const { articleList } = await getPublishedArticleList({
+    pageSize: 1000,
+  });
+
   const tagCount = articleList.reduce(
     (acc, post) => {
       post.tagList?.forEach((tag) => {

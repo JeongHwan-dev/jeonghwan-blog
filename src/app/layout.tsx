@@ -7,6 +7,8 @@ import './globals.css';
 
 import { Footer, Header } from '@/components';
 
+import { Providers } from './providers';
+
 interface RootLayoutProps {
   children: ReactNode;
 }
@@ -36,11 +38,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body className={`${pretendard.variable} antialiased`}>
-        <Header />
-        <main className="container flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex-col py-7 lg:py-8">
-          {children}
-        </main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="container flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex-col py-7 lg:py-8">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
