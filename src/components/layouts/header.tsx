@@ -9,6 +9,7 @@ import {
   DrawerContent,
   DrawerTitle,
   DrawerTrigger,
+  ThemeToggleButton,
   VisuallyHidden,
 } from '@/components';
 import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
@@ -57,7 +58,7 @@ function Header() {
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-0.5 sm:gap-4">
           <nav className="hidden items-center gap-4 text-sm sm:flex">
             {PAGE_NAV_LINK_LIST.map(({ href, label }) => (
               <Link
@@ -70,15 +71,20 @@ function Header() {
             ))}
           </nav>
 
-          <nav className="hidden items-center gap-0.5 sm:flex">
-            {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
-              <Button asChild key={label} size="icon" variant="ghost">
-                <Link href={href} rel="noopener noreferrer" target="_blank">
-                  <Icon />
-                </Link>
-              </Button>
-            ))}
-          </nav>
+          <div className="flex items-center gap-0.5">
+            <nav className="hidden items-center gap-0.5 sm:flex">
+              {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
+                <Button asChild key={label} size="icon" variant="ghost">
+                  <Link href={href} rel="noopener noreferrer" target="_blank">
+                    <Icon />
+                  </Link>
+                </Button>
+              ))}
+            </nav>
+            <div className="flex items-center gap-2">
+              <ThemeToggleButton />
+            </div>
+          </div>
 
           <Drawer>
             <DrawerTrigger asChild>
