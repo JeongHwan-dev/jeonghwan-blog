@@ -1,6 +1,7 @@
 'use client';
 
 import Giscus from '@giscus/react';
+import { useTheme } from 'next-themes';
 
 const GISCUS_REPOSITORY = process.env.NEXT_PUBLIC_GISCUS_REPOSITORY;
 
@@ -15,6 +16,8 @@ const isGiscusConfigInvalid =
   GISCUS_CATEGORY_ID === undefined;
 
 function GiscusComments() {
+  const { theme } = useTheme();
+
   if (isGiscusConfigInvalid) {
     return null;
   }
@@ -32,7 +35,7 @@ function GiscusComments() {
       repo={GISCUS_REPOSITORY as `${string}/${string}`}
       repoId={GISCUS_REPOSITORY_ID}
       strict="0"
-      theme="light"
+      theme={theme === 'dark' ? 'dark' : 'light'}
     />
   );
 }
