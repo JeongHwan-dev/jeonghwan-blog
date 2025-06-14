@@ -23,6 +23,17 @@ interface ArticleDetailPageProps {
   }>;
 }
 
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const { articleList } = await getPublishedArticleList({
+    pageSize: 100,
+    startCursor: undefined,
+  });
+
+  return articleList.map(({ slug }) => ({ slug }));
+}
+
+export const revalidate = 60;
+
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   const { slug } = await params;
   const { article, markdown } = await getArticleBySlug(slug);
@@ -112,14 +123,3 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     </div>
   );
 }
-
-export async function generateStaticParams() {
-  const { articleList } = await getPublishedArticleList({
-    pageSize: 100,
-    startCursor: undefined,
-  });
-
-  return articleList.map(({ slug }) => ({ slug }));
-}
-
-export const revalidate = 60;
