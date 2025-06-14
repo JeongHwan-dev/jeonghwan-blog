@@ -26,10 +26,12 @@ function TagFilterList({ selectedTag, tagFilterList }: TagFilterListProps) {
                 'bg-primary-foreground dark:bg-primary/20 text-primary font-medium',
             )}
             href={{
+              pathname: '/',
               query: {
                 tag: name,
               },
             }}
+            scroll={false}
           >
             <span>{name}</span>
             <span>{count}</span>
