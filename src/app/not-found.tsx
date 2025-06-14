@@ -1,7 +1,22 @@
+import type { Metadata } from 'next';
+
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 import { Button } from '@/components';
+
+const TITLE = '페이지를 찾지 못했어요';
+
+const DESCRIPTION = '페이지 주소가 정확한지 확인해 주세요';
+
+export const metadata: Metadata = {
+  description: DESCRIPTION,
+  robots: {
+    follow: false,
+    index: false,
+  },
+  title: TITLE,
+};
 
 export default function NotFoundPage() {
   return (
@@ -11,10 +26,8 @@ export default function NotFoundPage() {
           <div className="text-muted-foreground tossface text-6xl font-bold md:text-7xl">
             ⚠️ 404
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            페이지를 찾지 못했어요
-          </h1>
-          <p className="text-muted-foreground md:text-lg">페이지 주소가 정확한지 확인해 주세요</p>
+          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{TITLE}</h1>
+          <p className="text-muted-foreground md:text-lg">{DESCRIPTION}</p>
         </div>
         <Button asChild>
           <Link href="/">
