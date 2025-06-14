@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     'Developer',
     'Web Development',
   ],
-  metadataBase: new URL('https://jeonghwan.blog'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
   publisher: PROFILE.koreanName,
   title: {
     default: BLOG_TITLE,
