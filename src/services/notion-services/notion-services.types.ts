@@ -1,9 +1,7 @@
 export interface Article {
-  author?: string;
   date?: string;
   description?: string;
   id: string;
-  modifiedDate?: string;
   slug: string;
   tagList?: string[];
   thumbnailImageUrl?: string;
