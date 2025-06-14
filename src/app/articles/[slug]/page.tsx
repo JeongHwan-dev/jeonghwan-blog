@@ -36,85 +36,78 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   }
 
   return (
-    <div className="tossface">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
-        <section>
-          {article.thumbnailImageUrl !== undefined && (
-            <AspectRatio className="bg-muted mb-6 rounded-md" ratio={16 / 9}>
-              <Image
-                alt={article.title}
-                className="h-full w-full rounded-md object-cover"
-                fill
-                src={article.thumbnailImageUrl}
-              />
-            </AspectRatio>
-          )}
-          <div className="space-y-4">
-            <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
-            <div className="flex gap-2">
-              {article.tagList?.map((tag) => (
-                <Link
-                  href={{
-                    pathname: '/',
-                    query: {
-                      tag,
-                    },
-                  }}
-                  key={tag}
-                >
-                  <ArticleTagBadge
-                    className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
-                    tag={tag}
-                  />
-                </Link>
-              ))}
-            </div>
-            <div className="text-muted-foreground flex gap-4 text-sm">
-              <div className="flex items-center gap-1">
-                <CalendarDays className="h-4 w-4" />
-                <time>{formatDate(article.date)}</time>
-              </div>
-            </div>
-          </div>
-          <Separator className="my-6 lg:my-8" />
-
-          {data?.toc !== undefined && (
-            <div className="mb-6 md:hidden">
-              <TableOfContentsCard itemList={data.toc} />
-            </div>
-          )}
-
-          <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
-            <MDXRemote
-              components={{
-                img: ({ alt, className, src, ...props }) => (
-                  <img
-                    alt={alt || ''}
-                    className={cn('rounded-md', className)}
-                    src={src}
-                    {...props}
-                  />
-                ),
-              }}
-              options={{
-                mdxOptions: {
-                  rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode],
-                  remarkPlugins: [remarkGfm],
-                },
-              }}
-              source={markdown}
+    <div className="tossface grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
+      <section>
+        {article.thumbnailImageUrl !== undefined && (
+          <AspectRatio className="bg-muted mb-6 rounded-md" ratio={16 / 9}>
+            <Image
+              alt={article.title}
+              className="h-full w-full rounded-md object-cover"
+              fill
+              src={article.thumbnailImageUrl}
             />
-          </div>
-          <Separator className="my-16" />
-          <GiscusComments />
-        </section>
-
-        {data?.toc !== undefined && (
-          <aside className="relative hidden md:block">
-            <TableOfContentsCard className="sticky top-[var(--sticky-top)]" itemList={data.toc} />
-          </aside>
+          </AspectRatio>
         )}
-      </div>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
+          <div className="flex gap-2">
+            {article.tagList?.map((tag) => (
+              <Link
+                className="flex"
+                href={{
+                  pathname: '/',
+                  query: {
+                    tag,
+                  },
+                }}
+                key={tag}
+              >
+                <ArticleTagBadge
+                  className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                  tag={tag}
+                />
+              </Link>
+            ))}
+          </div>
+          <div className="text-muted-foreground flex gap-4 text-sm">
+            <div className="flex items-center gap-1">
+              <CalendarDays className="h-4 w-4" />
+              <time>{formatDate(article.date)}</time>
+            </div>
+          </div>
+        </div>
+        <Separator className="my-6 lg:my-8" />
+        {data?.toc !== undefined && (
+          <div className="mb-6 md:hidden">
+            <TableOfContentsCard itemList={data.toc} />
+          </div>
+        )}
+
+        <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
+          <MDXRemote
+            components={{
+              img: ({ alt, className, src, ...props }) => (
+                <img alt={alt || ''} className={cn('rounded-md', className)} src={src} {...props} />
+              ),
+            }}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode],
+                remarkPlugins: [remarkGfm],
+              },
+            }}
+            source={markdown}
+          />
+        </div>
+        <Separator className="my-16" />
+        <GiscusComments />
+      </section>
+
+      {data?.toc !== undefined && (
+        <aside className="relative hidden md:block">
+          <TableOfContentsCard className="sticky top-[var(--sticky-top)]" itemList={data.toc} />
+        </aside>
+      )}
     </div>
   );
 }
