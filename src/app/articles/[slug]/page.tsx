@@ -44,6 +44,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               alt={article.title}
               className="h-full w-full rounded-md object-cover"
               fill
+              priority
               src={article.thumbnailImageUrl}
             />
           </AspectRatio>
