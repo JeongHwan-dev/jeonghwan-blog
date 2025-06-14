@@ -145,3 +145,7 @@ body {
     system-ui,
     sans-serif;
 }
+
+.h-main-full {
+  @apply h-[calc(100vh-var(--header-height)-var(--footer-height)-var(--spacing)*14)] md:h-[calc(100vh-var(--header-height)-var(--footer-height)-var(--spacing)*16)];
+}
