@@ -13,7 +13,7 @@ import remarkGfm from 'remark-gfm';
 
 import { ArticleTagBadge, AspectRatio, GiscusComments, Separator } from '@/components';
 import { cn, formatDate } from '@/lib/utils';
-import { getArticleBySlug } from '@/services';
+import { getArticleBySlug, getPublishedArticleList } from '@/services';
 
 import { TableOfContentsCard } from './_components';
 
@@ -111,3 +111,14 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const { articleList } = await getPublishedArticleList({
+    pageSize: 100,
+    startCursor: undefined,
+  });
+
+  return articleList.map(({ slug }) => ({ slug }));
+}
+
+export const revalidate = 60;
