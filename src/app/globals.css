@@ -133,7 +133,7 @@ body {
 }
 
 .container {
-  @apply mx-auto w-full max-w-7xl px-5 md:px-7 xl:border-x-1 xl:border-dashed;
+  @apply mx-auto w-full max-w-7xl px-5 md:px-7 xl:border-x xl:border-dashed;
 }
 
 .tossface {
