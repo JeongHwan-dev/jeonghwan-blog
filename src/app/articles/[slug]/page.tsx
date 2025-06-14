@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     };
   }
 
-  const { date, description, tagList, title } = article;
+  const { date, description, tagList, thumbnailImageUrl, title } = article;
   const url = `/articles/${slug}`;
 
   return {
@@ -58,6 +58,17 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     openGraph: {
       authors: PROFILE.koreanName,
       description,
+      images:
+        thumbnailImageUrl === undefined
+          ? undefined
+          : [
+              {
+                alt: title,
+                height: 675,
+                url: thumbnailImageUrl,
+                width: 1200,
+              },
+            ],
       publishedTime: date,
       tags: tagList,
       title,
@@ -66,6 +77,10 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     },
     publisher: PROFILE.koreanName,
     title,
+    twitter: {
+      card: 'summary_large_image',
+      images: thumbnailImageUrl === undefined ? undefined : [thumbnailImageUrl],
+    },
   };
 }
 
