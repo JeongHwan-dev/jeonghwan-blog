@@ -1,9 +1,4 @@
-import {
-  Client,
-  type PageObjectResponse,
-  type PersonUserObjectResponse,
-  type RichTextItemResponse,
-} from '@notionhq/client';
+import { Client, type PageObjectResponse, type RichTextItemResponse } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
 import type {
@@ -19,12 +14,7 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-export const getArticleMetadata = ({
-  cover,
-  id,
-  last_edited_time: modifiedDate,
-  properties,
-}: PageObjectResponse): Article => {
+export const getArticleMetadata = ({ cover, id, properties }: PageObjectResponse): Article => {
   const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
 
   const getThumbnailImageUrl = (cover: PageObjectResponse['cover']): string => {
@@ -51,21 +41,15 @@ export const getArticleMetadata = ({
     properties.Tags.type === 'multi_select'
       ? properties.Tags.multi_select.map(({ name }) => name)
       : [];
-  const author =
-    properties.Author.type === 'people'
-      ? ((properties.Author.people[0] as PersonUserObjectResponse)?.name ?? '')
-      : '';
   const date = properties.Date.type === 'date' ? (properties.Date.date?.start ?? '') : '';
   const slug =
     properties.Slug.type === 'rich_text' ? getTextContent(properties.Slug.rich_text) || id : id;
   const thumbnailImageUrl = getThumbnailImageUrl(cover);
 
   return {
-    author,
     date,
     description,
     id,
-    modifiedDate,
     slug,
     tagList,
     thumbnailImageUrl,

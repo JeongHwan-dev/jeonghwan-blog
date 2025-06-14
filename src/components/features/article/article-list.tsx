@@ -76,11 +76,10 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     <div className="space-y-6">
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {articleList.map(
-          ({ author, date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => (
+          ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => (
             <li key={id}>
               <Link className="flex h-full w-full" href={`/articles/${slug}`}>
                 <ArticleCard
-                  author={author}
                   date={date}
                   description={description}
                   slug={slug}

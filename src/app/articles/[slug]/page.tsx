@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     };
   }
 
-  const { author = PROFILE.koreanName, date, description, tagList, title } = article;
+  const { date, description, tagList, title } = article;
   const url = `/articles/${slug}`;
 
   return {
@@ -50,13 +50,13 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     },
     authors: [
       {
-        name: author,
+        name: PROFILE.koreanName,
       },
     ],
     description,
     keywords: tagList,
     openGraph: {
-      authors: author,
+      authors: PROFILE.koreanName,
       description,
       publishedTime: date,
       tags: tagList,
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
       type: 'article',
       url,
     },
-    publisher: author,
+    publisher: PROFILE.koreanName,
     title,
   };
 }
