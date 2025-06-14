@@ -5,6 +5,7 @@ import { CalendarDays } from 'lucide-react';
 import { MDXRemote } from 'next-mdx-remote-client/rsc';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
@@ -29,6 +30,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const { data } = await compile(markdown, {
     rehypePlugins: [rehypeSlug, rehypeSanitize, withToc, withTocExport],
   });
+
+  if (article === null) {
+    notFound();
+  }
 
   return (
     <div className="tossface">

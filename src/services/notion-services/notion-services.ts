@@ -123,7 +123,7 @@ export const getPublishedArticleList = async ({
 };
 
 export type ArticleWithMarkdown = {
-  article: Article;
+  article: Article | null;
   markdown: string;
 };
 
@@ -147,6 +147,14 @@ export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdow
       ],
     },
   });
+
+  if (results.length === 0) {
+    return {
+      article: null,
+      markdown: '',
+    };
+  }
+
   const mdBlocks = await n2m.pageToMarkdown(results[0].id);
   const { parent } = n2m.toMarkdownString(mdBlocks);
 
