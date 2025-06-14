@@ -23,7 +23,7 @@ function TagFilterList({ selectedTag, tagFilterList }: TagFilterListProps) {
             className={cn(
               'hover:bg-muted-foreground/10 active:bg-muted-foreground/10 text-muted-foreground flex items-center justify-between rounded-md p-1.5 px-3 py-2 text-sm transition-colors',
               selectedTag === name &&
-                'bg-primary-foreground dark:bg-primary-foreground/30 text-primary font-medium',
+                'bg-primary-foreground dark:bg-primary/20 text-primary font-medium',
             )}
             href={{
               query: {
