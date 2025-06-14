@@ -5,10 +5,12 @@ import { Button } from '@/components';
 
 export default function ArticleNotFoundPage() {
   return (
-    <div className="h-main-full tossface flex flex-col items-center justify-center">
+    <div className="h-main-full flex flex-col items-center justify-center">
       <div className="flex w-full max-w-md flex-col items-center gap-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-          <div className="text-muted-foreground text-6xl font-bold md:text-7xl">⚠️ 404</div>
+          <div className="text-muted-foreground tossface text-6xl font-bold md:text-7xl">
+            ⚠️ 404
+          </div>
           <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
             페이지를 찾지 못했어요
           </h1>
