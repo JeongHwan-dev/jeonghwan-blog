@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { compile } from '@mdx-js/mdx';
 import withToc from '@stefanprobst/rehype-extract-toc';
 import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
@@ -12,6 +14,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 import { ArticleTagBadge, AspectRatio, GiscusComments, Separator } from '@/components';
+import { PROFILE } from '@/constants';
 import { cn, formatDate } from '@/lib/utils';
 import { getArticleBySlug, getPublishedArticleList } from '@/services';
 
@@ -21,6 +24,49 @@ interface ArticleDetailPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+interface GenerateMetadataProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { slug } = await params;
+  const { article } = await getArticleBySlug(slug);
+
+  if (article === null) {
+    return {
+      description: '페이지 주소가 정확한지 확인해 주세요',
+      title: '페이지를 찾지 못했어요',
+    };
+  }
+
+  const { author = PROFILE.koreanName, date, description, tagList, title } = article;
+  const url = `/articles/${slug}`;
+
+  return {
+    alternates: {
+      canonical: url,
+    },
+    authors: [
+      {
+        name: author,
+      },
+    ],
+    description,
+    keywords: tagList,
+    openGraph: {
+      authors: author,
+      description,
+      publishedTime: date,
+      tags: tagList,
+      title,
+      type: 'article',
+      url,
+    },
+    publisher: author,
+    title,
+  };
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
