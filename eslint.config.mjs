@@ -132,6 +132,7 @@ export default [
           ],
         },
       ],
+      'perfectionist/sort-modules': 'off',
     },
   },
   eslintConfigPrettier,
