@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components';
 
-export default function ArticleNotFoundPage() {
+export default function NotFoundPage() {
   return (
     <div className="h-main-full flex flex-col items-center justify-center">
       <div className="flex w-full max-w-md flex-col items-center gap-6">

@@ -4,12 +4,12 @@ import { RotateCcw } from 'lucide-react';
 
 import { Button } from '@/components';
 
-interface ArticleErrorPageProps {
+interface ErrorPageProps {
   error: Error & { digest?: string };
   reset: VoidFunction;
 }
 
-export default function ArticleErrorPage({ reset }: ArticleErrorPageProps) {
+export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
     <div className="h-main-full flex flex-col items-center justify-center">
       <div className="flex w-full max-w-md flex-col items-center gap-6">
