@@ -1,6 +1,6 @@
 import { Card, Skeleton } from '@/components/ui';
 
-const ARTICLE_CARD_SKELETON_COUNT = 4;
+const ARTICLE_CARD_SKELETON_COUNT = 6;
 
 function ArticleListSkeleton() {
   return (
