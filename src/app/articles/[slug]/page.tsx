@@ -159,8 +159,18 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
           <MDXRemote
             components={{
-              img: ({ alt, className, src, ...props }) => (
-                <img alt={alt || ''} className={cn('rounded-md', className)} src={src} {...props} />
+              a: ({ children, className, ...props }) => (
+                <Link
+                  {...props}
+                  className={cn('break-all', className)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {children}
+                </Link>
+              ),
+              img: ({ className, ...props }) => (
+                <img {...props} className={cn('rounded-md', className)} />
               ),
             }}
             options={{
