@@ -26,10 +26,10 @@ interface SocialLink {
 }
 
 const PAGE_NAV_LINK_LIST: PageNavLink[] = [
-  {
-    href: '/about',
-    label: '개발자 소개',
-  },
+  // {
+  //   href: '/about',
+  //   label: '개발자 소개',
+  // },
 ];
 
 const SOCIAL_LINK_LIST: SocialLink[] = [
