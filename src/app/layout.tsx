@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 
 import './globals.css';
 
-import { Footer, Header } from '@/components';
+import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/components';
 import { PROFILE } from '@/constants';
 
 import { Providers } from './providers';
@@ -77,6 +77,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </main>
           <Footer />
+          <ScrollFloatingActionButtonGroup className="fixed right-6 bottom-6 z-20 xl:right-[calc((100vw-1280px)/2+24px)]" />
         </Providers>
       </body>
     </html>
