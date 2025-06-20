@@ -87,7 +87,6 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const { articleList } = await getPublishedArticleList({
     pageSize: 100,
-    startCursor: undefined,
   });
 
   return articleList.map(({ slug }) => ({ slug }));
