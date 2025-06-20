@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import localFont from 'next/font/local';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import './globals.css';
+
+import localFont from 'next/font/local';
 
 import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/components';
 import { PROFILE } from '@/constants';
@@ -79,6 +81,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Footer />
           <ScrollFloatingActionButtonGroup className="fixed right-6 bottom-6 z-20 xl:right-[calc((100vw-1280px)/2+24px)]" />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
