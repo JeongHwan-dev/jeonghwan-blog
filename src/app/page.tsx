@@ -22,9 +22,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
       <div className="order-3 space-y-6 md:order-none md:space-y-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
             {tag === '전체' ? '전체 글' : `${tag} 관련 글`}
-          </h2>
+          </h1>
           <SortSelect className="w-full md:w-[180px]" />
         </div>
         <Suspense fallback={<ArticleListSkeleton />}>

@@ -48,7 +48,7 @@ function ProfileCard() {
           </div>
 
           <div className="text-center">
-            <h3 className="text-lg font-bold">{PROFILE.koreanName}</h3>
+            <span className="text-lg font-bold">{PROFILE.koreanName}</span>
             <p className="text-primary text-sm">{PROFILE.job}</p>
           </div>
 
