@@ -1,0 +1,35 @@
+🔧 chore:
+  - head-branch: ['chore/']
+
+👷 ci:
+  - head-branch: ['ci/']
+
+📝 docs:
+  - head-branch: ['docs/']
+
+✨ feat:
+  - head-branch: ['feat/']
+
+🐛 fix:
+  - head-branch: ['fix/']
+
+🚑 hotfix:
+  - head-branch: ['hotfix/']
+
+⚡ perf:
+  - head-branch: ['perf/']
+
+♻️ refactor:
+  - head-branch: ['refactor/']
+
+🗑️ remove:
+  - head-branch: ['remove/']
+
+⏪ revert:
+  - head-branch: ['revert/']
+
+💄 style:
+  - head-branch: ['style/']
+
+✅ test:
+  - head-branch: ['test/']

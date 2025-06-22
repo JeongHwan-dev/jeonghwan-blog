@@ -1,7 +1,31 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
+
+import createMDX from '@next/mdx';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com',
+        protocol: 'https',
+      },
+      {
+        hostname: 'vxxtyjrnkztzwbhregtu.supabase.co',
+        protocol: 'https',
+      },
+    ],
+  },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
 };
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

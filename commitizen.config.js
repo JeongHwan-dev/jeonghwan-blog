@@ -1,0 +1,96 @@
+const MAX_COMMIT_MESSAGE_LENGTH = 100;
+
+const COMMIT_TYPE_LIST = [
+  {
+    description: '새로운 기능 추가 및 변경',
+    value: 'feat',
+  },
+  {
+    description: '버그 수정',
+    value: 'fix',
+  },
+  {
+    description: '긴급 수정',
+    value: 'hotfix',
+  },
+  {
+    description: '사용하지 않는 코드 혹은 파일 삭제',
+    value: 'remove',
+  },
+  {
+    description: '코드 스타일 수정(코드 포맷, 세미콜론 추가 및 삭제 등)',
+    value: 'style',
+  },
+  {
+    description: '코드 리팩토링(기능 변경 없이 코드 구조 개선)',
+    value: 'refactor',
+  },
+  {
+    description: '성능 개선',
+    value: 'perf',
+  },
+  {
+    description: '빌드, 패키지 업데이트, CI 설정 등 코드 변경 없는 작업',
+    value: 'chore',
+  },
+  {
+    description: 'CI/CD 관련 설정 변경',
+    value: 'ci',
+  },
+  {
+    description: '테스트 코드 추가 및 수정',
+    value: 'test',
+  },
+  {
+    description: '이전 커밋을 되돌릴 때',
+    value: 'revert',
+  },
+  {
+    description: '문서 수정(README, 주석 등)',
+    value: 'docs',
+  },
+];
+
+const COMMIT_QUESTION_LIST = [
+  {
+    choices: COMMIT_TYPE_LIST.map(({ description, value }) => ({
+      name: `${value.padEnd(8, ' ')}: ${description}`,
+      value,
+    })),
+    message: '1️⃣ 커밋 유형을 선택하세요:',
+    name: 'type',
+    type: 'list',
+  },
+  {
+    message: '2️⃣ 커밋 메시지를 입력하세요:',
+    name: 'subject',
+    type: 'input',
+    validate: (input) => input.length > 0 && input.length <= MAX_COMMIT_MESSAGE_LENGTH,
+  },
+];
+
+module.exports = {
+  prompter: (cz, commit) => {
+    cz.prompt(COMMIT_QUESTION_LIST).then(({ subject, type }) => {
+      const commitMessage = `${type}: ${subject}`;
+      const divider = '-'.repeat(50);
+
+      cz.prompt([
+        {
+          default: true,
+          message: `✅ 커밋 메시지가 아래와 같아요. 커밋을 진행할까요?\n${divider}\n${commitMessage}\n${divider}\n`,
+          name: 'confirmCommit',
+          type: 'confirm',
+        },
+      ]).then(({ confirmCommit }) => {
+        if (confirmCommit) {
+          commit(commitMessage);
+
+          return;
+        }
+
+        console.log('❌ 커밋이 취소되었습니다.');
+      });
+    });
+  },
+};
