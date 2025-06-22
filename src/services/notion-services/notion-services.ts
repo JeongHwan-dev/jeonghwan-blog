@@ -14,23 +14,8 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-export const getArticleMetadata = ({ cover, id, properties }: PageObjectResponse): Article => {
+export const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
   const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
-
-  const getThumbnailImageUrl = (cover: PageObjectResponse['cover']): string => {
-    if (!cover) {
-      return '';
-    }
-
-    switch (cover.type) {
-      case 'external':
-        return cover.external.url;
-      case 'file':
-        return cover.file.url;
-      default:
-        return '';
-    }
-  };
 
   const title = properties.Title.type === 'title' ? getTextContent(properties.Title.title) : '';
   const description =
@@ -44,7 +29,8 @@ export const getArticleMetadata = ({ cover, id, properties }: PageObjectResponse
   const date = properties.Date.type === 'date' ? (properties.Date.date?.start ?? '') : '';
   const slug =
     properties.Slug.type === 'rich_text' ? getTextContent(properties.Slug.rich_text) || id : id;
-  const thumbnailImageUrl = getThumbnailImageUrl(cover);
+  const thumbnailImageUrl =
+    properties.ThumbnailImageUrl.type === 'url' ? (properties.ThumbnailImageUrl.url ?? '') : '';
 
   return {
     date,
