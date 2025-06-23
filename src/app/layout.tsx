@@ -17,14 +17,14 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-const BLOG_TITLE = `Jeonghwan's Blog`;
-
 const pretendard = localFont({
   display: 'swap',
   src: '../../public/fonts/pretendard-variable.woff2',
   variable: '--font-pretendard',
   weight: '45 920',
 });
+
+const BLOG_TITLE = `Jeonghwan's Blog`;
 
 export const metadata: Metadata = {
   alternates: {
@@ -55,6 +55,21 @@ export const metadata: Metadata = {
     'Web Development',
   ],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
+  openGraph: {
+    description:
+      '웹 개발 지식과 실무 경험을 나누는 테크 블로그입니다. 개발 과정에서 얻은 인사이트와 최신 웹 기술 트렌드 등을 공유합니다.',
+    images: [
+      {
+        alt: BLOG_TITLE,
+        height: 675,
+        url: '../../public/images/img-default-og.png',
+        width: 1200,
+      },
+    ],
+    title: BLOG_TITLE,
+    type: 'website',
+    url: '/',
+  },
   publisher: PROFILE.koreanName,
   title: {
     default: BLOG_TITLE,
