@@ -44,6 +44,9 @@ export const metadata: Metadata = {
     email: false,
     telephone: false,
   },
+  icons: {
+    icon: '/favicon.ico',
+  },
   keywords: [
     '개발 블로그',
     '프론트엔드',
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
       {
         alt: BLOG_TITLE,
         height: 675,
-        url: '../../public/images/img-default-og.png',
+        url: '/images/img-default-og.png',
         width: 1200,
       },
     ],
