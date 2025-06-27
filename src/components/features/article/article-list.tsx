@@ -1,7 +1,6 @@
 'use client';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { use, useEffect } from 'react';
@@ -9,7 +8,12 @@ import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/services';
 
+import { renderTimes } from '@/lib/utils';
+
 import { ArticleCard } from './article-card';
+import { ArticleCardSkeleton } from './article-card-skeleton';
+
+const LOADING_ARTICLE_CARD_SKELETON_COUNT = 2;
 
 interface ArticleListProps {
   articleListPromise: Promise<GetPublishedArticleListResponse>;
@@ -92,14 +96,14 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
             </li>
           ),
         )}
+        {hasNextPage && !isFetchingNextPage && <div className="h-10" ref={ref} />}
+        {isFetchingNextPage &&
+          renderTimes(LOADING_ARTICLE_CARD_SKELETON_COUNT, (index) => (
+            <li key={`loading-article-card-skeleton-${index}`}>
+              <ArticleCardSkeleton />
+            </li>
+          ))}
       </ul>
-
-      {hasNextPage && !isFetchingNextPage && <div className="h-10" ref={ref} />}
-      {isFetchingNextPage && (
-        <div className="flex justify-center py-4">
-          <Loader2 className="text-muted-foreground h-6 w-6 animate-spin" />
-        </div>
-      )}
     </div>
   );
 }
