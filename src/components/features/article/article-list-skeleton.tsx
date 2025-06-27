@@ -1,25 +1,15 @@
-import { Card, Skeleton } from '@/components/ui';
+import { renderTimes } from '@/lib/utils';
+
+import { ArticleCardSkeleton } from './article-card-skeleton';
 
 const ARTICLE_CARD_SKELETON_COUNT = 6;
 
 function ArticleListSkeleton() {
   return (
     <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      {Array.from({ length: ARTICLE_CARD_SKELETON_COUNT }).map((_, index) => (
-        <li key={index}>
-          <Card className="gap-0 overflow-hidden p-0">
-            <div className="aspect-[16/9]">
-              <Skeleton className="h-full w-full" />
-            </div>
-            <div className="flex flex-grow flex-col justify-between p-4 md:p-5">
-              <div>
-                <Skeleton className="mb-3 h-5.5 w-18 md:mb-4" />
-                <Skeleton className="mb-2 h-7 w-full" />
-                <Skeleton className="h-5.5 w-full md:h-6.5" />
-              </div>
-              <Skeleton className="mt-3 h-5 w-30 md:mt-4" />
-            </div>
-          </Card>
+      {renderTimes(ARTICLE_CARD_SKELETON_COUNT, (index) => (
+        <li key={`article-card-skeleton-${index}`}>
+          <ArticleCardSkeleton />
         </li>
       ))}
     </ul>
