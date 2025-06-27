@@ -1,12 +1,13 @@
 import { Skeleton } from '@/components';
+import { renderTimes } from '@/lib/utils';
+
+const TAG_FILTER_SKELETON_COUNT = 5;
 
 function TagFilterListSkeleton() {
-  const skeletonList = Array.from({ length: 5 }, (_, index) => index);
-
   return (
     <ul className="flex flex-col gap-3">
-      {skeletonList.map((id) => (
-        <li key={id}>
+      {renderTimes(TAG_FILTER_SKELETON_COUNT, (index) => (
+        <li key={`tag-filter-skeleton-${index}`}>
           <Skeleton className="h-9 w-full" />
         </li>
       ))}
