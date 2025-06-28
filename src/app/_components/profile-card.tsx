@@ -40,7 +40,6 @@ function ProfileCard() {
                 <JeonghwanAvatar
                   aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
                   height={144}
-                  role="img"
                   width={144}
                 />
               </div>

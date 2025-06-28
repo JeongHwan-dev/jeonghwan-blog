@@ -19,6 +19,7 @@ interface RootLayoutProps {
 
 const pretendard = localFont({
   display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
   src: '../../public/fonts/pretendard-variable.woff2',
   variable: '--font-pretendard',
   weight: '45 920',
