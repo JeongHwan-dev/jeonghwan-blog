@@ -33,7 +33,7 @@ function ArticleCard({
       {thumbnailImageUrl && (
         <div className="relative aspect-[16/9] overflow-hidden">
           <Image
-            alt={title}
+            alt={`${title} 글의 썸네일 이미지`}
             className="bg-accent object-cover transition-transform duration-300 group-hover:scale-105"
             fill
             priority={thumbnailImagePriority}

@@ -125,6 +125,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           <div className="flex gap-2">
             {article.tagList?.map((tag) => (
               <Link
+                aria-label={`${tag} 태그가 있는 다른 글 보기`}
                 className="flex"
                 href={{
                   pathname: '/',

@@ -82,7 +82,11 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
         {articleList.map(
           ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => (
             <li key={id}>
-              <Link className="flex h-full w-full" href={`/articles/${slug}`}>
+              <Link
+                aria-label={`${title} 글 읽기`}
+                className="flex h-full w-full"
+                href={`/articles/${slug}`}
+              >
                 <ArticleCard
                   date={date}
                   description={description}

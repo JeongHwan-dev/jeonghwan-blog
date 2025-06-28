@@ -35,7 +35,7 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
           <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{TITLE}</h1>
           <p className="text-muted-foreground md:text-lg">{DESCRIPTION}</p>
         </div>
-        <Button onClick={reset}>
+        <Button aria-label="페이지 다시 로드하기" onClick={reset}>
           <RotateCcw />
           다시 시도하기
         </Button>
