@@ -14,7 +14,7 @@ function TableOfContentsCard({ itemList, ...rest }: TableOfContentsCardProps) {
     <div {...rest}>
       <div className="bg-muted/60 space-y-4 rounded-lg p-6 backdrop-blur-sm">
         <h3 className="text-lg font-semibold">목차</h3>
-        <nav className="space-y-3 text-sm">
+        <nav aria-label="글 목차 네비게이션" className="space-y-3 text-sm">
           {itemList.map(({ children, depth, id, value }) => (
             <TableOfContentsLink depth={depth} id={id} key={id} value={value}>
               {children}

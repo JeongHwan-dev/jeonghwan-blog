@@ -29,7 +29,7 @@ function SortSelect({ className, ...props }: SortSelectProps) {
 
   return (
     <Select onValueChange={handleSelectValueChange} value={selectedSort} {...props}>
-      <SelectTrigger className={className}>
+      <SelectTrigger aria-label="글 정렬 방식 선택" className={className}>
         <SelectValue placeholder="정렬 방식 선택" />
       </SelectTrigger>
       <SelectContent>

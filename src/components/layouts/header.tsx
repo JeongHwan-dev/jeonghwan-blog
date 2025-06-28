@@ -71,7 +71,12 @@ function Header() {
             <nav className="hidden items-center gap-0.5 md:flex">
               {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                 <Button asChild key={label} size="icon" variant="ghost">
-                  <Link href={href} rel="noopener noreferrer" target="_blank">
+                  <Link
+                    aria-label={`${label} 프로필 보기`}
+                    href={href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     <Icon />
                   </Link>
                 </Button>
@@ -84,7 +89,13 @@ function Header() {
 
           <Drawer>
             <DrawerTrigger asChild>
-              <Button className="md:hidden" size="icon" type="button" variant="ghost">
+              <Button
+                aria-label="메뉴 열기"
+                className="md:hidden"
+                size="icon"
+                type="button"
+                variant="ghost"
+              >
                 <Menu />
               </Button>
             </DrawerTrigger>
@@ -105,6 +116,7 @@ function Header() {
 
                 {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                   <Link
+                    aria-label={`${label} 프로필 보기`}
                     className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
                     href={href}
                     key={label}
