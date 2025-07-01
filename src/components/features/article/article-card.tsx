@@ -25,7 +25,7 @@ function ArticleCard({
   return (
     <Card
       className={cn(
-        'group bg-card/50 border-border hover:border-primary/20 w-full cursor-pointer gap-0 overflow-hidden border p-0 shadow-none backdrop-blur-sm transition-all duration-300',
+        'group bg-card/50 border-border hover:border-primary/20 w-full cursor-pointer gap-0 overflow-hidden border p-0 shadow-none transition-all duration-300',
         className,
       )}
       {...rest}

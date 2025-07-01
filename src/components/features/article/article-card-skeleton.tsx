@@ -1,8 +1,19 @@
-import { Card, Skeleton } from '@/components/ui';
+import type { ComponentProps } from 'react';
 
-function ArticleCardSkeleton() {
+import { Card, Skeleton } from '@/components/ui';
+import { cn } from '@/lib/utils';
+
+interface ArticleCardSkeletonProps extends ComponentProps<'div'> {}
+
+function ArticleCardSkeleton({ className, ...rest }: ArticleCardSkeletonProps) {
   return (
-    <Card className="gap-0 overflow-hidden p-0">
+    <Card
+      className={cn(
+        'bg-card/50 border-border w-full gap-0 overflow-hidden border p-0 shadow-none',
+        className,
+      )}
+      {...rest}
+    >
       <div className="aspect-[16/9]">
         <Skeleton className="h-full w-full" />
       </div>
