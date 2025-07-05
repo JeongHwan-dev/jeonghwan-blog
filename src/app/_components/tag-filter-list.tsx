@@ -5,7 +5,7 @@ import { use } from 'react';
 
 import type { ArticleTagFilterItem } from '@/services';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 
 interface TagFilterListProps {
   selectedTag: string;

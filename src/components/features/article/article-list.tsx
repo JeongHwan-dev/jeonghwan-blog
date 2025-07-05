@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/services';
 
-import { renderTimes } from '@/lib/utils';
+import { renderTimes } from '@/utils';
 
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';

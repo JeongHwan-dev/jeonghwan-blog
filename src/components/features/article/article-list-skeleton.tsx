@@ -1,4 +1,4 @@
-import { renderTimes } from '@/lib/utils';
+import { renderTimes } from '@/utils';
 
 import { ArticleCardSkeleton } from './article-card-skeleton';
 

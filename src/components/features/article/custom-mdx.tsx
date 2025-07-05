@@ -7,7 +7,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
-import { cn, isInternalLink } from '@/lib/utils';
+import { cn, isInternalLink } from '@/utils';
 
 interface CustomMDXProps extends MDXRemoteProps {}
 

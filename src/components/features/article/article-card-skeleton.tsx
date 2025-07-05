@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
-import { Card, Skeleton } from '@/components/ui';
-import { cn } from '@/lib/utils';
+import { Card, Skeleton } from '@/components';
+import { cn } from '@/utils';
 
 interface ArticleCardSkeletonProps extends ComponentProps<'div'> {}
 

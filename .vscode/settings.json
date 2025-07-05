@@ -7,7 +7,15 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "cSpell.userWords": ["jeonghwan", "pretendard", "notionhq", "vaul", "tossface", "giscus"],
+  "cSpell.userWords": [
+    "jeonghwan",
+    "pretendard",
+    "notionhq",
+    "vaul",
+    "tossface",
+    "giscus",
+    "shadcn"
+  ],
   "css.lint.unknownAtRules": "ignore",
   "eslint.useFlatConfig": true
 }

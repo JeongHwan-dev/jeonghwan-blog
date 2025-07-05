@@ -12,8 +12,8 @@ import rehypeSlug from 'rehype-slug';
 
 import { ArticleTagBadge, AspectRatio, CustomMDX, GiscusComments, Separator } from '@/components';
 import { PROFILE } from '@/constants';
-import { formatDate } from '@/lib/utils';
 import { getArticleBySlug, getPublishedArticleList } from '@/services';
+import { formatDate } from '@/utils';
 
 import { TableOfContentsCard } from './_components';
 
