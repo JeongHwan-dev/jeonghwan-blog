@@ -149,3 +149,15 @@ body {
 .h-main-full {
   @apply h-[calc(100vh-var(--header-height)-var(--footer-height)-var(--spacing)*14)] md:h-[calc(100vh-var(--header-height)-var(--footer-height)-var(--spacing)*16)];
 }
+
+.custom-mdx-blockquote > p:first-child::before {
+  content: none;
+}
+
+.custom-mdx-blockquote > p:last-child::after {
+  content: none;
+}
+
+.custom-mdx-code:not(pre > code) {
+  @apply bg-muted rounded border px-1 py-0.5 break-all before:content-none after:content-none;
+}
