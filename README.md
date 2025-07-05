@@ -6,7 +6,7 @@
 
 ### Frontend
 
-- **코어**: Next.js
+- **프레임워크**: Next.js
 - **언어**: TypeScript
 - **상태 관리**: TanStack Query
 - **스타일링**: Tailwind CSS
