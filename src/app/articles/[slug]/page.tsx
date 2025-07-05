@@ -4,18 +4,15 @@ import { compile } from '@mdx-js/mdx';
 import withToc from '@stefanprobst/rehype-extract-toc';
 import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
 import { CalendarDays } from 'lucide-react';
-import { MDXRemote } from 'next-mdx-remote-client/rsc';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
 
-import { ArticleTagBadge, AspectRatio, GiscusComments, Separator } from '@/components';
+import { ArticleTagBadge, AspectRatio, CustomMDX, GiscusComments, Separator } from '@/components';
 import { PROFILE } from '@/constants';
-import { cn, formatDate } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import { getArticleBySlug, getPublishedArticleList } from '@/services';
 
 import { TableOfContentsCard } from './_components';
@@ -157,30 +154,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         )}
 
         <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
-          <MDXRemote
-            components={{
-              a: ({ children, className, ...props }) => (
-                <Link
-                  {...props}
-                  className={cn('break-all', className)}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {children}
-                </Link>
-              ),
-              img: ({ className, ...props }) => (
-                <img {...props} className={cn('rounded-md', className)} />
-              ),
-            }}
-            options={{
-              mdxOptions: {
-                rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode],
-                remarkPlugins: [remarkGfm],
-              },
-            }}
-            source={markdown}
-          />
+          <CustomMDX source={markdown} />
         </div>
         <Separator className="my-16" />
         <GiscusComments />
