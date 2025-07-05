@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
 /**
- * Utility function to render components a specified number of times
- * @param count Number of times to repeat
- * @param renderFunction Function that returns a component to render for each index
- * @returns Array of rendered components
+ * 컴포넌트를 지정된 횟수만큼 렌더링하는 유틸리티 함수
+ * @param count 반복할 횟수
+ * @param renderFunction 각 인덱스에 대해 렌더링할 컴포넌트를 반환하는 함수
+ * @returns 렌더링된 컴포넌트들의 배열
  */
 export function renderTimes(
   count: number,
