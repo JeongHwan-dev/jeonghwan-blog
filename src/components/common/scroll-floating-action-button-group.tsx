@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react';
 
 import { ArrowDown, ArrowUp } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 
 import { Button, Separator } from '../ui';
 
