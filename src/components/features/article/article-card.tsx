@@ -6,7 +6,7 @@ import Image from 'next/image';
 import type { Article } from '@/services';
 
 import { ArticleTagBadge, Card, CardContent } from '@/components';
-import { cn, formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/utils';
 
 interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {
   thumbnailImagePriority?: boolean;

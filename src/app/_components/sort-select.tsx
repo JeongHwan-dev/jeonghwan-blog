@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import type { ArticleSort } from '@/services';
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components';
 
 interface SortSelectProps extends ComponentProps<typeof Select> {
   className?: string;

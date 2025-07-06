@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components';
-import { renderTimes } from '@/lib/utils';
+import { renderTimes } from '@/utils';
 
 const TAG_FILTER_SKELETON_COUNT = 5;
 

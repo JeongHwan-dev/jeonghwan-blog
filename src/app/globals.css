@@ -159,5 +159,5 @@ body {
 }
 
 .custom-mdx-code:not(pre > code) {
-  @apply bg-muted rounded border px-1 py-0.5 break-all before:content-none after:content-none;
+  @apply bg-muted rounded border px-1 py-0.5 before:content-none after:content-none;
 }
