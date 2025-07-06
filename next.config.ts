@@ -2,18 +2,13 @@ import type { NextConfig } from 'next';
 
 import createMDX from '@next/mdx';
 
+const AWS_S3_IMAGE_DOMAIN = process.env.AWS_S3_IMAGE_DOMAIN || '';
+
+const SUPABASE_STORAGE_DOMAIN = process.env.SUPABASE_STORAGE_DOMAIN || '';
+
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com',
-        protocol: 'https',
-      },
-      {
-        hostname: 'vxxtyjrnkztzwbhregtu.supabase.co',
-        protocol: 'https',
-      },
-    ],
+    domains: [AWS_S3_IMAGE_DOMAIN, SUPABASE_STORAGE_DOMAIN],
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   webpack: (config) => {
