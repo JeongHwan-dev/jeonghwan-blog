@@ -2,11 +2,9 @@ import type { NextConfig } from 'next';
 
 import createMDX from '@next/mdx';
 
-const domains: string[] = [
-  process.env.AWS_S3_IMAGE_DOMAIN,
-  process.env.SUPABASE_STORAGE_DOMAIN,
-  process.env.VERCEL_BLOB_STORAGE_DOMAIN,
-].filter((domain): domain is string => Boolean(domain));
+const domains: string[] = [process.env.VERCEL_BLOB_STORAGE_DOMAIN].filter(
+  (domain): domain is string => Boolean(domain),
+);
 
 const nextConfig: NextConfig = {
   images: {
