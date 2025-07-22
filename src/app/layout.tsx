@@ -92,7 +92,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           type="text/css"
         />
       </head>
-      <body className={`${pretendard.variable} antialiased`}>
+      <body className={`${pretendard.className} ${pretendard.variable} antialiased`}>
         <Providers>
           <Header />
           <main className="container flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex-col py-7 md:py-8">
