@@ -128,13 +128,7 @@
 }
 
 .tossface {
-  font-family:
-    var(--font-pretendard),
-    Tossface,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    sans-serif;
+  font-family: var(--font-pretendard), var(--font-tossface);
 }
 
 .h-main-full {
