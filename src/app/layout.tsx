@@ -3,15 +3,13 @@ import type { ReactNode } from 'react';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
-import './globals.css';
-
 import localFont from 'next/font/local';
 
 import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/components';
 import { PROFILE } from '@/constants';
 
 import { Providers } from './providers';
+import './globals.css';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -23,6 +21,13 @@ const pretendard = localFont({
   src: '../../public/fonts/pretendard-variable.woff2',
   variable: '--font-pretendard',
   weight: '45 920',
+});
+
+const tossface = localFont({
+  display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+  src: '../../public/fonts/toss-face-font-web.otf',
+  variable: '--font-tossface',
 });
 
 const BLOG_TITLE = `Jeonghwan's Blog`;
@@ -84,15 +89,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <head>
-        <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
-        <link
-          href="https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css"
-          rel="stylesheet"
-          type="text/css"
-        />
-      </head>
-      <body className={`${pretendard.variable} antialiased`}>
+      <body
+        className={`${pretendard.className} ${pretendard.variable} ${tossface.variable} antialiased`}
+      >
         <Providers>
           <Header />
           <main className="container flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex-col py-7 md:py-8">

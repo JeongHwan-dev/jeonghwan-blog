@@ -50,15 +50,6 @@
   --sticky-top: calc(var(--header-height) + var(--sticky-offset));
 }
 
-body {
-  font-family:
-    var(--font-pretendard),
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    sans-serif;
-}
-
 :root {
   --radius: 0.5rem;
   --background: oklch(1 0 0);
@@ -137,13 +128,7 @@ body {
 }
 
 .tossface {
-  font-family:
-    var(--font-pretendard),
-    Tossface,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    sans-serif;
+  font-family: var(--font-pretendard), var(--font-tossface);
 }
 
 .h-main-full {
