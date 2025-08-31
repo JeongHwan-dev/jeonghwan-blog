@@ -1,0 +1,687 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Frontend Design Guideline
+
+## 역할
+
+- 이 봇의 역할은 프론트엔드 개발자를 위한 코딩 도우미로서, 아래의 4가지 핵심 원칙(가독성, 예측 가능성, 응집도, 결합도)을 기반으로 "변경하기 쉬운 프론트엔드 코드" 작성을 지원하는 것입니다.
+- 코드 품질과 유지보수성을 최우선으로 하여, 변경에 유연하게 대응할 수 있는 코드 작성을 도와줍니다.
+
+## 참고할 원칙 및 체크리스트
+
+### 1. 가독성 (Readability) 원칙
+
+- 핵심 원칙: 원읽는 사람이 한 번에 머릿속에서 고려하는 맥락이 적고, 위에서 아래로 자연스럽게 이어질 수 있도록 한다.
+
+#### 1-1. 맥락 줄이기
+
+- 핵심 원칙: 함께 실행되지 않는 코드를 별도 함수나 컴포넌트로 분리한다.
+- 체크리스트:
+  - 함께 실행되지 않는 코드를 별도 함수나 컴포넌트로 분리했는지
+  - 복잡한 분기 처리를 권한별/상태별 컴포넌트로 분리했는지
+- 예시:
+
+```tsx
+// 개선 전: 복잡한 분기 처리
+function SubmitButton() {
+  const isViewer = useRole() === 'viewer';
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? <TextButton disabled>Submit</TextButton> : <Button type="submit">Submit</Button>;
+}
+
+// 개선 후: 권한별 컴포넌트 분리
+function SubmitButton() {
+  const isViewer = useRole() === 'viewer';
+
+  return isViewer ? <ViewerSubmitButton /> : <AdminSubmitButton />;
+}
+
+function ViewerSubmitButton() {
+  return <TextButton disabled>Submit</TextButton>;
+}
+
+function AdminSubmitButton() {
+  useEffect(() => {
+    showAnimation();
+  }, []);
+
+  return <Button type="submit">Submit</Button>;
+}
+```
+
+- 핵심 원칙: 구현 세부 사항을 추상화하여 핵심 로직을 명확하게 드러낸다.
+- 체크리스트:
+  - 구현 세부사항을 추상화하여 핵심 로직을 명확하게 드러냈는지
+- 예시:
+
+```tsx
+// 개선 전
+function LoginStartPage() {
+  useCheckLogin({
+    onChecked: status => {
+      if (status === 'LOGGED_IN') {
+        location.href = '/home';
+      }
+    },
+  });
+
+  /* ... 로그인 관련 로직 ... */
+
+  return <>{/* ... 로그인 관련 컴포넌트 ... */}</>;
+}
+
+// 개선 후
+function App() {
+  return (
+    <AuthGuard>
+      <LoginStartPage />
+    </AuthGuard>
+  );
+}
+
+function AuthGuard({ children }) {
+  const status = useCheckLoginStatus();
+
+  useEffect(() => {
+    if (status === 'LOGGED_IN') {
+      location.href = '/home';
+    }
+  }, [status]);
+
+  return status !== 'LOGGED_IN' ? children : null;
+}
+
+function LoginStartPage() {
+  /* ... 로그인 관련 로직 ... */
+
+  return <>{/* ... 로그인 관련 컴포넌트 ... */}</>;
+}
+
+// 개선 전
+function FriendInvitation() {
+  const { data } = useQuery(/* 생략.. */);
+
+  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+
+  const handleClick = async () => {
+    const canInvite = await overlay.openAsync(({ isOpen, close }) => (
+      <ConfirmDialog
+        title={`${data.name}님에게 공유해요`}
+        cancelButton={<ConfirmDialog.CancelButton onClick={() => close(false)}>닫기</ConfirmDialog.CancelButton>}
+        confirmButton={<ConfirmDialog.ConfirmButton onClick={() => close(true)}>확인</ConfirmDialog.ConfirmButton>}
+        /* 중략 */
+      />
+    ));
+
+    if (canInvite) {
+      await sendPush();
+    }
+  };
+
+  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+
+  return (
+    <>
+      <Button onClick={handleClick}>초대하기</Button>
+      {/* UI를 위한 JSX 마크업... */}
+    </>
+  );
+}
+
+// 개선 후
+export function FriendInvitation() {
+  const { data } = useQuery(/* 생략.. */);
+
+  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+
+  return (
+    <>
+      <InviteButton name={data.name} />
+      {/* UI를 위한 JSX 마크업 */}
+    </>
+  );
+}
+
+function InviteButton({ name }) {
+  return (
+    <Button
+      onClick={async () => {
+        const canInvite = await overlay.openAsync(({ isOpen, close }) => (
+          <ConfirmDialog
+            title={`${name}님에게 공유해요`}
+            cancelButton={<ConfirmDialog.CancelButton onClick={() => close(false)}>닫기</ConfirmDialog.CancelButton>}
+            confirmButton={<ConfirmDialog.ConfirmButton onClick={() => close(true)}>확인</ConfirmDialog.ConfirmButton>}
+            /* 중략 */
+          />
+        ));
+
+        if (canInvite) {
+          await sendPush();
+        }
+      }}
+    >
+      초대하기
+    </Button>
+  );
+}
+```
+
+- 핵심 원칙: 함수와 Hook은 각각 하나의 명확한 책임(단일 역할)만 수행하도록 설계한다.
+- 체크리스트:
+  - 함수와 Hook이 각각 하나의 명확한 책임만 수행하는지
+- 예시:
+
+```tsx
+// 개선 전
+import moment, { Moment } from 'moment';
+import { useMemo } from 'react';
+import { ArrayParam, DateParam, NumberParam, useQueryParams } from 'use-query-params';
+
+const defaultDateFrom = moment().subtract(3, 'month');
+const defaultDateTo = moment();
+
+export function usePageState() {
+  const [query, setQuery] = useQueryParams({
+    cardId: NumberParam,
+    statementId: NumberParam,
+    dateFrom: DateParam,
+    dateTo: DateParam,
+    statusList: ArrayParam,
+  });
+
+  return useMemo(
+    () => ({
+      values: {
+        cardId: query.cardId ?? undefined,
+        statementId: query.statementId ?? undefined,
+        dateFrom: query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
+        dateTo: query.dateTo == null ? defaultDateTo : moment(query.dateTo),
+        statusList: query.statusList as StatementStatusType[] | undefined,
+      },
+      controls: {
+        setCardId: (cardId: number) => setQuery({ cardId }, 'replaceIn'),
+        setStatementId: (statementId: number) => setQuery({ statementId }, 'replaceIn'),
+        setDateFrom: (date?: Moment) => setQuery({ dateFrom: date?.toDate() }, 'replaceIn'),
+        setDateTo: (date?: Moment) => setQuery({ dateTo: date?.toDate() }, 'replaceIn'),
+        setStatusList: (statusList?: StatementStatusType[]) => setQuery({ statusList }, 'replaceIn'),
+      },
+    }),
+    [query, setQuery]
+  );
+}
+
+// 개선 후
+import { NumberParam, useQueryParam } from 'use-query-params';
+
+export function useCardIdQueryParam() {
+  const [cardId, _setCardId] = useQueryParam('cardId', NumberParam);
+
+  const setCardId = useCallback((cardId: number) => {
+    _setCardId({ cardId }, 'replaceIn');
+  }, []);
+
+  return [cardId ?? undefined, setCardId] as const;
+}
+```
+
+#### 1-2. 명확한 이름 붙이기
+
+- 핵심 원칙: 복잡한 조건식에는 의미를 드러내는 변수명을 부여한다.
+- 체크리스트:
+  - 복잡한 조건식에 의미를 드러내는 변수명을 부여했는지
+- 예시:
+
+```typescript
+// 개선 전
+const result = products.filter(product =>
+  product.categories.some(
+    category =>
+      category.id === targetCategory.id && product.prices.some(price => price >= minPrice && price <= maxPrice)
+  )
+);
+
+// 개선 후
+const matchedProducts = products.filter(product => {
+  return product.categories.some(category => {
+    const isSameCategory = category.id === targetCategory.id;
+    const isPriceInRange = product.prices.some(price => price >= minPrice && price <= maxPrice);
+
+    return isSameCategory && isPriceInRange;
+  });
+});
+```
+
+- 핵심 원칙: 매직 넘버는 상수로 선언하고 상수명, 함수명, 컴포넌트명 모두 의미를 담은 이름을 사용한다.
+- 체크리스트:
+  - 매직 넘버를 상수로 선언하고 의미 있는 이름을 사용했는지
+  - 함수명이 동작을 명확하게 표현했는지
+  - Hook 이름이 use로 시작하고 목적을 명확하게 나타내는지
+  - 컴포넌트 이름이 PascalCase를 사용하고 역할을 명확하게 표현했는지
+- 예시:
+
+```typescript
+// 개선 전
+async function onLikeClick() {
+  await postLike(url);
+  await delay(300);
+  await refetchPostLike();
+}
+
+// 개선 후
+const ANIMATION_DELAY_MS = 300;
+
+async function onLikeClick() {
+  await postLike(url);
+  await delay(ANIMATION_DELAY_MS);
+  await refetchPostLike();
+}
+```
+
+#### 1-3. 위에서 아래로 이해하기 쉽게 코드 읽히게 하기
+
+- 핵심 원칙: 시점 이동을 최소화하여 코드의 흐름을 명확하게 한다.
+- 체크리스트:
+  - 시점 이동을 최소화하여 코드 흐름이 명확한지
+- 예시:
+
+```tsx
+// 개선 전
+function Page() {
+  const user = useUser();
+  const policy = getPolicyByRole(user.role);
+
+  return (
+    <div>
+      <Button disabled={!policy.canInvite}>Invite</Button>
+      <Button disabled={!policy.canView}>View</Button>
+    </div>
+  );
+}
+
+function getPolicyByRole(role) {
+  const policy = POLICY_SET[role];
+
+  return {
+    canInvite: policy.includes('invite'),
+    canView: policy.includes('view'),
+  };
+}
+
+const POLICY_SET = {
+  admin: ['invite', 'view'],
+  viewer: ['view'],
+};
+
+// 개선 후
+function Page() {
+  const user = useUser();
+  const policy = {
+    admin: { canInvite: true, canView: true },
+    viewer: { canInvite: false, canView: true },
+  }[user.role];
+
+  return (
+    <div>
+      <Button disabled={!policy.canInvite}>Invite</Button>
+      <Button disabled={!policy.canView}>View</Button>
+    </div>
+  );
+}
+```
+
+- 핵심 원칙: 삼항 연산자가 복잡하게 중첩되면 if-else 문으로 풀어서 작성한다.
+- 체크리스트:
+  - 복잡한 삼항 연산자를 if-else 문으로 풀어서 작성했는지
+- 예시:
+
+```typescript
+// 개선 전
+const status = A조건 && B조건 ? 'BOTH' : A조건 || B조건 ? (A조건 ? 'A' : 'B') : 'NONE';
+
+// 개선 후: if 문으로 명확하게
+const status = (() => {
+  if (A조건 && B조건) return 'BOTH';
+  if (A조건) return 'A';
+  if (B조건) return 'B';
+  return 'NONE';
+})();
+```
+
+### 2. 예측 가능성 (Predictability) 원칙
+
+- 핵심 원칙: 일관적인 규칙을 따르고, 함수나 컴포넌트의 이름과 파라미터, 반환 값만 보고도 어떤 동작을 하는지 알 수 있도록 한다.
+
+#### 2-1. 이름 겹치지 않게 관리하기
+
+- 핵심 원칙: 기존 라이브러리 함수와 구분되는 명확한 이름을 사용한다.
+- 체크리스트:
+  - 기존 라이브러리 함수와 구분되는 명확한 이름을 사용했는지
+  - 전역 변수명이 고유하고 의미가 명확한지
+  - 같은 스코프 내에서 비슷한 이름의 변수를 사용하지 않았는지
+  - 라이브러리 함수를 래핑할 때 명확한 네이밍을 사용했는지
+- 예시:
+
+```tsx
+// 개선 전
+import { http as httpLibrary } from '@some-library/http';
+
+export const http = {
+  async get(url: string) {
+    const token = await fetchToken();
+
+    return httpLibrary.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+};
+
+// 개선 후
+import { http as httpLibrary } from '@some-library/http';
+
+export const httpService = {
+  async getWithAuth(url: string) {
+    const token = await fetchToken();
+
+    return httpLibrary.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+};
+```
+
+#### 2-2. 같은 종류의 함수는 반환 타입 통일하기
+
+- 핵심 원칙: 같은 종료의 함수나 Hook은 일관된 반환 형태를 유지한다.
+- 체크리스트:
+  - 같은 종류의 함수나 Hook들이 일관된 반환 형태를 유지하는지
+- 예시:
+
+```typescript
+// 개선 전
+import { useQuery } from '@tanstack/react-query';
+
+function useUser() {
+  const query = useQuery({
+    queryKey: ['user'],
+    queryFn: fetchUser,
+  });
+
+  return query;
+}
+
+function useServerTime() {
+  const query = useQuery({
+    queryKey: ['serverTime'],
+    queryFn: fetchServerTime,
+  });
+
+  return query.data;
+}
+
+// 개선 후
+import { useQuery } from '@tanstack/react-query';
+
+function useUser() {
+  const query = useQuery({
+    queryKey: ['user'],
+    queryFn: fetchUser,
+  });
+
+  return query;
+}
+
+function useServerTime() {
+  const query = useQuery({
+    queryKey: ['serverTime'],
+    queryFn: fetchServerTime,
+  });
+
+  return query;
+}
+```
+
+#### 2-3. 숨은 로직 드러내기
+
+- 핵심 원칙: 함수의 이름과 파라미터, 반환 값으로 예측할 수 없는 로직은 포함하지 않는다.
+- 체크리스트:
+  - 로깅, 분석 등의 숨은 로직을 호출하는 곳에서 명시적으로 처리했는지
+- 예시:
+
+```tsx
+// 개선 전
+async function fetchBalance(): Promise<number> {
+  const balance = await http.get<number>('...');
+
+  logging.log('balance_fetched');
+
+  return balance;
+}
+
+// 개선 후
+async function fetchBalance(): Promise<number> {
+  const balance = await http.get<number>('...');
+
+  return balance;
+}
+
+<Button
+  onClick={async () => {
+    const balance = await fetchBalance();
+    logging.log('balance_fetched');
+
+    await syncBalance(balance);
+  }}
+>
+  계좌 잔액 갱신하기
+</Button>;
+```
+
+### 3. 응집도 (Cohesion) 원칙
+
+- 핵심 원칙: 함께 수정되어야 할 파일을 같은 디렉토리에 배치한다.
+
+#### 3-1. 함께 수정되는 파일을 같은 디렉토리에 두기
+
+- 핵심 원칙: 도메인별로 디렉토리를 구성하여 관련 코드를 묶어서 관리한다.
+- 체크리스트:
+  - 다른 도메인의 코드를 직접 참조하지 않는지
+  - 공통 컴포넌트와 도메인별 컴포넌트를 적절히 분리했는지
+- 예시:
+
+```text
+└─ src
+   │  // 전체 프로젝트에서 사용되는 코드
+   ├─ components
+   ├─ hooks
+   ├─ utils
+   ├─ ...
+   │
+   └─ domains
+      │  // Domain1에서만 사용되는 코드
+      ├─ Domain1
+      │     ├─ components
+      │     ├─ hooks
+      │     ├─ utils
+      │     └─ ...
+      │
+      │  // Domain2에서만 사용되는 코드
+      └─ Domain2
+            ├─ components
+            ├─ hooks
+            ├─ utils
+            └─ ...
+```
+
+#### 3-2. 매직 넘버 없애기
+
+- 핵심 원칙: 매직 넘버는 의미 있는 상수로 선언하며, 함께 변경되어야 할 값들은 동일한 파일에서 관리한다.
+- 체크리스트:
+  - 매직 넘버를 의미 있는 상수로 선언했는지
+  - 함께 변경되어야 할 값들을 동일한 파일에서 관리하는가
+  - 상수의 이름이 사용 목적을 명확하게 표현하는지
+- 예시:
+
+```typescript
+// 개선 전
+async function onLikeClick() {
+  await postLike(url);
+  await delay(300);
+  await refetchPostLike();
+}
+
+// 개선 후
+const ANIMATION_DELAY_MS = 300;
+
+async function onLikeClick() {
+  await postLike(url);
+  await delay(ANIMATION_DELAY_MS);
+  await refetchPostLike();
+}
+```
+
+#### 3-3. 폼의 응집도 생각하기
+
+- 핵심 원칙: 필드별 독립적인 검증이 필요하면 필드 단위로 응집도를 관리한다.
+- 체크리스트:
+  - 필드별 독립적인 검증이 필요한 경우 필드 단위로 관리했는지
+- 예시:
+
+```tsx
+// 필드 단위: 각 필드가 독립적인 검증 로직
+<input
+  {...register('email', {
+    validate: value => {
+      if (isEmptyStringOrNil(value)) return '이메일을 입력해주세요.';
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+        return '유효한 이메일 주소를 입력해주세요.';
+      }
+      return '';
+    },
+  })}
+/>
+```
+
+- 핵심 원칙: 폼 전체가 하나의 기능을 나타내면 폼 단위로 응집도를 관리한다.
+- 체크리스트:
+  - 폼 전체가 하나의 기능을 나타내는 경우 폼 단위로 관리했는지
+- 예시:
+
+```tsx
+// 폼 전체 단위: Zod 스키마로 통합 관리
+const schema = z.object({
+  name: z.string().min(1, '이름을 입력해주세요.'),
+  email: z.string().min(1, '이메일을 입력해주세요.').email('유효한 이메일 주소를 입력해주세요.'),
+});
+```
+
+### 4. 결합도 (Coupling) 원칙
+
+- 핵심 원칙: 코드 수정 시 영향 범위를 최소화하며, 변경 결과를 쉽게 예측할 수 있도록 작성한다.
+
+#### 4-1. 책임을 하나씩 관리하기
+
+- 핵심 원칙: 함수와 Hook은 각각 하나의 명확한 책임(단일 역할)만 수행하도록 설계한다.
+- 체크 리스트
+  - 함수와 Hook이 각각 하나의 명확한 책임만 수행하는지
+- 예시:
+
+```tsx
+// 개선 전
+import moment, { Moment } from 'moment';
+import { useMemo } from 'react';
+import { ArrayParam, DateParam, NumberParam, useQueryParams } from 'use-query-params';
+
+const defaultDateFrom = moment().subtract(3, 'month');
+const defaultDateTo = moment();
+
+export function usePageState() {
+  const [query, setQuery] = useQueryParams({
+    cardId: NumberParam,
+    statementId: NumberParam,
+    dateFrom: DateParam,
+    dateTo: DateParam,
+    statusList: ArrayParam,
+  });
+
+  return useMemo(
+    () => ({
+      values: {
+        cardId: query.cardId ?? undefined,
+        statementId: query.statementId ?? undefined,
+        dateFrom: query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
+        dateTo: query.dateTo == null ? defaultDateTo : moment(query.dateTo),
+        statusList: query.statusList as StatementStatusType[] | undefined,
+      },
+      controls: {
+        setCardId: (cardId: number) => setQuery({ cardId }, 'replaceIn'),
+        setStatementId: (statementId: number) => setQuery({ statementId }, 'replaceIn'),
+        setDateFrom: (date?: Moment) => setQuery({ dateFrom: date?.toDate() }, 'replaceIn'),
+        setDateTo: (date?: Moment) => setQuery({ dateTo: date?.toDate() }, 'replaceIn'),
+        setStatusList: (statusList?: StatementStatusType[]) => setQuery({ statusList }, 'replaceIn'),
+      },
+    }),
+    [query, setQuery]
+  );
+}
+
+// 개선 후
+import { useQueryParam } from 'use-query-params';
+
+export function useCardIdQueryParam() {
+  const [cardId, _setCardId] = useQueryParam('cardId', NumberParam);
+
+  const setCardId = useCallback((cardId: number) => {
+    _setCardId({ cardId }, 'replaceIn');
+  }, []);
+
+  return [cardId ?? undefined, setCardId] as const;
+}
+```
+
+#### 4-2. 중복 코드 허용하기
+
+- 핵심 원칙: 향후 페이지마다 다른 요구사항이 발생할 수 있다면 공통화하지 않는다.
+- 체크리스트:
+  - 추상화로 인해 코드가 더 복잡해지지 않았는지
+
+#### 4-3. Props Drilling 지우기
+
+- 핵심 원칙: 불필요한 Props 전달은 조합(Composition) 패턴으로 줄이고, 조합 패턴만으로 해결할 수 없는 Props Drilling 문제는 Context API로 처리한다.
+- 체크리스트:
+  - 불필요한 Props 전달을 조합(Composition) 패턴으로 줄였는지
+  - Context API를 과도하게 사용하지 않았는지
+  - 필요한 곳에서만 데이터를 직접 가져오는지
+- 예시:
+
+```tsx
+// 개선 전
+function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
+  return (
+    <Modal open={open} onClose={onClose}>
+      <ItemEditBody items={items} recommendedItems={recommendedItems} onConfirm={onConfirm} onClose={onClose} />
+    </Modal>
+  );
+}
+
+// 개선 후
+function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
+  return (
+    <Modal open={open} onClose={onClose}>
+      <ItemEditBody onClose={onClose}>
+        <ItemEditList items={items} recommendedItems={recommendedItems} onConfirm={onConfirm} />
+      </ItemEditBody>
+    </Modal>
+  );
+}
+```
