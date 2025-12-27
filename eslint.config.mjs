@@ -18,8 +18,9 @@ const compat = new FlatCompat({
 });
 
 export default [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
-    ignores: ['node_modules/**', '.next/**', 'dist/**', 'eslint.config.mjs'],
+    ignores: ['node_modules/**', '.next/**', 'dist/**', 'eslint.config.mjs', 'next-env.d.ts'],
   },
   js.configs.recommended,
   {
@@ -71,7 +72,6 @@ export default [
     },
   },
   ...compat.extends('plugin:import/recommended', 'plugin:import/typescript'),
-  ...compat.extends('next/core-web-vitals'),
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
@@ -92,6 +92,7 @@ export default [
         },
       ],
       'import/no-named-as-default-member': 'warn',
+      'import/no-named-as-default': 'off',
     },
     settings: {
       'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

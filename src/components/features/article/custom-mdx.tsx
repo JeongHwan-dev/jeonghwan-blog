@@ -9,7 +9,7 @@ import remarkGfm from 'remark-gfm';
 
 import { cn, isInternalLink } from '@/utils';
 
-interface CustomMDXProps extends MDXRemoteProps {}
+type CustomMDXProps = MDXRemoteProps;
 
 function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
   if (href === null || href === undefined) {
@@ -40,6 +40,7 @@ function CustomCode({ className, ...rest }: ComponentProps<'code'>) {
 }
 
 function CustomImage({ alt, className, ...rest }: ComponentProps<'img'>) {
+  // eslint-disable-next-line @next/next/no-img-element
   return <img alt={alt} className={cn('rounded-md', className)} {...rest} />;
 }
 
