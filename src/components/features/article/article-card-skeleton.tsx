@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { Card, Skeleton } from '@/components';
 import { cn } from '@/utils';
 
-interface ArticleCardSkeletonProps extends ComponentProps<'div'> {}
+type ArticleCardSkeletonProps = ComponentProps<'div'>;
 
 function ArticleCardSkeleton({ className, ...rest }: ArticleCardSkeletonProps) {
   return (

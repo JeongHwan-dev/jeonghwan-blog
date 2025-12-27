@@ -8,7 +8,7 @@ import { cn } from '@/utils';
 
 import { Button, Separator } from '../ui';
 
-interface ScrollFloatingActionButtonGroupProps extends ComponentProps<'div'> {}
+type ScrollFloatingActionButtonGroupProps = ComponentProps<'div'>;
 
 type ScrollDirection = 'bottom' | 'top';
 
