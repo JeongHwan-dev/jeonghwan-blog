@@ -63,7 +63,7 @@ function ArticleCard({
         <div className="text-muted-foreground mt-3 flex items-center gap-x-4 text-sm md:mt-4">
           {date && (
             <div className="flex items-center gap-1.5">
-              <Calendar className="h-4 w-4" />
+              <Calendar className="size-4" />
               <time>{formatDate(date)}</time>
             </div>
           )}

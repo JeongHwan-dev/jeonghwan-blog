@@ -110,7 +110,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           <AspectRatio className="bg-muted mb-6 rounded-md" ratio={16 / 9}>
             <Image
               alt={article.title}
-              className="h-full w-full rounded-md object-cover"
+              className="size-full rounded-md object-cover"
               fill
               priority
               src={article.thumbnailImageUrl}
@@ -141,7 +141,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           </div>
           <div className="text-muted-foreground flex gap-4 text-sm">
             <div className="flex items-center gap-1">
-              <CalendarDays className="h-4 w-4" />
+              <CalendarDays className="size-4" />
               <time>{formatDate(article.date)}</time>
             </div>
           </div>
