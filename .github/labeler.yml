@@ -1,3 +1,6 @@
+💥 breaking:
+  - head-branch: ['breaking/']
+
 🔧 chore:
   - head-branch: ['chore/']
 
@@ -21,6 +24,9 @@
 
 ♻️ refactor:
   - head-branch: ['refactor/']
+
+🚀 release:
+  - title: ['^release:']
 
 🗑️ remove:
   - head-branch: ['remove/']
