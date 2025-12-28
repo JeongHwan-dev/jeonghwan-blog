@@ -2,6 +2,10 @@ const MAX_COMMIT_MESSAGE_LENGTH = 100;
 
 const COMMIT_TYPE_LIST = [
   {
+    description: '호환성에 영향을 주는 변경 (Major 버전 업)',
+    value: 'breaking',
+  },
+  {
     description: '새로운 기능 추가 및 변경',
     value: 'feat',
   },
