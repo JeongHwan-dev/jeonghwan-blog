@@ -84,7 +84,7 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
             <li key={id}>
               <Link
                 aria-label={`${title} 글 읽기`}
-                className="flex h-full w-full"
+                className="flex size-full"
                 href={`/articles/${slug}`}
               >
                 <ArticleCard

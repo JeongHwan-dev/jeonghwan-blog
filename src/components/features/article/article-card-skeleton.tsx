@@ -15,7 +15,7 @@ function ArticleCardSkeleton({ className, ...rest }: ArticleCardSkeletonProps) {
       {...rest}
     >
       <div className="aspect-[16/9]">
-        <Skeleton className="h-full w-full rounded-none" />
+        <Skeleton className="size-full rounded-none" />
       </div>
       <div className="flex flex-grow flex-col justify-between p-4 md:p-5">
         <div>

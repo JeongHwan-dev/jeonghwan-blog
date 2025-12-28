@@ -36,7 +36,7 @@ function ProfileCard() {
         <div className="space-y-4">
           <div className="flex justify-center">
             <div className="bg-muted rounded-full p-2">
-              <div className="h-36 w-36 overflow-hidden rounded-full">
+              <div className="size-36 overflow-hidden rounded-full">
                 <JeonghwanAvatar
                   aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
                   height={144}
@@ -60,7 +60,7 @@ function ProfileCard() {
                   rel={label === 'Email' ? undefined : 'noopener noreferrer'}
                   target={label === 'Email' ? undefined : '_blank'}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="size-4" />
                 </Link>
               </Button>
             ))}
