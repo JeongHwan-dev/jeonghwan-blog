@@ -1,3 +1,3 @@
-export * from './profile-card';
-export * from './sort-select';
-export * from './tag-filter-card';
+export { ProfileCard } from './profile-card';
+export { SortSelect } from './sort-select';
+export { TagFilterCard } from './tag-filter-card';

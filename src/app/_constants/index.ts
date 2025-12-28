@@ -1,1 +1,1 @@
-export * from './metadata';
+export { metadata } from './metadata';
