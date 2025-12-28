@@ -1,2 +1,2 @@
-export * from './tanstack-query-provider';
-export * from './theme-provider';
+export { TanstackQueryProvider } from './tanstack-query-provider';
+export { ThemeProvider } from './theme-provider';

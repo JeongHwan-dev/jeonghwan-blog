@@ -1,1 +1,1 @@
-export * from './table-of-contents-card';
+export { TableOfContentsCard } from './table-of-contents-card';

@@ -1,3 +1,3 @@
-export * from './scroll-floating-action-button-group';
-export * from './theme-toggle-button';
-export * from './visually-hidden';
+export { ScrollFloatingActionButtonGroup } from './scroll-floating-action-button-group';
+export { ThemeToggleButton } from './theme-toggle-button';
+export { VisuallyHidden } from './visually-hidden';
