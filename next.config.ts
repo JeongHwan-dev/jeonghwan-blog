@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next';
 
+import withBundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 
 const domains: string[] = [process.env.VERCEL_BLOB_STORAGE_DOMAIN].filter(
@@ -23,4 +24,8 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({});
 
-export default withMDX(nextConfig);
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+export default bundleAnalyzer(withMDX(nextConfig));
