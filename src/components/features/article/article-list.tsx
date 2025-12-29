@@ -83,24 +83,24 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
           ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => (
             <li key={id}>
               <Link
+                href={`/articles/${slug}`}
                 aria-label={`${title} 글 읽기`}
                 className="flex size-full"
-                href={`/articles/${slug}`}
               >
                 <ArticleCard
+                  title={title}
                   date={date}
                   description={description}
                   slug={slug}
                   tagList={tagList}
                   thumbnailImagePriority={index < 4}
                   thumbnailImageUrl={thumbnailImageUrl}
-                  title={title}
                 />
               </Link>
             </li>
           ),
         )}
-        {hasNextPage && !isFetchingNextPage && <div className="h-10" ref={ref} />}
+        {hasNextPage && !isFetchingNextPage && <div ref={ref} className="h-10" />}
         {isFetchingNextPage &&
           renderTimes(LOADING_ARTICLE_CARD_SKELETON_COUNT, (index) => (
             <li key={`loading-article-card-skeleton-${index}`}>

@@ -34,23 +34,23 @@ function ScrollFloatingActionButtonGroup({
   return (
     <div className={cn('flex flex-col', className)} {...props}>
       <Button
-        aria-label="맨 위로 이동"
-        className="rounded-b-none"
-        onClick={handleScrollToTopButtonClick}
-        size="icon"
-        title="맨 위로 이동"
         type="button"
+        title="맨 위로 이동"
+        size="icon"
+        aria-label="맨 위로 이동"
+        onClick={handleScrollToTopButtonClick}
+        className="rounded-b-none"
       >
         <ArrowUp />
       </Button>
       <Separator />
       <Button
-        aria-label="맨 아래로 이동"
-        className="rounded-t-none"
-        onClick={handleScrollToBottomButtonClick}
-        size="icon"
-        title="맨 아래로 이동"
         type="button"
+        title="맨 아래로 이동"
+        size="icon"
+        aria-label="맨 아래로 이동"
+        onClick={handleScrollToBottomButtonClick}
+        className="rounded-t-none"
       >
         <ArrowDown />
       </Button>

@@ -24,12 +24,12 @@ function GiscusComments() {
 
   return (
     <Giscus
+      loading="lazy"
       category="Announcements"
       categoryId={GISCUS_CATEGORY_ID}
       emitMetadata="0"
       inputPosition="bottom"
       lang="ko"
-      loading="lazy"
       mapping="pathname"
       reactionsEnabled="1"
       repo={GISCUS_REPOSITORY as `${string}/${string}`}

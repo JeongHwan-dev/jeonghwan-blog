@@ -38,9 +38,9 @@ function ProfileCard() {
             <div className="bg-muted rounded-full p-2">
               <div className="size-36 overflow-hidden rounded-full">
                 <JeonghwanAvatar
-                  aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-                  height={144}
                   width={144}
+                  height={144}
+                  aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
                 />
               </div>
             </div>
@@ -53,12 +53,12 @@ function ProfileCard() {
 
           <div className="flex justify-center gap-2">
             {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
-              <Button asChild className="bg-primary/10" key={label} size="icon" variant="ghost">
+              <Button key={label} asChild size="icon" variant="ghost" className="bg-primary/10">
                 <Link
-                  aria-label={label}
                   href={label === 'Email' ? `mailto:${href}` : href}
                   rel={label === 'Email' ? undefined : 'noopener noreferrer'}
                   target={label === 'Email' ? undefined : '_blank'}
+                  aria-label={label}
                 >
                   <Icon className="size-4" />
                 </Link>

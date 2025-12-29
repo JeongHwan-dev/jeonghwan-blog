@@ -28,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
+        <link href="https://cdn.jsdelivr.net" rel="preconnect" crossOrigin="anonymous" />
         <link
           href="https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css"
           rel="stylesheet"
