@@ -12,6 +12,22 @@ interface SortSelectProps extends ComponentProps<typeof Select> {
   className?: string;
 }
 
+interface SortOption {
+  label: string;
+  value: ArticleSort;
+}
+
+const SORT_OPTION_LIST: SortOption[] = [
+  {
+    label: '최신순',
+    value: 'latest',
+  },
+  {
+    label: '오래된 순',
+    value: 'oldest',
+  },
+];
+
 function SortSelect({ className, ...props }: SortSelectProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -33,8 +49,11 @@ function SortSelect({ className, ...props }: SortSelectProps) {
         <SelectValue placeholder="정렬 방식 선택" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="latest">최신순</SelectItem>
-        <SelectItem value="oldest">오래된 순</SelectItem>
+        {SORT_OPTION_LIST.map(({ label, value }) => (
+          <SelectItem key={value} value={value}>
+            {label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
