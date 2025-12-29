@@ -1,4 +1,4 @@
-import { Separator, Skeleton } from '@/components';
+import { Separator, Skeleton } from '@/shared/components';
 
 export default function ArticleLoadingPage() {
   return (

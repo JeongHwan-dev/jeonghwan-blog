@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# bundle analyzer
+/.next/analyze/
+
 # production
 /build
 

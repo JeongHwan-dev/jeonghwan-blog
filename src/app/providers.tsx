@@ -2,7 +2,7 @@
 
 import type { PropsWithChildren } from 'react';
 
-import { TanstackQueryProvider, ThemeProvider } from '@/components';
+import { TanstackQueryProvider, ThemeProvider } from '@/shared/providers';
 
 type ProvidersProps = PropsWithChildren;
 

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { getPublishedArticleList } from '@/services';
+import { getPublishedArticleList } from '@/domains/article/services';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL as string;
 
