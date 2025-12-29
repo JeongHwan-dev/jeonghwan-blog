@@ -49,8 +49,8 @@ function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed backdrop-blur">
       <div className="container flex h-full items-center justify-between gap-2 md:gap-4">
-        <Link className="mr-4 flex items-center gap-0.5" href="/">
-          <JeonghwanAvatar height={44} width={44} />
+        <Link href="/" className="mr-4 flex items-center gap-0.5">
+          <JeonghwanAvatar width={44} height={44} />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
@@ -58,9 +58,9 @@ function Header() {
           <nav className="hidden items-center gap-4 text-sm md:flex">
             {PAGE_NAV_LINK_LIST.map(({ href, label }) => (
               <Link
-                className="hover:text-foreground/100 active:text-foreground/100 text-foreground/80 transition-colors"
-                href={href}
                 key={label}
+                href={href}
+                className="hover:text-foreground/100 active:text-foreground/100 text-foreground/80 transition-colors"
               >
                 {label}
               </Link>
@@ -70,12 +70,12 @@ function Header() {
           <div className="flex items-center gap-0.5">
             <nav className="hidden items-center gap-0.5 md:flex">
               {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
-                <Button asChild key={label} size="icon" variant="ghost">
+                <Button key={label} asChild size="icon" variant="ghost">
                   <Link
-                    aria-label={`${label} 프로필 보기`}
                     href={href}
                     rel="noopener noreferrer"
                     target="_blank"
+                    aria-label={`${label} 프로필 보기`}
                   >
                     <Icon />
                   </Link>
@@ -90,11 +90,11 @@ function Header() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button
+                type="button"
+                size="icon"
+                variant="ghost"
                 aria-label="메뉴 열기"
                 className="md:hidden"
-                size="icon"
-                type="button"
-                variant="ghost"
               >
                 <Menu />
               </Button>
@@ -106,9 +106,9 @@ function Header() {
               <div className="mx-auto flex w-full flex-col gap-2 p-6">
                 {PAGE_NAV_LINK_LIST.map(({ href, label }) => (
                   <Link
-                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center rounded py-2 transition"
-                    href={href}
                     key={label}
+                    href={href}
+                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center rounded py-2 transition"
                   >
                     {label}
                   </Link>
@@ -116,14 +116,14 @@ function Header() {
 
                 {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                   <Link
-                    aria-label={`${label} 프로필 보기`}
-                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
-                    href={href}
                     key={label}
+                    href={href}
                     rel="noopener noreferrer"
                     target="_blank"
+                    aria-label={`${label} 프로필 보기`}
+                    className="hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 text-foreground/80 flex items-center justify-center gap-1 rounded py-2 transition"
                   >
-                    <Icon height={20} width={20} />
+                    <Icon width={20} height={20} />
                     {label}
                   </Link>
                 ))}

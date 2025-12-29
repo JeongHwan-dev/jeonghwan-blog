@@ -16,7 +16,7 @@ function TableOfContentsCard({ itemList, ...rest }: TableOfContentsCardProps) {
         <h3 className="text-lg font-semibold">목차</h3>
         <nav aria-label="글 목차 네비게이션" className="space-y-3 text-sm">
           {itemList.map(({ children, depth, id, value }) => (
-            <TableOfContentsLink depth={depth} id={id} key={id} value={value}>
+            <TableOfContentsLink key={id} id={id} value={value} depth={depth}>
               {children}
             </TableOfContentsLink>
           ))}
@@ -30,11 +30,11 @@ function TableOfContentsLink({ children = [], id, value }: TableOfContentsLinkPr
   return (
     <div className="space-y-2">
       <Link
-        className={`hover:text-foreground text-muted-foreground block font-medium transition-colors`}
+        key={id}
         href={{
           hash: id,
         }}
-        key={id}
+        className={`hover:text-foreground text-muted-foreground block font-medium transition-colors`}
       >
         {value}
       </Link>
@@ -42,10 +42,10 @@ function TableOfContentsLink({ children = [], id, value }: TableOfContentsLinkPr
         <div className="space-y-2 pl-4">
           {children.map((subItem) => (
             <TableOfContentsLink
-              depth={subItem.depth}
-              id={subItem.id}
               key={subItem.id}
+              id={subItem.id}
               value={subItem.value}
+              depth={subItem.depth}
             >
               {subItem.children}
             </TableOfContentsLink>

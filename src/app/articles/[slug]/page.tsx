@@ -107,13 +107,13 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     <div className="tossface grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
       <section>
         {article.thumbnailImageUrl !== undefined && (
-          <AspectRatio className="bg-muted mb-6 rounded-md" ratio={16 / 9}>
+          <AspectRatio ratio={16 / 9} className="bg-muted mb-6 rounded-md">
             <Image
+              src={article.thumbnailImageUrl}
               alt={article.title}
-              className="size-full rounded-md object-cover"
               fill
               priority
-              src={article.thumbnailImageUrl}
+              className="size-full rounded-md object-cover"
             />
           </AspectRatio>
         )}
@@ -122,19 +122,19 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           <div className="flex gap-2">
             {article.tagList?.map((tag) => (
               <Link
-                aria-label={`${tag} 태그가 있는 다른 글 보기`}
-                className="flex"
+                key={tag}
                 href={{
                   pathname: '/',
                   query: {
                     tag,
                   },
                 }}
-                key={tag}
+                aria-label={`${tag} 태그가 있는 다른 글 보기`}
+                className="flex"
               >
                 <ArticleTagBadge
-                  className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
                   tag={tag}
+                  className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
                 />
               </Link>
             ))}
@@ -162,7 +162,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
       {data?.toc !== undefined && (
         <aside className="relative hidden md:block">
-          <TableOfContentsCard className="sticky top-[var(--sticky-top)]" itemList={data.toc} />
+          <TableOfContentsCard itemList={data.toc} className="sticky top-[var(--sticky-top)]" />
         </aside>
       )}
     </div>

@@ -23,11 +23,11 @@ function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
   );
 
   if (isInternal) {
-    return <Link className={linkClassName} href={href} {...rest} />;
+    return <Link href={href} className={linkClassName} {...rest} />;
   }
 
   return (
-    <a className={linkClassName} href={href} rel="noopener noreferrer" target="_blank" {...rest} />
+    <a href={href} rel="noopener noreferrer" target="_blank" className={linkClassName} {...rest} />
   );
 }
 

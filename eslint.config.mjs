@@ -133,6 +133,110 @@ export default [
           ],
         },
       ],
+      'perfectionist/sort-jsx-props': [
+        'error',
+        (() => {
+          const keywords = [
+            // 1. React 특별 prop
+            'key',
+
+            // 2. 식별자 & 참조
+            'id',
+            'ref',
+
+            // 3. 접근성
+            'role',
+
+            // 4. 컴포넌트 타입 & 네비게이션
+            'as',
+            'to',
+            'href',
+            'rel',
+            'target',
+
+            // 5. 리소스 (미디어)
+            'src',
+            'alt',
+            'loading',
+
+            // 6. 미디어 컨트롤
+            'controls',
+            'autoPlay',
+            'loop',
+            'muted',
+
+            // 7. 폼 기본 속성
+            'type',
+            'name',
+
+            // 8. 폼 값
+            'value',
+            'defaultValue',
+            'checked',
+            'defaultChecked',
+
+            // 9. UI 텍스트
+            'title',
+            'placeholder',
+
+            // 10. 폼 상태 & 제약조건
+            'disabled',
+            'required',
+            'readOnly',
+
+            // 11. 자동화
+            'autoComplete',
+            'autoFocus',
+
+            // 12. 범위 & 길이 제한
+            'step',
+            'min',
+            'max',
+            'minLength',
+            'maxLength',
+
+            // 13. UI 상태
+            'open',
+            'active',
+            'selected',
+
+            // 14. 스타일
+            'width',
+            'height',
+
+            // 15. 컨텐츠
+            'children',
+          ];
+
+          return {
+            type: 'natural',
+            order: 'asc',
+            groups: [...keywords, 'unknown', 'aria', 'data', 'callback', 'className'],
+            customGroups: [
+              ...keywords.map((keyword) => ({
+                groupName: keyword,
+                elementNamePattern: `^${keyword}$`,
+              })),
+              {
+                groupName: 'aria',
+                elementNamePattern: '^aria-.+',
+              },
+              {
+                groupName: 'data',
+                elementNamePattern: '^data-.+',
+              },
+              {
+                groupName: 'callback',
+                elementNamePattern: '^on.+',
+              },
+              {
+                groupName: 'className',
+                elementNamePattern: '^className$',
+              },
+            ],
+          };
+        })(),
+      ],
       'perfectionist/sort-modules': 'off',
     },
   },
