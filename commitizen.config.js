@@ -1,10 +1,8 @@
 const MAX_COMMIT_MESSAGE_LENGTH = 100;
 
+const MAX_SCOPE_LENGTH = 50;
+
 const COMMIT_TYPE_LIST = [
-  {
-    description: '호환성에 영향을 주는 변경 (Major 버전 업)',
-    value: 'breaking',
-  },
   {
     description: '새로운 기능 추가 및 변경',
     value: 'feat',
@@ -53,6 +51,10 @@ const COMMIT_TYPE_LIST = [
     description: '문서 수정(README, 주석 등)',
     value: 'docs',
   },
+  {
+    description: '호환성에 영향을 주는 변경 (Major 버전 업)',
+    value: 'breaking',
+  },
 ];
 
 const COMMIT_QUESTION_LIST = [
@@ -66,17 +68,46 @@ const COMMIT_QUESTION_LIST = [
     type: 'list',
   },
   {
-    message: '2️⃣ 커밋 메시지를 입력하세요:',
+    message: '2️⃣ 커밋 scope를 입력하세요:',
+    name: 'scope',
+    type: 'input',
+    validate: (input) => {
+      const trimmedScopeLength = input.trim().length;
+
+      if (trimmedScopeLength === 0) {
+        return 'scope는 필수입니다.';
+      }
+
+      if (trimmedScopeLength > MAX_SCOPE_LENGTH) {
+        return `scope는 ${MAX_SCOPE_LENGTH}자 이하여야 해요.`;
+      }
+
+      return true;
+    },
+  },
+  {
+    message: '3️⃣ 커밋 메시지를 입력하세요:',
     name: 'subject',
     type: 'input',
     validate: (input) => input.length > 0 && input.length <= MAX_COMMIT_MESSAGE_LENGTH,
+  },
+  {
+    message: '4️⃣ 커밋 description을 입력하세요 (선택사항, Enter로 건너뛰기):',
+    name: 'description',
+    type: 'input',
   },
 ];
 
 module.exports = {
   prompter: (cz, commit) => {
-    cz.prompt(COMMIT_QUESTION_LIST).then(({ subject, type }) => {
-      const commitMessage = `${type}: ${subject}`;
+    cz.prompt(COMMIT_QUESTION_LIST).then(({ description, scope, subject, type }) => {
+      const trimmedScope = scope.trim();
+      const trimmedDescription = description?.trim();
+      const baseCommitMessage = `${type}(${trimmedScope}): ${subject}`;
+      const commitMessage =
+        trimmedDescription?.length > 0
+          ? `${baseCommitMessage}\n\n${trimmedDescription}`
+          : baseCommitMessage;
       const divider = '-'.repeat(50);
 
       cz.prompt([
@@ -93,7 +124,7 @@ module.exports = {
           return;
         }
 
-        console.log('❌ 커밋이 취소되었습니다.');
+        console.log('❌ 커밋이 취소되었어요.');
       });
     });
   },
