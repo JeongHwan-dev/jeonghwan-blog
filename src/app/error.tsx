@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 import { RotateCcw } from 'lucide-react';
 
-import { Button } from '@/components';
+import { Button } from '@/shared/components';
 
 interface ErrorPageProps {
   error: Error & { digest?: string };

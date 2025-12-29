@@ -4,9 +4,9 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
 
-import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/components';
+import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/shared/components';
+import { metadata } from '@/shared/constants';
 
-import { metadata } from './_constants';
 import { Providers } from './providers';
 import './globals.css';
 

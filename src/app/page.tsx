@@ -1,9 +1,13 @@
 import { Suspense } from 'react';
 
-import { ArticleList, ArticleListSkeleton } from '@/components';
-import { type ArticleSort, getPublishedArticleList } from '@/services';
-
-import { ProfileCard, SortSelect, TagFilterCard } from './_components';
+import {
+  ArticleList,
+  ArticleListSkeleton,
+  SortSelect,
+  TagFilterCard,
+} from '@/domains/article/components';
+import { type ArticleSort, getPublishedArticleList } from '@/domains/article/services';
+import { ProfileCard } from '@/domains/author/components';
 
 interface HomePageProps {
   searchParams: Promise<{ sort?: ArticleSort; tag?: string }>;

@@ -10,12 +10,16 @@ import { notFound } from 'next/navigation';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 
-import { ArticleTagBadge, AspectRatio, CustomMDX, GiscusComments, Separator } from '@/components';
-import { PROFILE } from '@/constants';
-import { getArticleBySlug, getPublishedArticleList } from '@/services';
-import { formatDate } from '@/utils';
-
-import { TableOfContentsCard } from './_components';
+import {
+  ArticleTagBadge,
+  CustomMDX,
+  GiscusComments,
+  TableOfContentsCard,
+} from '@/domains/article/components';
+import { getArticleBySlug, getPublishedArticleList } from '@/domains/article/services';
+import { AspectRatio, Separator } from '@/shared/components';
+import { PROFILE } from '@/shared/constants';
+import { formatDate } from '@/shared/utils';
 
 interface ArticleDetailPageProps {
   params: Promise<{

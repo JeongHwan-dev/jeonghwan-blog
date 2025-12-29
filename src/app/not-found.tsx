@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from '@/components';
+import { Button } from '@/shared/components';
 
 const TITLE = '페이지를 찾지 못했어요';
 
