@@ -137,6 +137,11 @@ module.exports = {
         message: 'chore(release): v${nextRelease.version}\n\n${nextRelease.notes}',
       },
     ],
-    '@semantic-release/github',
+    [
+      '@semantic-release/github',
+      {
+        releasedLabels: ['🏷️ released'],
+      },
+    ],
   ],
 };
