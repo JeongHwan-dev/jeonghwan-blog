@@ -2,8 +2,8 @@
  * 라벨 정의 단일 소스
  *
  * 이 파일을 수정하면 다음 파일들이 자동으로 동기화돼요:
- * - .github/labels.json (github-label-sync용)
- * - .github/labeler.yml (GitHub Actions labeler용)
+ * - .github/labels/labels.json (github-label-sync용)
+ * - .github/labels/labeler.yml (GitHub Actions labeler용)
  * - commitizen.config.mjs (커밋 타입 선택 목록)
  *
  * 자동 동기화: PR에서 이 파일이 변경되면 GitHub Actions가 자동으로 연관 파일들을 업데이트하고 커밋을 추가해요.
@@ -116,3 +116,4 @@ export const LABELS = [
     value: 'released',
   },
 ];
+

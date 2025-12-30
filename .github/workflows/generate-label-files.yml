@@ -3,7 +3,7 @@ name: Generate Label Files
 on:
   pull_request:
     paths:
-      - '.github/labels.config.mjs'
+      - '.github/labels/labels.config.mjs'
 
 jobs:
   sync-labels:
@@ -37,9 +37,9 @@ jobs:
       - name: Check for changes
         id: verify-changed-files
         run: |
-          if [ -n "$(git status --porcelain .github/labels.json .github/labeler.yml)" ]; then
+          if [ -n "$(git status --porcelain .github/labels/labels.json .github/labels/labeler.yml)" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
-            git diff .github/labels.json .github/labeler.yml || true
+            git diff .github/labels/labels.json .github/labels/labeler.yml || true
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
@@ -49,6 +49,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .github/labels.json .github/labeler.yml
+          git add .github/labels/labels.json .github/labels/labeler.yml
           git commit -m "chore(label): labels.config.mjs 업데이트에 따라 관련 파일 자동 동기화"
           git push origin HEAD:${{ github.head_ref }}

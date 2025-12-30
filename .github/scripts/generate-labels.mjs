@@ -8,7 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { LABELS } from '../labels.config.mjs';
+import { LABELS } from '../labels/labels.config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +20,9 @@ const FILE_NAMES = Object.freeze({
 
 const ROOT_DIRECTORY = path.resolve(__dirname, '../..');
 const GITHUB_DIRECTORY = path.join(ROOT_DIRECTORY, '.github');
-const LABELS_JSON_PATH = path.join(GITHUB_DIRECTORY, FILE_NAMES.LABELS_JSON);
-const LABELER_YML_PATH = path.join(GITHUB_DIRECTORY, FILE_NAMES.LABELER_YML);
+const LABELS_DIRECTORY = path.join(GITHUB_DIRECTORY, 'labels');
+const LABELS_JSON_PATH = path.join(LABELS_DIRECTORY, FILE_NAMES.LABELS_JSON);
+const LABELER_YML_PATH = path.join(LABELS_DIRECTORY, FILE_NAMES.LABELER_YML);
 
 /**
  * 이모지와 값을 조합하여 라벨 이름을 생성해요.

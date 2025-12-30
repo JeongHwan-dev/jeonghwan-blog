@@ -1,4 +1,4 @@
-import { LABELS } from './.github/labels.config.mjs';
+import { LABELS } from './.github/labels/labels.config.mjs';
 
 const MAX_COMMIT_MESSAGE_LENGTH = 100;
 
