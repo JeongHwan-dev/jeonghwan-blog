@@ -5,7 +5,7 @@ on:
     branches:
       - dev
     paths:
-      - '.github/labels.json'
+      - '.github/labels/labels.json'
   workflow_dispatch:
 
 jobs:
@@ -39,4 +39,4 @@ jobs:
           npx github-label-sync \
             --access-token $GITHUB_TOKEN \
             ${{ github.repository }} \
-            --labels .github/labels.json
+            --labels .github/labels/labels.json
