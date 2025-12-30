@@ -1,4 +1,5 @@
-name: 'Pull Request Labeler'
+name: Auto PR Label
+
 on:
   - pull_request_target
 
