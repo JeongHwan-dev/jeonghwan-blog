@@ -24,8 +24,11 @@
     "generate:labels": "node .github/scripts/generate-labels.mjs"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,mjs}": [
       "eslint --fix",
+      "prettier"
+    ],
+    "*.{json,md}": [
       "prettier"
     ]
   },
