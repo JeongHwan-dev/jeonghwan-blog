@@ -17,10 +17,10 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
-export default [
+const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
-    ignores: ['node_modules/**', '.next/**', 'dist/**', 'eslint.config.mjs', 'next-env.d.ts'],
+    ignores: ['node_modules/**', '.next/**', 'dist/**', 'next-env.d.ts'],
   },
   js.configs.recommended,
   {
@@ -64,9 +64,9 @@ export default [
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {
-          prefer: 'type-imports',
           disallowTypeAnnotations: true,
           fixStyle: 'inline-type-imports',
+          prefer: 'type-imports',
         },
       ],
     },
@@ -91,8 +91,8 @@ export default [
           'prefer-inline': true,
         },
       ],
-      'import/no-named-as-default-member': 'warn',
       'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'warn',
     },
     settings: {
       'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -117,10 +117,6 @@ export default [
       'perfectionist/sort-imports': [
         'error',
         {
-          order: 'asc',
-          type: 'natural',
-          internalPattern: ['^@/', '^@svgs/'],
-          newlinesBetween: 'always',
           groups: [
             'type-import',
             ['value-builtin', 'value-external'],
@@ -131,6 +127,10 @@ export default [
             'ts-equals-import',
             'unknown',
           ],
+          internalPattern: ['^@/', '^@svgs/'],
+          newlinesBetween: 'always',
+          order: 'asc',
+          type: 'natural',
         },
       ],
       'perfectionist/sort-jsx-props': [
@@ -209,31 +209,31 @@ export default [
           ];
 
           return {
-            type: 'natural',
-            order: 'asc',
-            groups: [...keywords, 'unknown', 'aria', 'data', 'callback', 'className'],
             customGroups: [
               ...keywords.map((keyword) => ({
-                groupName: keyword,
                 elementNamePattern: `^${keyword}$`,
+                groupName: keyword,
               })),
               {
-                groupName: 'aria',
                 elementNamePattern: '^aria-.+',
+                groupName: 'aria',
               },
               {
-                groupName: 'data',
                 elementNamePattern: '^data-.+',
+                groupName: 'data',
               },
               {
-                groupName: 'callback',
                 elementNamePattern: '^on.+',
+                groupName: 'callback',
               },
               {
-                groupName: 'className',
                 elementNamePattern: '^className$',
+                groupName: 'className',
               },
             ],
+            groups: [...keywords, 'unknown', 'aria', 'data', 'callback', 'className'],
+            order: 'asc',
+            type: 'natural',
           };
         })(),
       ],
@@ -242,3 +242,5 @@ export default [
   },
   eslintConfigPrettier,
 ];
+
+export default eslintConfig;

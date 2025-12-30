@@ -1,0 +1,77 @@
+[
+  {
+    "color": "#FFD700",
+    "description": "새로운 기능 추가 및 변경",
+    "name": "✨ feat"
+  },
+  {
+    "color": "#FF6B6B",
+    "description": "버그 수정",
+    "name": "🐛 fix"
+  },
+  {
+    "color": "#FF4444",
+    "description": "긴급 수정",
+    "name": "🚑 hotfix"
+  },
+  {
+    "color": "#C40948",
+    "description": "호환성에 영향을 주는 변경",
+    "name": "💥 breaking"
+  },
+  {
+    "color": "#FDB813",
+    "description": "성능 개선",
+    "name": "⚡ perf"
+  },
+  {
+    "color": "#2ECC71",
+    "description": "코드 리팩토링",
+    "name": "♻️ refactor"
+  },
+  {
+    "color": "#4169E1",
+    "description": "문서 수정",
+    "name": "📝 docs"
+  },
+  {
+    "color": "#00FF00",
+    "description": "테스트 코드 추가 및 수정",
+    "name": "✅ test"
+  },
+  {
+    "color": "#FF69B4",
+    "description": "코드 스타일 수정",
+    "name": "💄 style"
+  },
+  {
+    "color": "#808080",
+    "description": "빌드, 패키지 업데이트 등 기능 변경 없는 작업",
+    "name": "🔧 chore"
+  },
+  {
+    "color": "#FF8C00",
+    "description": "CI/CD 관련 설정 변경",
+    "name": "👷 ci"
+  },
+  {
+    "color": "#FF7F50",
+    "description": "사용하지 않는 코드 혹은 파일 삭제",
+    "name": "🗑️ remove"
+  },
+  {
+    "color": "#9370DB",
+    "description": "이전 커밋을 되돌릴 때",
+    "name": "⏪ revert"
+  },
+  {
+    "color": "#8DE08B",
+    "description": "배포 준비 PR",
+    "name": "🚀 release"
+  },
+  {
+    "color": "#EDEDED",
+    "description": "배포 완료된 PR",
+    "name": "🏷️ released"
+  }
+]
