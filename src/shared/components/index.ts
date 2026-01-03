@@ -24,6 +24,7 @@ export {
 } from './drawer';
 export { Footer } from './footer';
 export { Header } from './header';
+export { Repeat } from './repeat';
 export { ScrollFloatingActionButtonGroup } from './scroll-floating-action-button-group';
 export { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
 export { Separator } from './separator';
