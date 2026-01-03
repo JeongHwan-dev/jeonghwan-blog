@@ -3,12 +3,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { use, useEffect } from 'react';
+import { use } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/domains/article/services';
 
 import { Repeat } from '@/shared/components';
+import { useInfiniteScroll } from '@/shared/hooks';
 
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';
@@ -66,11 +67,12 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     queryKey: ['GET_ARTICLE_LIST', tag, sort],
   });
 
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
+  useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    inView,
+    isFetchingNextPage,
+  });
 
   const articleList = data?.pages.flatMap((page) => page.articleList) ?? [];
 
