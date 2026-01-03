@@ -8,12 +8,10 @@ import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/domains/article/services';
 
-import { renderTimes } from '@/shared/utils';
+import { Repeat } from '@/shared/components';
 
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';
-
-const LOADING_ARTICLE_CARD_SKELETON_COUNT = 2;
 
 interface ArticleListProps {
   articleListPromise: Promise<GetPublishedArticleListResponse>;
@@ -101,12 +99,13 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
           ),
         )}
         {hasNextPage && !isFetchingNextPage && <div ref={ref} className="h-10" />}
-        {isFetchingNextPage &&
-          renderTimes(LOADING_ARTICLE_CARD_SKELETON_COUNT, (index) => (
-            <li key={`loading-article-card-skeleton-${index}`}>
+        {isFetchingNextPage && (
+          <Repeat times={2}>
+            <li>
               <ArticleCardSkeleton />
             </li>
-          ))}
+          </Repeat>
+        )}
       </ul>
     </div>
   );
