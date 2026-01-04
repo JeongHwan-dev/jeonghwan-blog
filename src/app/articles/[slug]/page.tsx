@@ -93,7 +93,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return articleList.map(({ slug }) => ({ slug }));
 }
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   const { slug } = await params;
