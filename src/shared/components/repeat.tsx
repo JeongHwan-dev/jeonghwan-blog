@@ -1,3 +1,4 @@
+import { range } from 'es-toolkit';
 import React, { createElement, Fragment, type ReactNode } from 'react';
 
 // void element를 제외한 HTML 요소 타입
@@ -101,7 +102,7 @@ function Repeat<T extends NonVoidElement>({
   times,
   ...htmlProps
 }: RepeatPropsWithAs<T> | RepeatPropsWithoutAs) {
-  const items = Array.from({ length: times }, (_, index) => index);
+  const items = range(times);
   const sortedItems = order === 'asc' ? items : [...items].reverse();
   const isFunctionChildren = typeof children === 'function';
 
