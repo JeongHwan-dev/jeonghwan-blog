@@ -3,17 +3,16 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { use, useEffect } from 'react';
+import { use } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/domains/article/services';
 
-import { renderTimes } from '@/shared/utils';
+import { Repeat } from '@/shared/components';
+import { useInfiniteScroll } from '@/shared/hooks';
 
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';
-
-const LOADING_ARTICLE_CARD_SKELETON_COUNT = 2;
 
 interface ArticleListProps {
   articleListPromise: Promise<GetPublishedArticleListResponse>;
@@ -68,11 +67,12 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     queryKey: ['GET_ARTICLE_LIST', tag, sort],
   });
 
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
+  useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    inView,
+    isFetchingNextPage,
+  });
 
   const articleList = data?.pages.flatMap((page) => page.articleList) ?? [];
 
@@ -101,12 +101,13 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
           ),
         )}
         {hasNextPage && !isFetchingNextPage && <div ref={ref} className="h-10" />}
-        {isFetchingNextPage &&
-          renderTimes(LOADING_ARTICLE_CARD_SKELETON_COUNT, (index) => (
-            <li key={`loading-article-card-skeleton-${index}`}>
+        {isFetchingNextPage && (
+          <Repeat times={2}>
+            <li>
               <ArticleCardSkeleton />
             </li>
-          ))}
+          </Repeat>
+        )}
       </ul>
     </div>
   );

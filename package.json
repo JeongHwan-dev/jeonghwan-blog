@@ -20,17 +20,21 @@
     "prepare": "husky",
     "lint-staged": "lint-staged",
     "preinstall": "npx only-allow pnpm",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "generate:labels": "node .github/scripts/generate-labels.mjs"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,mjs}": [
       "eslint --fix",
+      "prettier"
+    ],
+    "*.{json,md}": [
       "prettier"
     ]
   },
   "config": {
     "commitizen": {
-      "path": "./commitizen.config.js"
+      "path": "./commitizen.config.mjs"
     }
   },
   "dependencies": {
@@ -52,6 +56,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "es-toolkit": "^1.43.0",
     "lucide-react": "^0.508.0",
     "next": "15.5.9",
     "next-mdx-remote-client": "^2.1.2",
@@ -95,6 +100,7 @@
     "eslint-plugin-perfectionist": "^4.12.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "github-label-sync": "^3.0.0",
     "globals": "^16.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",

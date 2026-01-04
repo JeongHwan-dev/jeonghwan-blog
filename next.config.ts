@@ -2,10 +2,9 @@ import type { NextConfig } from 'next';
 
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
+import { compact } from 'es-toolkit';
 
-const domains: string[] = [process.env.VERCEL_BLOB_STORAGE_DOMAIN].filter(
-  (domain): domain is string => Boolean(domain),
-);
+const domains: string[] = compact([process.env.VERCEL_BLOB_STORAGE_DOMAIN]);
 
 const nextConfig: NextConfig = {
   images: {
