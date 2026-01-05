@@ -34,7 +34,7 @@ function TableOfContentsLink({ children = [], id, value }: TableOfContentsLinkPr
         href={{
           hash: id,
         }}
-        className={`hover:text-foreground text-muted-foreground block font-medium transition-colors`}
+        className="hover:text-foreground text-muted-foreground block font-medium transition-colors"
       >
         {value}
       </Link>
