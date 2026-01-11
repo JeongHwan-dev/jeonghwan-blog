@@ -1,3 +1,22 @@
+## [1.3.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.2.0...v1.3.0) (2026-01-11)
+
+### ✨ Features
+
+* **article:** ArticleCard 컴포넌트 웹 접근성 요소 개선 ([#157](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/157)) ([05f3ecd](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/05f3ecd8675f64bcc28bd89e41da25092ca9b3f2))
+* **article:** 아티클 상세 페이지 웹 접근성 개선 ([#158](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/158)) ([2185e48](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2185e48ecd45da7622258df7486200511651216d))
+
+### 💄 Styles
+
+* **article:** TableOfContentsLink 컴포넌트의 className 선언 형식 변경 ([#154](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/154)) ([31579ed](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/31579ed6d82beefd55c4dfc9682c000d975d2783))
+
+### ♻️ Code Refactoring
+
+* **author:** ProfileCard 컴포넌트 코드 개선 ([#155](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/155)) ([f20d430](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/f20d430c656c148e6cb46e819556564e9a324faa))
+
+### 🔧 Miscellaneous Chores
+
+* **package:** Node.js 요구 버전을 24로 업데이트 ([#156](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/156)) ([2b71fca](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2b71fcad5059beb624a5795b0fa5227437dafbb0))
+
 ## [1.2.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.1.0...v1.2.0) (2026-01-04)
 
 ### ✨ Features
