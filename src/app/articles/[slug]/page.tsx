@@ -109,60 +109,63 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
   return (
     <div className="tossface grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
-      <section>
-        {article.thumbnailImageUrl !== undefined && (
-          <AspectRatio ratio={16 / 9} className="bg-muted mb-6 rounded-md">
-            <Image
-              src={article.thumbnailImageUrl}
-              alt={article.title}
-              fill
-              priority
-              className="size-full rounded-md object-cover"
-            />
-          </AspectRatio>
-        )}
-        <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
-          <div className="flex gap-2">
-            {article.tagList?.map((tag) => (
-              <Link
-                key={tag}
-                href={{
-                  pathname: '/',
-                  query: {
-                    tag,
-                  },
-                }}
-                aria-label={`${tag} 태그가 있는 다른 글 보기`}
-                className="flex"
-              >
-                <ArticleTagBadge
-                  tag={tag}
-                  className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
-                />
-              </Link>
-            ))}
-          </div>
-          <div className="text-muted-foreground flex gap-4 text-sm">
-            <div className="flex items-center gap-1">
-              <CalendarDays className="size-4" />
-              <time>{formatDate(article.date)}</time>
+      <div>
+        <article>
+          {article.thumbnailImageUrl !== undefined && (
+            <AspectRatio ratio={16 / 9} className="bg-muted mb-6 rounded-md">
+              <Image
+                src={article.thumbnailImageUrl}
+                alt={article.title}
+                fill
+                priority
+                className="size-full rounded-md object-cover"
+              />
+            </AspectRatio>
+          )}
+          <div className="flex flex-col gap-4">
+            <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
+            <nav aria-label="태그 목록" className="flex gap-2">
+              {article.tagList?.map((tag) => (
+                <Link
+                  key={tag}
+                  href={{
+                    pathname: '/',
+                    query: {
+                      tag,
+                    },
+                  }}
+                  aria-label={`${tag} 태그가 있는 다른 글 보기`}
+                  className="flex"
+                >
+                  <ArticleTagBadge
+                    tag={tag}
+                    className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                  />
+                </Link>
+              ))}
+            </nav>
+            <div className="text-muted-foreground flex gap-4 text-sm">
+              <div className="flex items-center gap-1">
+                <CalendarDays aria-hidden="true" className="size-4" />
+                <time dateTime={article.date}>{formatDate(article.date)}</time>
+              </div>
             </div>
           </div>
-        </div>
-        <Separator className="my-6 lg:my-8" />
-        {data?.toc !== undefined && (
-          <div className="mb-6 md:hidden">
-            <TableOfContentsCard itemList={data.toc} />
-          </div>
-        )}
+          <Separator className="my-6 lg:my-8" />
+          {data?.toc !== undefined && (
+            <div className="mb-6 md:hidden">
+              <TableOfContentsCard itemList={data.toc} />
+            </div>
+          )}
 
-        <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
-          <CustomMDX source={markdown} />
-        </div>
+          <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
+            <CustomMDX source={markdown} />
+          </div>
+        </article>
+
         <Separator className="my-16" />
         <GiscusComments />
-      </section>
+      </div>
 
       {data?.toc !== undefined && (
         <aside className="relative hidden md:block">
