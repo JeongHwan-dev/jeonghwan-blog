@@ -25,7 +25,7 @@ interface FetchArticleListProps {
 function ArticleList({ articleListPromise }: ArticleListProps) {
   const initialData = use(articleListPromise);
   const { inView, ref } = useInView({
-    threshold: 0.5,
+    threshold: 0.1,
   });
   const searchParams = useSearchParams();
 
@@ -80,27 +80,31 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     <div className="space-y-6">
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {articleList.map(
-          ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => (
-            <li key={id}>
-              <Link
-                href={`/articles/${slug}`}
-                aria-label={`${title} 글 읽기`}
-                className="flex size-full"
-              >
-                <ArticleCard
-                  title={title}
-                  date={date}
-                  description={description}
-                  slug={slug}
-                  tagList={tagList}
-                  thumbnailImagePriority={index < 4}
-                  thumbnailImageUrl={thumbnailImageUrl}
-                />
-              </Link>
-            </li>
-          ),
+          ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => {
+            const isLastItem = index === articleList.length - 1;
+            const shouldObserve = isLastItem && hasNextPage && !isFetchingNextPage;
+
+            return (
+              <li key={id} ref={shouldObserve ? ref : undefined}>
+                <Link
+                  href={`/articles/${slug}`}
+                  aria-label={`${title} 글 읽기`}
+                  className="flex size-full"
+                >
+                  <ArticleCard
+                    title={title}
+                    date={date}
+                    description={description}
+                    slug={slug}
+                    tagList={tagList}
+                    thumbnailImagePriority={index < 4}
+                    thumbnailImageUrl={thumbnailImageUrl}
+                  />
+                </Link>
+              </li>
+            );
+          },
         )}
-        {hasNextPage && !isFetchingNextPage && <div ref={ref} className="h-10" />}
         {isFetchingNextPage && (
           <Repeat times={2}>
             <li>
