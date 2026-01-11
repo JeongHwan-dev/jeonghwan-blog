@@ -14,6 +14,27 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+const isProductionEnv = process.env.VERCEL_ENV === 'production';
+
+const createArticleStatusSelectFilter = (status: string) => ({
+  property: 'Status',
+  select: {
+    equals: status,
+  },
+});
+
+const getArticleStatusFilter = () => {
+  const publishedFilter = createArticleStatusSelectFilter('Published');
+
+  if (isProductionEnv) {
+    return publishedFilter;
+  }
+
+  return {
+    or: [publishedFilter, createArticleStatusSelectFilter('Pre-Published')],
+  };
+};
+
 export const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
   const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
 
@@ -53,12 +74,7 @@ export const getPublishedArticleList = async ({
     database_id: process.env.NOTION_DATABASE_ID!,
     filter: {
       and: [
-        {
-          property: 'Status',
-          select: {
-            equals: 'Published',
-          },
-        },
+        getArticleStatusFilter(),
         ...(!!tag && tag !== '전체'
           ? [
               {
@@ -108,12 +124,7 @@ export const getArticleBySlug = async (slug: string): Promise<ArticleWithMarkdow
             equals: slug,
           },
         },
-        {
-          property: 'Status',
-          select: {
-            equals: 'Published',
-          },
-        },
+        getArticleStatusFilter(),
       ],
     },
   });
