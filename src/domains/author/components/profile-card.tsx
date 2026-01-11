@@ -40,23 +40,20 @@ function ProfileCard() {
     <Card className="shadow-none">
       <CardContent>
         <div className="space-y-4">
-          <div className="flex justify-center">
-            <div className="bg-muted rounded-full p-2">
-              <div className="size-36 overflow-hidden rounded-full">
-                <JeonghwanAvatar
-                  aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-                  className="size-fit"
-                />
-              </div>
-            </div>
+          <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
+            <JeonghwanAvatar
+              role="img"
+              aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
+              className="size-full rounded-full"
+            />
           </div>
 
           <div className="text-center">
-            <span className="text-lg font-bold">{PROFILE.koreanName}</span>
+            <h2 className="text-lg font-bold">{PROFILE.koreanName}</h2>
             <p className="text-primary text-sm">{PROFILE.job}</p>
           </div>
 
-          <div className="flex justify-center gap-2">
+          <nav aria-label="소셜 링크" className="flex justify-center gap-2">
             {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label, type }) => {
               const linkProps =
                 type === 'email'
@@ -71,13 +68,13 @@ function ProfileCard() {
 
               return (
                 <Button key={label} asChild size="icon" variant="ghost" className="bg-primary/10">
-                  <Link {...linkProps} aria-label={label}>
-                    <Icon className="size-4" />
+                  <Link aria-label={label} {...linkProps}>
+                    <Icon aria-hidden="true" className="size-4" />
                   </Link>
                 </Button>
               );
             })}
-          </div>
+          </nav>
         </div>
       </CardContent>
     </Card>
