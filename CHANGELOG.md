@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.0...v1.3.1) (2026-01-11)
+
+### ⚡️ Performance Improvements
+
+* **article:** 아티클 목록 페이지의 무한 스크롤 prefetch 시점 개선 ([#160](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/160)) ([cb6426b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/cb6426b44dd56f085d1ff3f91f3a00c808922ae6))
+
 ## [1.3.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.2.0...v1.3.0) (2026-01-11)
 
 ### ✨ Features
