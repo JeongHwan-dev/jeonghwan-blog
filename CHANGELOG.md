@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.1...v1.4.0) (2026-01-11)
+
+### ✨ Features
+
+* **author:** ProfileCard 웹 접근성 요소 개선 ([#163](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/163)) ([4d67aa5](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/4d67aa5bae05cab36a6b8a060a3f3795ae1a1f4e))
+
 ## [1.3.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.0...v1.3.1) (2026-01-11)
 
 ### ⚡️ Performance Improvements
