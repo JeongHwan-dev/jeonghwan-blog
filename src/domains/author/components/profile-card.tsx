@@ -40,15 +40,11 @@ function ProfileCard() {
     <Card className="shadow-none">
       <CardContent>
         <div className="space-y-4">
-          <div className="flex justify-center">
-            <div className="bg-muted rounded-full p-2">
-              <div className="size-36 overflow-hidden rounded-full">
-                <JeonghwanAvatar
-                  aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-                  className="size-fit"
-                />
-              </div>
-            </div>
+          <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
+            <JeonghwanAvatar
+              aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
+              className="size-full rounded-full"
+            />
           </div>
 
           <div className="text-center">
