@@ -36,7 +36,7 @@ function ArticleCard({
         <div className="relative aspect-[16/9] overflow-hidden">
           <Image
             src={thumbnailImageUrl}
-            alt={`${title} 글의 썸네일 이미지`}
+            alt=""
             fill
             priority={thumbnailImagePriority}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -65,8 +65,8 @@ function ArticleCard({
         <div className="text-muted-foreground mt-3 flex items-center gap-x-4 text-sm md:mt-4">
           {date && (
             <div className="flex items-center gap-1.5">
-              <Calendar className="size-4" />
-              <time>{formatDate(date)}</time>
+              <Calendar aria-hidden="true" className="size-4" />
+              <time dateTime={date}>{formatDate(date)}</time>
             </div>
           )}
         </div>
