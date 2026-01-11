@@ -5,10 +5,13 @@ import { Button, Card, CardContent } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 
+type SocialLinkType = 'email' | 'externalLink';
+
 interface SocialLinkItem {
   href: string;
   icon: LucideIcon;
   label: string;
+  type: SocialLinkType;
 }
 
 const SOCIAL_LINK_LIST: SocialLinkItem[] = [
@@ -16,16 +19,19 @@ const SOCIAL_LINK_LIST: SocialLinkItem[] = [
     href: PROFILE.gitHubUrl,
     icon: Github,
     label: 'GitHub',
+    type: 'externalLink',
   },
   {
     href: PROFILE.linkedInUrl,
     icon: Linkedin,
     label: 'LinkedIn',
+    type: 'externalLink',
   },
   {
     href: PROFILE.email,
     icon: Mail,
     label: 'Email',
+    type: 'email',
   },
 ];
 
@@ -38,9 +44,8 @@ function ProfileCard() {
             <div className="bg-muted rounded-full p-2">
               <div className="size-36 overflow-hidden rounded-full">
                 <JeonghwanAvatar
-                  width={144}
-                  height={144}
                   aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
+                  className="size-fit"
                 />
               </div>
             </div>
@@ -52,18 +57,26 @@ function ProfileCard() {
           </div>
 
           <div className="flex justify-center gap-2">
-            {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
-              <Button key={label} asChild size="icon" variant="ghost" className="bg-primary/10">
-                <Link
-                  href={label === 'Email' ? `mailto:${href}` : href}
-                  rel={label === 'Email' ? undefined : 'noopener noreferrer'}
-                  target={label === 'Email' ? undefined : '_blank'}
-                  aria-label={label}
-                >
-                  <Icon className="size-4" />
-                </Link>
-              </Button>
-            ))}
+            {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label, type }) => {
+              const linkProps =
+                type === 'email'
+                  ? {
+                      href: `mailto:${href}`,
+                    }
+                  : {
+                      href,
+                      rel: 'noopener noreferrer',
+                      target: '_blank',
+                    };
+
+              return (
+                <Button key={label} asChild size="icon" variant="ghost" className="bg-primary/10">
+                  <Link {...linkProps} aria-label={label}>
+                    <Icon className="size-4" />
+                  </Link>
+                </Button>
+              );
+            })}
           </div>
         </div>
       </CardContent>
