@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.4.0...v1.5.0) (2026-01-11)
+
+### ✨ Features
+
+* **article:** 아티클 조희 시 status 옵션에 Pre-Published 상태 로직 추가 ([#165](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/165)) ([cf24191](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/cf241911ba01761b01114d77d19aefc3cdc929e7))
+
+### 🔧 Miscellaneous Chores
+
+* **github:** main 브랜치 PR에 release 라벨 자동 적용 미동작 이슈 수정 ([#166](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/166)) ([f6ad7fb](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/f6ad7fbc80825ba991bd7498108da4aa785b949b))
+
 ## [1.4.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.1...v1.4.0) (2026-01-11)
 
 ### ✨ Features
