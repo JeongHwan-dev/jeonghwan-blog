@@ -1,3 +1,13 @@
+## [1.5.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.0...v1.5.1) (2026-01-18)
+
+### 📝 Documentation
+
+* **core:** AI Skills 문서 추가 ([#169](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/169)) ([91f4634](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/91f463445297c21c4635a6bf58346cb1aa61e7a9))
+
+### 🔧 Miscellaneous Chores
+
+* **core:** 보안 취약 패키지 업데이트 ([#168](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/168)) ([d230808](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/d2308084cb572645ed1c29d1fe0f07095406f6fc))
+
 ## [1.5.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.4.0...v1.5.0) (2026-01-11)
 
 ### ✨ Features
