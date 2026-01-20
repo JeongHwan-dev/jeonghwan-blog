@@ -30,6 +30,5 @@
     "giscus",
     "shadcn"
   ],
-  "css.lint.unknownAtRules": "ignore",
-  "eslint.useFlatConfig": true
+  "css.lint.unknownAtRules": "ignore"
 }
