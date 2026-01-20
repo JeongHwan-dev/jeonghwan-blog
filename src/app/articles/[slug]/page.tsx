@@ -112,7 +112,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       <div>
         <article>
           {article.thumbnailImageUrl !== undefined && (
-            <AspectRatio ratio={16 / 9} className="bg-muted mb-6 rounded-md">
+            <AspectRatio ratio={16 / 9} className="mb-6 rounded-md bg-muted">
               <Image
                 src={article.thumbnailImageUrl}
                 alt={article.title}
@@ -123,7 +123,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             </AspectRatio>
           )}
           <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
+            <h1 className="font-bold text-3xl md:text-4xl">{article.title}</h1>
             <nav aria-label="태그 목록" className="flex gap-2">
               {article.tagList?.map((tag) => (
                 <Link
@@ -139,12 +139,12 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 >
                   <ArticleTagBadge
                     tag={tag}
-                    className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                    className="transition-colors hover:bg-primary/20 active:bg-primary/20"
                   />
                 </Link>
               ))}
             </nav>
-            <div className="text-muted-foreground flex gap-4 text-sm">
+            <div className="flex gap-4 text-muted-foreground text-sm">
               <div className="flex items-center gap-1">
                 <CalendarDays aria-hidden="true" className="size-4" />
                 <time dateTime={article.date}>{formatDate(article.date)}</time>
@@ -158,7 +158,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             </div>
           )}
 
-          <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
+          <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-[var(--header-height)]">
             <CustomMDX source={markdown} />
           </div>
         </article>

@@ -18,7 +18,7 @@ function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
 
   const isInternal = isInternalLink(href);
   const linkClassName = cn(
-    'hover:text-primary text-muted-foreground break-all transition-colors',
+    'break-all text-muted-foreground transition-colors hover:text-primary',
     className,
   );
 

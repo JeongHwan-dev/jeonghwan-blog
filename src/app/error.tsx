@@ -26,13 +26,13 @@ export const metadata: Metadata = {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
-    <div className="h-main-full flex flex-col items-center justify-center">
+    <div className="flex h-main-full flex-col items-center justify-center">
       <div className="flex w-full max-w-md flex-col items-center gap-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-          <div className="text-muted-foreground tossface text-6xl font-bold md:text-7xl">
+          <div className="tossface font-bold text-6xl text-muted-foreground md:text-7xl">
             🚫 500
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{TITLE}</h1>
+          <h1 className="font-semibold text-2xl tracking-tight md:text-3xl">{TITLE}</h1>
           <p className="text-muted-foreground md:text-lg">{DESCRIPTION}</p>
         </div>
         <Button aria-label="페이지 다시 로드하기" onClick={reset}>
