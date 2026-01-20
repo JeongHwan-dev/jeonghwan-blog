@@ -41,12 +41,7 @@ function ProfileCard() {
       <CardContent>
         <div className="space-y-4">
           <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
-            <AuthorAvatar
-              size="full"
-              role="img"
-              aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-              className="rounded-full"
-            />
+            <AuthorAvatar size="full" role="img" className="rounded-full" aria-hidden="true" />
           </div>
 
           <div className="text-center">
