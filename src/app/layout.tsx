@@ -6,7 +6,6 @@ import localFont from 'next/font/local';
 
 import { Footer, Header, ScrollFloatingActionButtonGroup } from '@/shared/components';
 import { metadata } from '@/shared/constants';
-
 import { Providers } from './providers';
 import './globals.css';
 

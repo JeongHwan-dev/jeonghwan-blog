@@ -1,7 +1,7 @@
-import type { Toc, TocEntry } from '@stefanprobst/rehype-extract-toc';
+import Link from 'next/link';
 import type { ComponentProps } from 'react';
 
-import Link from 'next/link';
+import type { Toc, TocEntry } from '@stefanprobst/rehype-extract-toc';
 
 interface TableOfContentsCardProps extends ComponentProps<'div'> {
   itemList: Toc;

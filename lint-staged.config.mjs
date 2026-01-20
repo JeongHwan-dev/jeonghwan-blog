@@ -23,11 +23,6 @@ export default {
       return 'gitleaks protect --staged --redact';
     },
   ],
-  '*.{js,jsx,ts,tsx,mjs}': [
-    'eslint --fix',
-    'prettier',
-  ],
-  '*.{json,md}': [
-    'prettier',
-  ],
+  '*.{js,jsx,ts,tsx,mjs}': ['eslint --fix', 'prettier'],
+  '*.{json,md}': ['prettier'],
 };

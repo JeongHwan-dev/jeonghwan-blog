@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @plugin "@tailwindcss/typography";
 
@@ -128,7 +128,7 @@
 }
 
 .tossface {
-  font-family: var(--font-pretendard), Tossface;
+  font-family: var(--font-pretendard), Tossface, sans-serif;
 }
 
 .h-main-full {
