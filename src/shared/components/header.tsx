@@ -45,7 +45,7 @@ function Header() {
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed backdrop-blur">
       <div className="container flex h-full items-center justify-between gap-2 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
-          <AuthorAvatar size="sm" />
+          <AuthorAvatar size="sm" aria-hidden="true" />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
