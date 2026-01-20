@@ -3,7 +3,7 @@ import type { ElementType } from 'react';
 
 import { Github, Linkedin, Menu } from 'lucide-react';
 
-import JeonghwanAvatar from '#/svgs/img-jeonghwan-avatar.svg';
+import { AuthorAvatar } from './author-avatar';
 import { Button } from './button';
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
 import { ThemeToggleButton } from './theme-toggle-button';
@@ -45,7 +45,7 @@ function Header() {
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed backdrop-blur">
       <div className="container flex h-full items-center justify-between gap-2 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
-          <JeonghwanAvatar width={44} height={44} />
+          <AuthorAvatar size="sm" />
           <span className="font-bold lg:inline-block">{`Jeonghwan's Blog`}</span>
         </Link>
 
