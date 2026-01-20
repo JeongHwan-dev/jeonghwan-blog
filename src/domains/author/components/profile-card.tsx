@@ -1,9 +1,9 @@
-import { Github, Linkedin, type LucideIcon, Mail } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button, Card, CardContent } from '@/shared/components';
+import { Github, Linkedin, type LucideIcon, Mail } from 'lucide-react';
+
+import { AuthorAvatar, Button, Card, CardContent } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
-import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 
 type SocialLinkType = 'email' | 'externalLink';
 
@@ -40,16 +40,12 @@ function ProfileCard() {
     <Card className="shadow-none">
       <CardContent>
         <div className="space-y-4">
-          <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
-            <JeonghwanAvatar
-              role="img"
-              aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-              className="size-full rounded-full"
-            />
+          <div className="m-auto mb-4 max-h-36 max-w-36 rounded-full bg-muted p-2">
+            <AuthorAvatar size="full" role="img" className="rounded-full" aria-hidden="true" />
           </div>
 
           <div className="text-center">
-            <h2 className="text-lg font-bold">{PROFILE.koreanName}</h2>
+            <h2 className="font-bold text-lg">{PROFILE.koreanName}</h2>
             <p className="text-primary text-sm">{PROFILE.job}</p>
           </div>
 

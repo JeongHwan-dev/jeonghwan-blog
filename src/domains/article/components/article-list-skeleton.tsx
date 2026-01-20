@@ -1,5 +1,4 @@
 import { Repeat } from '@/shared/components';
-
 import { ArticleCardSkeleton } from './article-card-skeleton';
 
 function ArticleListSkeleton() {

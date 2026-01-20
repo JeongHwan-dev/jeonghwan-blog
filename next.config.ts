@@ -1,7 +1,7 @@
-import type { NextConfig } from 'next';
-
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
+import type { NextConfig } from 'next';
+
 import { compact } from 'es-toolkit';
 
 const domains: string[] = compact([process.env.VERCEL_BLOB_STORAGE_DOMAIN]);

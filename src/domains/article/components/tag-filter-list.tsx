@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { use } from 'react';
 
 import type { ArticleTagFilterItem } from '@/domains/article/services';
-
 import { cn } from '@/shared/utils';
 
 interface TagFilterListProps {
@@ -30,13 +29,13 @@ function TagFilterList({ selectedTag, tagFilterList }: TagFilterListProps) {
             aria-current={selectedTag === name ? 'page' : undefined}
             aria-label={`${name} 태그 글 보기 (${count}개)`}
             className={cn(
-              'hover:bg-muted-foreground/10 active:bg-muted-foreground/10 text-muted-foreground flex items-center justify-between rounded-md p-1.5 px-3 py-2 text-sm transition-colors',
+              'flex items-center justify-between rounded-md p-1.5 px-3 py-2 text-muted-foreground text-sm transition-colors hover:bg-muted-foreground/10 active:bg-muted-foreground/10',
               selectedTag === name &&
-                'bg-primary-foreground dark:bg-primary/20 text-primary font-medium',
+                'bg-primary-foreground font-medium text-primary dark:bg-primary/20',
             )}
           >
             <span>{name}</span>
-            <span aria-label={`${count}개의 글`}>{count}</span>
+            <span>{count}</span>
           </Link>
         </li>
       ))}

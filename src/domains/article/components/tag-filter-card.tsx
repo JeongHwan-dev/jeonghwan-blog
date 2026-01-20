@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 
 import { getArticleTagFilterList } from '@/domains/article/services';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components';
-
 import { TagFilterList } from './tag-filter-list';
 import { TagFilterListSkeleton } from './tag-filter-list-skeleton';
 

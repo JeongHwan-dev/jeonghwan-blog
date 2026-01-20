@@ -5,7 +5,6 @@ import type { ComponentProps } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 
 import { cn } from '@/shared/utils';
-
 import { Button } from './button';
 import { Separator } from './separator';
 

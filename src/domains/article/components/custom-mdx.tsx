@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import type { ComponentProps } from 'react';
 
 import { type MDXComponents, MDXRemote, type MDXRemoteProps } from 'next-mdx-remote-client/rsc';
-import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
@@ -18,7 +18,7 @@ function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
 
   const isInternal = isInternalLink(href);
   const linkClassName = cn(
-    'hover:text-primary text-muted-foreground break-all transition-colors',
+    'break-all text-muted-foreground transition-colors hover:text-primary',
     className,
   );
 
@@ -40,7 +40,7 @@ function CustomCode({ className, ...rest }: ComponentProps<'code'>) {
 }
 
 function CustomImage({ alt, className, ...rest }: ComponentProps<'img'>) {
-  // eslint-disable-next-line @next/next/no-img-element
+  // biome-ignore lint/performance/noImgElement: next/image is not supported in the server component
   return <img alt={alt} className={cn('rounded-md', className)} {...rest} />;
 }
 

@@ -1,4 +1,5 @@
 export { AspectRatio } from './aspect-ratio';
+export { AuthorAvatar } from './author-avatar';
 export { Badge } from './badge';
 export { Button } from './button';
 export {
