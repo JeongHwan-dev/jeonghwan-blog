@@ -20,6 +20,16 @@
       "suspicious": {
         "noUnknownAtRules": "off",
         "noArrayIndexKey": "info"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "fix": "safe",
+          "options": {
+            "attributes": ["classList"],
+            "functions": ["clsx", "cn", "cva", "tv"]
+          }
+        }
       }
     }
   },

@@ -40,12 +40,12 @@ function ProfileCard() {
     <Card className="shadow-none">
       <CardContent>
         <div className="space-y-4">
-          <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
+          <div className="m-auto mb-4 max-h-36 max-w-36 rounded-full bg-muted p-2">
             <AuthorAvatar size="full" role="img" className="rounded-full" aria-hidden="true" />
           </div>
 
           <div className="text-center">
-            <h2 className="text-lg font-bold">{PROFILE.koreanName}</h2>
+            <h2 className="font-bold text-lg">{PROFILE.koreanName}</h2>
             <p className="text-primary text-sm">{PROFILE.job}</p>
           </div>
 
