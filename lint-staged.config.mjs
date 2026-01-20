@@ -4,9 +4,15 @@
  */
 import { spawnSync } from 'node:child_process';
 
+const isCI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+
 export default {
   '*': [
     () => {
+      if (isCI) {
+        return;
+      }
+
       const { error, status } = spawnSync('gitleaks', ['version'], {
         stdio: 'ignore',
       });
