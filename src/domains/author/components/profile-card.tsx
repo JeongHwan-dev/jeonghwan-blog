@@ -2,8 +2,7 @@ import Link from 'next/link';
 
 import { Github, Linkedin, type LucideIcon, Mail } from 'lucide-react';
 
-import JeonghwanAvatar from '#/svgs/img-jeonghwan-avatar.svg';
-import { Button, Card, CardContent } from '@/shared/components';
+import { AuthorAvatar, Button, Card, CardContent } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 
 type SocialLinkType = 'email' | 'externalLink';
@@ -42,10 +41,11 @@ function ProfileCard() {
       <CardContent>
         <div className="space-y-4">
           <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
-            <JeonghwanAvatar
+            <AuthorAvatar
+              size="full"
               role="img"
               aria-label={`${PROFILE.koreanName}의 프로필 이미지`}
-              className="size-full rounded-full"
+              className="rounded-full"
             />
           </div>
 
