@@ -30,5 +30,6 @@
     "giscus",
     "shadcn"
   ],
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.classFunctions": ["cva", "cx", "tv"]
 }
