@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 import { Github, Linkedin, type LucideIcon, Mail } from 'lucide-react';
 
+import JeonghwanAvatar from '#/svgs/img-jeonghwan-avatar.svg';
 import { Button, Card, CardContent } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 
