@@ -116,4 +116,3 @@ export const LABELS = [
     value: 'released',
   },
 ];
-

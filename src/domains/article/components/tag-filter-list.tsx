@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { use } from 'react';
 
 import type { ArticleTagFilterItem } from '@/domains/article/services';
-
 import { cn } from '@/shared/utils';
 
 interface TagFilterListProps {
@@ -36,7 +35,7 @@ function TagFilterList({ selectedTag, tagFilterList }: TagFilterListProps) {
             )}
           >
             <span>{name}</span>
-            <span aria-label={`${count}개의 글`}>{count}</span>
+            <span>{count}</span>
           </Link>
         </li>
       ))}

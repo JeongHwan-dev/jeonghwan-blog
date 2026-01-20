@@ -1,13 +1,11 @@
+import Image from 'next/image';
 import type { ComponentProps } from 'react';
 
 import { Calendar } from 'lucide-react';
-import Image from 'next/image';
 
 import type { Article } from '@/domains/article/services';
-
 import { Card, CardContent } from '@/shared/components';
 import { cn, formatDate } from '@/shared/utils';
-
 import { ArticleTagBadge } from './';
 
 interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {

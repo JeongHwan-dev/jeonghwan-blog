@@ -1,11 +1,9 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { ComponentProps } from 'react';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-
 import type { ArticleSort } from '@/domains/article/services';
-
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components';
 
 interface SortSelectProps extends ComponentProps<typeof Select> {

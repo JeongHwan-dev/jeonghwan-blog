@@ -4,11 +4,11 @@
  * 변경사항이 없으면 파일을 쓰지 않아요.
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { LABELS } from '../labels/labels.config.mjs';
+import { fileURLToPath } from 'node: url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +46,7 @@ const formatLabelsToJsonString = (labels) => {
     name: formatLabelName(emoji, value),
   }));
 
-  return JSON.stringify(labelsForJson, null, 2) + '\n';
+  return `${JSON.stringify(labelsForJson, null, 2)}\n`;
 };
 
 /**
@@ -64,7 +64,7 @@ const formatLabelsToYamlString = (labels) => {
     })
     .join('\n\n');
 
-  return labelerYml + '\n';
+  return `${labelerYml}\n`;
 };
 
 const newLabelsJsonContent = formatLabelsToJsonString(LABELS);
