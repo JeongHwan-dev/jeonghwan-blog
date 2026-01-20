@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import type { ElementType } from 'react';
 
-import JeonghwanAvatar from '@svgs/img-jeonghwan-avatar.svg';
 import { Github, Linkedin, Menu } from 'lucide-react';
 
+import JeonghwanAvatar from '#/svgs/img-jeonghwan-avatar.svg';
 import { Button } from './button';
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
 import { ThemeToggleButton } from './theme-toggle-button';
