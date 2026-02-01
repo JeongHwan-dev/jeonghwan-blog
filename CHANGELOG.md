@@ -1,3 +1,33 @@
+## [1.6.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.1...v1.6.0) (2026-02-01)
+
+### ✨ Features
+
+* **article:** CustomMDX의 커스텀 컴포넌트에 YouTubePlayer 추가 ([#184](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/184)) ([86737e5](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/86737e5d247860b3753b0aaea51af6c3fc6c7a43))
+* **shared:** AuthorAvatar 컴포넌트 사용 시 aria-hidden 활성화 ([#178](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/178)) ([a5f2cab](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a5f2cabb4990f08e96107fc175828c6e4420edc4))
+
+### ♻️ Code Refactoring
+
+* **shared:** JeonghwanAvatar svg 파일 사용 코드를 AuthorAvatar 컴포넌트로 대체 ([#177](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/177)) ([d04e552](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/d04e552637f500f1af7fad53be62bf7067932373))
+* **shared:** ScrollFloatingActionButtonGroup 컴포넌트에 ButtonGroup 컴포넌트 활용 ([#185](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/185)) ([8eab0fd](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/8eab0fd1a0a2861c511a35dd18b0c720af890ccc))
+
+### 🔧 Miscellaneous Chores
+
+* **biome:** biome에 Tailwind CSS class 선언 순서 규칙 추가 ([#179](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/179)) ([2d104db](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2d104db75db17a04b18a004231e7cb13169b3fc7))
+* **core:** ESLint 설정 및 패키지 삭제 ([#173](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/173)) ([98f4cd7](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/98f4cd756c3cc6200358b7b70478ad566c53d5c9))
+* **core:** ESLint, Prettier를 Biome으로 마이그레이션 ([#172](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/172)) ([dc19eda](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/dc19eda762ecbd1992e5e109dabbe17585133997))
+* **core:** lint-staged에 gitleaks 확인 로직 추가 ([#171](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/171)) ([db3af37](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/db3af37a7175ca0f7076698672f5fc04e6a93f78))
+* **core:** Tailwind CSS Class Function VSCode 설정 추가 ([#174](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/174)) ([a68c653](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a68c653d9ad906eb354dc8405610f3502fc0d43b))
+* **github:** generate-label 스크립트의 import 경로 오타 수정 ([#181](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/181)) ([eb44c3d](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/eb44c3dbc1d864445c147995238df30a553a774e))
+* **github:** generate-labels 스크립트의 labeler 생성 로직 수정 ([#183](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/183)) ([1d4daf2](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/1d4daf28d2238ebdc1ac139276a238b6497f2b9b))
+* **label:** labels.config.mjs 업데이트에 따라 관련 파일 자동 동기화 ([e34483b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/e34483b9b349aff1a5f80c593757373446a6947b))
+* **label:** labels.config.mjs 업데이트에 따라 관련 파일 자동 동기화 ([a08e563](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a08e56351e9f87e9bccc8411102744f7a96cc88d))
+* **lint-staged:** lint-staged 설정에 CI 환경 시 스킵 로직 추가 ([#182](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/182)) ([15dcdd6](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/15dcdd6504ceb14b3e8b37f6816b75eb13a0a6a6))
+* **tsconfig:** public 폴더 alias path 변경 ([#176](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/176)) ([518a709](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/518a709a7008507ec7fd86f0bb3ad760503b8de3))
+
+### 👷 CI
+
+* **core:** CI Workflow 추가 ([#175](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/175)) ([0185598](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/018559867246f1600e216cddeb47f5293f89315d))
+
 ## [1.5.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.0...v1.5.1) (2026-01-18)
 
 ### 📝 Documentation
