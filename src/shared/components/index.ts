@@ -3,6 +3,12 @@ export { AuthorAvatar } from './author-avatar';
 export { Badge } from './badge';
 export { Button } from './button';
 export {
+  ButtonGroup,
+  ButtonGroupSeparator,
+  ButtonGroupText,
+  buttonGroupVariants,
+} from './button-group';
+export {
   Card,
   CardAction,
   CardContent,
