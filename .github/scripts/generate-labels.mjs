@@ -58,7 +58,7 @@ const formatLabelsToYamlString = (labels) => {
   const labelerYml = labels
     .map(({ emoji, value }) => {
       const labelName = formatLabelName(emoji, value);
-      const pattern = value === 'release' ? `title: ['^release:']` : `head-branch: ['${value}/']`;
+      const pattern = value === 'release' ? `title: ['^release:']` : `base-branch: 'main'`;
 
       return `${labelName}:\n  - ${pattern}`;
     })
