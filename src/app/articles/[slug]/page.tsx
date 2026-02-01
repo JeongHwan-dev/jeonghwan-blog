@@ -7,7 +7,7 @@ import { compile } from '@mdx-js/mdx';
 import withToc from '@stefanprobst/rehype-extract-toc';
 import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
 import { CalendarDays } from 'lucide-react';
-import rehypeSanitize from 'rehype-sanitize';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 
 import {
@@ -100,7 +100,22 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const { article, markdown } = await getArticleBySlug(slug);
 
   const { data } = await compile(markdown, {
-    rehypePlugins: [rehypeSlug, rehypeSanitize, withToc, withTocExport],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeSanitize,
+        {
+          ...defaultSchema,
+          tagNames: [...(defaultSchema.tagNames || []), 'YouTubePlayer'],
+          attributes: {
+            ...defaultSchema.attributes,
+            YouTubePlayer: ['videoId'],
+          },
+        },
+      ],
+      withToc,
+      withTocExport,
+    ],
   });
 
   if (article === null) {

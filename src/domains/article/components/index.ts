@@ -8,3 +8,4 @@ export { GiscusComments } from './giscus-comments';
 export { SortSelect } from './sort-select';
 export { TableOfContentsCard } from './table-of-contents-card';
 export { TagFilterCard } from './tag-filter-card';
+export { YouTubePlayer } from './youtube-player';
