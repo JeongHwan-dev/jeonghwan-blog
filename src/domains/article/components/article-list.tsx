@@ -1,16 +1,15 @@
 'use client';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { use } from 'react';
+
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/domains/article/services';
-
 import { Repeat } from '@/shared/components';
 import { useInfiniteScroll } from '@/shared/hooks';
-
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 
 import { Button } from '@/shared/components';
 
@@ -20,13 +20,11 @@ export const metadata: Metadata = {
 
 export default function NotFoundPage() {
   return (
-    <div className="h-main-full flex flex-col items-center justify-center">
+    <div className="flex h-main-full flex-col items-center justify-center">
       <div className="flex w-full max-w-md flex-col items-center gap-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-          <div className="text-muted-foreground tossface text-6xl font-bold md:text-7xl">
-            ⚠️ 404
-          </div>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{TITLE}</h1>
+          <div className="tossface font-bold text-6xl text-muted-foreground md:text-7xl">⚠️ 404</div>
+          <h1 className="font-semibold text-2xl tracking-tight md:text-3xl">{TITLE}</h1>
           <p className="text-muted-foreground md:text-lg">{DESCRIPTION}</p>
         </div>
         <Button asChild>

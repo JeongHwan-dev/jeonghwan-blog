@@ -1,1 +1,6 @@
+# CI 환경에서는 husky를 건너뜀
+if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
+  exit 0
+fi
+
 pnpm lint-staged

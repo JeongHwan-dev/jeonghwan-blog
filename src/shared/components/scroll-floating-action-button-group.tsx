@@ -4,12 +4,10 @@ import type { ComponentProps } from 'react';
 
 import { ArrowDown, ArrowUp } from 'lucide-react';
 
-import { cn } from '@/shared/utils';
-
 import { Button } from './button';
-import { Separator } from './separator';
+import { ButtonGroup, ButtonGroupSeparator } from './button-group';
 
-type ScrollFloatingActionButtonGroupProps = ComponentProps<'div'>;
+type ScrollFloatingActionButtonGroupProps = ComponentProps<typeof ButtonGroup>;
 
 type ScrollDirection = 'bottom' | 'top';
 
@@ -24,38 +22,32 @@ function ScrollFloatingActionButtonGroup({
     });
   };
 
-  const handleScrollToTopButtonClick = () => {
-    scrollTo('top');
-  };
-
-  const handleScrollToBottomButtonClick = () => {
-    scrollTo('bottom');
-  };
-
   return (
-    <div className={cn('flex flex-col', className)} {...props}>
+    <ButtonGroup orientation="vertical" className={className} {...props}>
       <Button
         type="button"
+        size="icon"
         title="맨 위로 이동"
-        size="icon"
         aria-label="맨 위로 이동"
-        onClick={handleScrollToTopButtonClick}
-        className="rounded-b-none"
+        onClick={() => {
+          scrollTo('top');
+        }}
       >
-        <ArrowUp />
+        <ArrowUp aria-hidden="true" />
       </Button>
-      <Separator />
+      <ButtonGroupSeparator orientation="horizontal" className="bg-muted" />
       <Button
         type="button"
-        title="맨 아래로 이동"
         size="icon"
+        title="맨 아래로 이동"
         aria-label="맨 아래로 이동"
-        onClick={handleScrollToBottomButtonClick}
-        className="rounded-t-none"
+        onClick={() => {
+          scrollTo('bottom');
+        }}
       >
-        <ArrowDown />
+        <ArrowDown aria-hidden="true" />
       </Button>
-    </div>
+    </ButtonGroup>
   );
 }
 

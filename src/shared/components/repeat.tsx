@@ -1,5 +1,6 @@
-import { range } from 'es-toolkit';
 import React, { createElement, Fragment, type ReactNode } from 'react';
+
+import { range } from 'es-toolkit';
 
 // void element를 제외한 HTML 요소 타입
 type NonVoidElement = Exclude<

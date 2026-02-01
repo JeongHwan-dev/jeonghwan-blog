@@ -1,7 +1,7 @@
-import type { Toc, TocEntry } from '@stefanprobst/rehype-extract-toc';
+import Link from 'next/link';
 import type { ComponentProps } from 'react';
 
-import Link from 'next/link';
+import type { Toc, TocEntry } from '@stefanprobst/rehype-extract-toc';
 
 interface TableOfContentsCardProps extends ComponentProps<'div'> {
   itemList: Toc;
@@ -12,8 +12,8 @@ type TableOfContentsLinkProps = TocEntry;
 function TableOfContentsCard({ itemList, ...rest }: TableOfContentsCardProps) {
   return (
     <div {...rest}>
-      <div className="bg-muted/60 space-y-4 rounded-lg p-6 backdrop-blur-sm">
-        <h3 className="text-lg font-semibold">목차</h3>
+      <div className="space-y-4 rounded-lg bg-muted/60 p-6 backdrop-blur-sm">
+        <h3 className="font-semibold text-lg">목차</h3>
         <nav aria-label="글 목차 네비게이션" className="space-y-3 text-sm">
           {itemList.map(({ children, depth, id, value }) => (
             <TableOfContentsLink key={id} id={id} value={value} depth={depth}>
@@ -34,7 +34,7 @@ function TableOfContentsLink({ children = [], id, value }: TableOfContentsLinkPr
         href={{
           hash: id,
         }}
-        className="hover:text-foreground text-muted-foreground block font-medium transition-colors"
+        className="block font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         {value}
       </Link>

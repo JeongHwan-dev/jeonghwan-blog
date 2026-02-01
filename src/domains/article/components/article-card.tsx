@@ -1,13 +1,11 @@
+import Image from 'next/image';
 import type { ComponentProps } from 'react';
 
 import { Calendar } from 'lucide-react';
-import Image from 'next/image';
 
 import type { Article } from '@/domains/article/services';
-
 import { Card, CardContent } from '@/shared/components';
 import { cn, formatDate } from '@/shared/utils';
-
 import { ArticleTagBadge } from './';
 
 interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {
@@ -27,7 +25,7 @@ function ArticleCard({
   return (
     <Card
       className={cn(
-        'group bg-card/50 border-border hover:border-primary/20 w-full cursor-pointer gap-0 overflow-hidden border p-0 shadow-none transition-all duration-300',
+        'group w-full cursor-pointer gap-0 overflow-hidden border border-border bg-card/50 p-0 shadow-none transition-all duration-300 hover:border-primary/20',
         className,
       )}
       {...rest}
@@ -53,16 +51,16 @@ function ArticleCard({
               ))}
             </div>
           )}
-          <h2 className="group-hover:text-primary mb-2 text-lg font-bold tracking-tight transition-colors md:text-xl">
+          <h2 className="mb-2 font-bold text-lg tracking-tight transition-colors group-hover:text-primary md:text-xl">
             {title}
           </h2>
           {description && (
-            <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed md:text-base">
+            <p className="line-clamp-2 text-muted-foreground text-sm leading-relaxed md:text-base">
               {description}
             </p>
           )}
         </div>
-        <div className="text-muted-foreground mt-3 flex items-center gap-x-4 text-sm md:mt-4">
+        <div className="mt-3 flex items-center gap-x-4 text-muted-foreground text-sm md:mt-4">
           {date && (
             <div className="flex items-center gap-1.5">
               <Calendar aria-hidden="true" className="size-4" />

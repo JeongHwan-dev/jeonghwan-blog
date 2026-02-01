@@ -4,9 +4,9 @@
  * 변경사항이 없으면 파일을 쓰지 않아요.
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { LABELS } from '../labels/labels.config.mjs';
 
@@ -46,7 +46,7 @@ const formatLabelsToJsonString = (labels) => {
     name: formatLabelName(emoji, value),
   }));
 
-  return JSON.stringify(labelsForJson, null, 2) + '\n';
+  return `${JSON.stringify(labelsForJson, null, 2)}\n`;
 };
 
 /**
@@ -58,13 +58,13 @@ const formatLabelsToYamlString = (labels) => {
   const labelerYml = labels
     .map(({ emoji, value }) => {
       const labelName = formatLabelName(emoji, value);
-      const pattern = value === 'release' ? `title: ['^release:']` : `head-branch: ['${value}/']`;
+      const pattern = value === 'release' ? `title: ['^release:']` : `base-branch: 'main'`;
 
       return `${labelName}:\n  - ${pattern}`;
     })
     .join('\n\n');
 
-  return labelerYml + '\n';
+  return `${labelerYml}\n`;
 };
 
 const newLabelsJsonContent = formatLabelsToJsonString(LABELS);
