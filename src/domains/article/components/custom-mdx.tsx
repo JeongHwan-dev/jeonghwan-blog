@@ -3,11 +3,11 @@ import type { ComponentProps } from 'react';
 
 import { type MDXComponents, MDXRemote, type MDXRemoteProps } from 'next-mdx-remote-client/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 import { cn, isInternalLink } from '@/shared/utils';
+import { YouTubePlayer } from './youtube-player';
 
 type CustomMDXProps = MDXRemoteProps;
 
@@ -49,6 +49,7 @@ const customComponents: MDXComponents = {
   blockquote: CustomBlockquote,
   code: CustomCode,
   img: CustomImage,
+  YouTubePlayer: YouTubePlayer,
 } as const;
 
 function CustomMDX({ components, options, ...rest }: CustomMDXProps) {
@@ -60,7 +61,7 @@ function CustomMDX({ components, options, ...rest }: CustomMDXProps) {
       }}
       options={{
         mdxOptions: {
-          rehypePlugins: [rehypeSlug, rehypeSanitize, rehypePrettyCode],
+          rehypePlugins: [rehypeSlug, rehypePrettyCode],
           remarkPlugins: [remarkGfm],
         },
         ...options,
