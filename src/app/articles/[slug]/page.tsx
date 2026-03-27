@@ -102,6 +102,8 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const { data } = await compile(markdown, {
     rehypePlugins: [
       rehypeSlug,
+      withToc,
+      withTocExport,
       [
         rehypeSanitize,
         {
@@ -113,8 +115,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
           },
         },
       ],
-      withToc,
-      withTocExport,
     ],
   });
 
