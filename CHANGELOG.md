@@ -1,3 +1,9 @@
+## [1.6.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.6.0...v1.6.1) (2026-03-27)
+
+### 🐛 Bug Fixes
+
+* **article:** rehypePlugins 선언 순서 이슈 수정 ([#186](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/186)) ([05c7f1b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/05c7f1bb9c215a2e75a7ce2969ddcc5eaba3dade))
+
 ## [1.6.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.1...v1.6.0) (2026-02-01)
 
 ### ✨ Features
