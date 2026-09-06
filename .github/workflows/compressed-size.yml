@@ -1,0 +1,46 @@
+name: Compressed Size
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  compressed-size:
+    name: Compressed Size
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 10.7.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Compare compressed size
+        uses: preactjs/compressed-size-action@f322c295dde06a1cb7ccaef105732dd8a726d1d9 # 2.10.0
+        with:
+          # Next.js 클라이언트 번들만 추적해요. (서버 청크는 사용자에게 전송되지 않아요)
+          pattern: '.next/static/**/*.{js,css}'
+          # 빌드마다 바뀌는 buildId 디렉터리 안의 매니페스트는 매번 추가/삭제로 잡혀서 제외해요.
+          # exclude는 전체 상대 경로로 매칭돼서 `**/_*.js` 같은 축약형은 동작하지 않아요.
+          exclude: '.next/static/*/_*.js'
+          # 파일명 끝의 16자리 해시를 *로 치환해 base/head 빌드의 같은 청크를 짝지어요.
+          # 확장자는 non-capturing group이어야 해요. capture group은 전부 *로 치환되거든요.
+          strip-hash: '[-.]?([0-9a-f]{16})\.(?:js|css)$'
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
