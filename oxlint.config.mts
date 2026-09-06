@@ -1,0 +1,30 @@
+import { defineConfig } from 'oxlint';
+
+export default defineConfig({
+  plugins: [
+    'typescript',
+    'react',
+    'react-perf',
+    'unicorn',
+    'import',
+    'jsx-a11y',
+    'nextjs',
+    'promise',
+    'node',
+    'oxc',
+  ],
+  categories: {
+    correctness: 'error',
+    suspicious: 'warn',
+    perf: 'warn',
+  },
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+    'eslint/no-underscore-dangle': 'off',
+    'import/no-unassigned-import': 'off',
+    'react-perf/jsx-no-new-function-as-prop': 'warn',
+    'react-perf/jsx-no-new-object-as-prop': 'warn',
+    'react-perf/jsx-no-new-array-as-prop': 'warn',
+    'react-perf/jsx-no-jsx-as-prop': 'warn',
+  },
+});

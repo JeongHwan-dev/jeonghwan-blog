@@ -16,9 +16,9 @@ const getCommitTypes = () => {
 
 const commitTypes = getCommitTypes();
 
-const getCommitTypeChoices = (commitTypes) => {
+const getCommitTypeChoices = (types) => {
   return Object.freeze(
-    commitTypes.map(({ description, emoji, value }) => ({
+    types.map(({ description, emoji, value }) => ({
       name: `${emoji} ${value.padEnd(10, ' ')}: ${description}`,
       value,
     })),
@@ -66,34 +66,33 @@ const COMMIT_QUESTION_LIST = [
 ];
 
 const config = {
-  prompter: (cz, commit) => {
-    cz.prompt(COMMIT_QUESTION_LIST).then(({ description, scope, subject, type }) => {
-      const trimmedScope = scope.trim();
-      const trimmedDescription = description?.trim();
-      const baseCommitMessage = `${type}(${trimmedScope}): ${subject}`;
-      const commitMessage =
-        trimmedDescription?.length > 0
-          ? `${baseCommitMessage}\n\n${trimmedDescription}`
-          : baseCommitMessage;
-      const divider = '-'.repeat(50);
+  prompter: async (cz, commit) => {
+    const { description, scope, subject, type } = await cz.prompt(COMMIT_QUESTION_LIST);
+    const trimmedScope = scope.trim();
+    const trimmedDescription = description?.trim();
+    const baseCommitMessage = `${type}(${trimmedScope}): ${subject}`;
+    const commitMessage =
+      trimmedDescription?.length > 0
+        ? `${baseCommitMessage}\n\n${trimmedDescription}`
+        : baseCommitMessage;
+    const divider = '-'.repeat(50);
 
-      cz.prompt([
-        {
-          default: true,
-          message: `✅ 커밋 메시지가 아래와 같아요. 커밋을 진행할까요?\n${divider}\n${commitMessage}\n${divider}\n`,
-          name: 'confirmCommit',
-          type: 'confirm',
-        },
-      ]).then(({ confirmCommit }) => {
-        if (confirmCommit) {
-          commit(commitMessage);
+    const { confirmCommit } = await cz.prompt([
+      {
+        default: true,
+        message: `✅ 커밋 메시지가 아래와 같아요. 커밋을 진행할까요?\n${divider}\n${commitMessage}\n${divider}\n`,
+        name: 'confirmCommit',
+        type: 'confirm',
+      },
+    ]);
 
-          return;
-        }
+    if (confirmCommit) {
+      commit(commitMessage);
 
-        console.log('❌ 커밋이 취소되었어요.');
-      });
-    });
+      return;
+    }
+
+    console.log('❌ 커밋이 취소되었어요.');
   },
 };
 

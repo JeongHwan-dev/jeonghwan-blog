@@ -11,17 +11,17 @@ type ScrollFloatingActionButtonGroupProps = ComponentProps<typeof ButtonGroup>;
 
 type ScrollDirection = 'bottom' | 'top';
 
+function scrollTo(direction: ScrollDirection) {
+  window.scrollTo({
+    behavior: 'smooth',
+    top: direction === 'top' ? 0 : document.documentElement.scrollHeight,
+  });
+}
+
 function ScrollFloatingActionButtonGroup({
   className,
   ...props
 }: ScrollFloatingActionButtonGroupProps) {
-  const scrollTo = (direction: ScrollDirection) => {
-    window.scrollTo({
-      behavior: 'smooth',
-      top: direction === 'top' ? 0 : document.documentElement.scrollHeight,
-    });
-  };
-
   return (
     <ButtonGroup orientation="vertical" className={className} {...props}>
       <Button

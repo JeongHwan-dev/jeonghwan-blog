@@ -42,7 +42,7 @@ const SOCIAL_LINK_LIST: SocialLink[] = [
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed backdrop-blur">
       <div className="container flex h-full items-center justify-between gap-2 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
           <AuthorAvatar size="sm" aria-hidden="true" />
@@ -55,7 +55,7 @@ function Header() {
               <Link
                 key={label}
                 href={href}
-                className="text-foreground/80 transition-colors hover:text-foreground/100 active:text-foreground/100"
+                className="text-foreground/80 hover:text-foreground/100 active:text-foreground/100 transition-colors"
               >
                 {label}
               </Link>
@@ -103,7 +103,7 @@ function Header() {
                   <Link
                     key={label}
                     href={href}
-                    className="flex items-center justify-center rounded py-2 text-foreground/80 transition hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100"
+                    className="text-foreground/80 hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 flex items-center justify-center rounded py-2 transition"
                   >
                     {label}
                   </Link>
@@ -116,7 +116,7 @@ function Header() {
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label={`${label} 프로필 보기`}
-                    className="flex items-center justify-center gap-1 rounded py-2 text-foreground/80 transition hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100"
+                    className="text-foreground/80 hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 flex items-center justify-center gap-1 rounded py-2 transition"
                   >
                     <Icon width={20} height={20} />
                     {label}
