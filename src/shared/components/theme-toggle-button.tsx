@@ -10,10 +10,10 @@ import { Button } from './button';
 type ThemeToggleButtonProps = PropsWithChildren;
 
 function ThemeToggleButton(props: ThemeToggleButtonProps) {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   const handleThemeToggleButtonClick = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
   return (
