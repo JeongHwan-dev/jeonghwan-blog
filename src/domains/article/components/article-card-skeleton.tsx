@@ -9,7 +9,7 @@ function ArticleCardSkeleton({ className, ...rest }: ArticleCardSkeletonProps) {
   return (
     <Card
       className={cn(
-        'w-full gap-0 overflow-hidden border border-border bg-card/50 p-0 shadow-none',
+        'border-border bg-card/50 w-full gap-0 overflow-hidden border p-0 shadow-none',
         className,
       )}
       {...rest}

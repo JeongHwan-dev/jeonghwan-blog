@@ -29,9 +29,9 @@ function TagFilterList({ selectedTag, tagFilterList }: TagFilterListProps) {
             aria-current={selectedTag === name ? 'page' : undefined}
             aria-label={`${name} 태그 글 보기 (${count}개)`}
             className={cn(
-              'flex items-center justify-between rounded-md p-1.5 px-3 py-2 text-muted-foreground text-sm transition-colors hover:bg-muted-foreground/10 active:bg-muted-foreground/10',
+              'text-muted-foreground hover:bg-muted-foreground/10 active:bg-muted-foreground/10 flex items-center justify-between rounded-md p-1.5 px-3 py-2 text-sm transition-colors',
               selectedTag === name &&
-                'bg-primary-foreground font-medium text-primary dark:bg-primary/20',
+                'bg-primary-foreground text-primary dark:bg-primary/20 font-medium',
             )}
           >
             <span>{name}</span>
