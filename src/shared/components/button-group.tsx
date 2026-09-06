@@ -27,8 +27,8 @@ function ButtonGroup({
   ...props
 }: React.ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>) {
   return (
-    // biome-ignore lint/a11y/useSemanticElements: button group 역할을 위해 role을 사용합니다.
     <div
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role -- button group 역할을 위해 role을 사용합니다.
       role="group"
       data-slot="button-group"
       data-orientation={orientation}
@@ -50,7 +50,7 @@ function ButtonGroupText({
   return (
     <Comp
       className={cn(
-        "flex items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm shadow-xs [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -68,7 +68,7 @@ function ButtonGroupSeparator({
       data-slot="button-group-separator"
       orientation={orientation}
       className={cn(
-        '!m-0 relative self-stretch bg-input data-[orientation=vertical]:h-auto',
+        'bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto',
         className,
       )}
       {...props}

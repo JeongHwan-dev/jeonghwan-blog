@@ -104,7 +104,7 @@ function Repeat<T extends NonVoidElement>({
   ...htmlProps
 }: RepeatPropsWithAs<T> | RepeatPropsWithoutAs) {
   const items = range(times);
-  const sortedItems = order === 'asc' ? items : [...items].reverse();
+  const sortedItems = order === 'asc' ? items : items.toReversed();
   const isFunctionChildren = typeof children === 'function';
 
   const content = sortedItems.map((index) => {

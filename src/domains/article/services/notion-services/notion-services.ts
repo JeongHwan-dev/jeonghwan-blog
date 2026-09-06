@@ -35,9 +35,9 @@ const getArticleStatusFilter = () => {
   };
 };
 
-export const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
-  const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
+const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
 
+export const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
   const title = properties.Title.type === 'title' ? getTextContent(properties.Title.title) : '';
   const description =
     properties.Description.type === 'rich_text'
@@ -170,7 +170,7 @@ export const getArticleTagFilterList = async (): Promise<ArticleTagFilterItem[]>
     id: name,
     name,
   }));
-  const sortedTagFilterList = tagFilterList.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedTagFilterList = tagFilterList.toSorted((a, b) => a.name.localeCompare(b.name));
 
   return [allTagFilterItem, ...sortedTagFilterList];
 };
