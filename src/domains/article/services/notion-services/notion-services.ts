@@ -37,7 +37,7 @@ const getArticleStatusFilter = () => {
 
 const getTextContent = (items?: RichTextItemResponse[]): string => items?.[0]?.plain_text ?? '';
 
-export const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
+const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => {
   const title = properties.Title.type === 'title' ? getTextContent(properties.Title.title) : '';
   const description =
     properties.Description.type === 'rich_text'
@@ -75,7 +75,7 @@ export const getPublishedArticleList = async ({
     filter: {
       and: [
         getArticleStatusFilter(),
-        ...(!!tag && tag !== '전체'
+        ...(tag && tag !== '전체'
           ? [
               {
                 multi_select: {
@@ -103,7 +103,6 @@ export const getPublishedArticleList = async ({
 
   return {
     articleList,
-    hasMore: response.has_more,
     nextCursor: response.next_cursor,
   };
 };

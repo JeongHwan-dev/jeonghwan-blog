@@ -1,12 +1,14 @@
-import { Repeat, Skeleton } from '@/shared/components';
+import { Skeleton } from '@/shared/components';
 
 function TagFilterListSkeleton() {
   return (
-    <Repeat as="ul" times={8} className="flex flex-col gap-3">
-      <li>
-        <Skeleton className="h-9 w-full" />
-      </li>
-    </Repeat>
+    <ul className="flex flex-col gap-3">
+      {Array.from({ length: 8 }, (_, index) => (
+        <li key={index}>
+          <Skeleton className="h-9 w-full" />
+        </li>
+      ))}
+    </ul>
   );
 }
 

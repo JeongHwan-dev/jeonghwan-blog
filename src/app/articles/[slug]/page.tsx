@@ -17,21 +17,15 @@ import {
   TableOfContentsCard,
 } from '@/domains/article/components';
 import { getArticleBySlug, getPublishedArticleList } from '@/domains/article/services';
-import { AspectRatio, Separator } from '@/shared/components';
+import { Separator } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 import { formatDate } from '@/shared/utils';
 
 interface ArticleDetailPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
-interface GenerateMetadataProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const { article } = await getArticleBySlug(slug);
 
@@ -99,6 +93,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const { slug } = await params;
   const { article, markdown } = await getArticleBySlug(slug);
 
+  if (article === null) {
+    notFound();
+  }
+
   const { data } = await compile(markdown, {
     rehypePlugins: [
       rehypeSlug,
@@ -118,16 +116,12 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     ],
   });
 
-  if (article === null) {
-    notFound();
-  }
-
   return (
     <div className="tossface grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
       <div>
         <article>
           {article.thumbnailImageUrl !== undefined && (
-            <AspectRatio ratio={16 / 9} className="bg-muted mb-6 rounded-md">
+            <div className="bg-muted relative mb-6 aspect-video rounded-md">
               <Image
                 src={article.thumbnailImageUrl}
                 alt={article.title}
@@ -135,7 +129,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 priority
                 className="size-full rounded-md object-cover"
               />
-            </AspectRatio>
+            </div>
           )}
           <div className="flex flex-col gap-4">
             <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>

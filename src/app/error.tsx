@@ -1,7 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
-
 import { RotateCcw } from 'lucide-react';
 
 import { Button } from '@/shared/components';
@@ -14,15 +12,6 @@ interface ErrorPageProps {
 const TITLE = '오류가 발생했어요';
 
 const DESCRIPTION = '잠시 후 다시 시도해 주세요';
-
-export const metadata: Metadata = {
-  description: DESCRIPTION,
-  robots: {
-    follow: false,
-    index: false,
-  },
-  title: TITLE,
-};
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
   return (

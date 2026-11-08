@@ -6,8 +6,6 @@ const config: KnipConfig = {
   // 의도적으로 전체 API를 내보내는 구조라서 노이즈만 나와 제외했어요.
   exclude: ['exports', 'nsExports', 'types', 'nsTypes', 'enumMembers', 'duplicates'],
   ignoreDependencies: [
-    // next.config.ts의 webpack 규칙에 문자열로만 등장해요. (author-avatar.tsx의 .svg import가 이걸 거쳐요)
-    '@svgr/webpack',
     // .releaserc.js의 preset: 'conventionalcommits' 문자열로만 참조돼요.
     'conventional-changelog-conventionalcommits',
   ],

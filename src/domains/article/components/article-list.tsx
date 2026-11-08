@@ -8,8 +8,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
 import type { GetPublishedArticleListResponse } from '@/domains/article/services';
-import { Repeat } from '@/shared/components';
-import { useInfiniteScroll } from '@/shared/hooks';
 import { ArticleCard } from './article-card';
 import { ArticleCardSkeleton } from './article-card-skeleton';
 
@@ -23,7 +21,12 @@ interface FetchArticleListProps {
 
 function ArticleList({ articleListPromise }: ArticleListProps) {
   const initialData = use(articleListPromise);
-  const { inView, ref } = useInView({
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView && hasNextPage && !isFetchingNextPage) {
+        void fetchNextPage();
+      }
+    },
     threshold: 0.1,
   });
   const searchParams = useSearchParams();
@@ -66,13 +69,6 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     queryKey: ['GET_ARTICLE_LIST', tag, sort],
   });
 
-  useInfiniteScroll({
-    fetchNextPage,
-    hasNextPage,
-    inView,
-    isFetchingNextPage,
-  });
-
   const articleList = data?.pages.flatMap((page) => page.articleList) ?? [];
 
   return (
@@ -104,13 +100,12 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
             );
           },
         )}
-        {isFetchingNextPage && (
-          <Repeat times={2}>
-            <li>
+        {isFetchingNextPage &&
+          Array.from({ length: 2 }, (_, index) => (
+            <li key={index}>
               <ArticleCardSkeleton />
             </li>
-          </Repeat>
-        )}
+          ))}
       </ul>
     </div>
   );
