@@ -1,11 +1,11 @@
 import type { ComponentProps } from 'react';
 
-import { tv, type VariantProps } from 'tailwind-variants';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 import AuthorAvatarSvg from '#/svgs/img-jeonghwan-avatar.svg';
+import { cn } from '@/shared/utils';
 
-const authorAvatarVariants = tv({
-  base: '',
+const authorAvatarVariants = cva('', {
   defaultVariants: {
     size: 'md',
   },
@@ -23,7 +23,7 @@ type AuthorAvatarProps = Omit<ComponentProps<typeof AuthorAvatarSvg>, 'width' | 
   VariantProps<typeof authorAvatarVariants>;
 
 function AuthorAvatar({ className, size, ...props }: AuthorAvatarProps) {
-  return <AuthorAvatarSvg className={authorAvatarVariants({ className, size })} {...props} />;
+  return <AuthorAvatarSvg className={cn(authorAvatarVariants({ size }), className)} {...props} />;
 }
 
 export { AuthorAvatar, authorAvatarVariants };

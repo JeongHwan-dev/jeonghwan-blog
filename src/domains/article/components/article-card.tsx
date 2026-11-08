@@ -6,7 +6,7 @@ import { Calendar } from 'lucide-react';
 import type { Article } from '@/domains/article/services';
 import { Card, CardContent } from '@/shared/components';
 import { cn, formatDate } from '@/shared/utils';
-import { ArticleTagBadge } from './';
+import { ArticleTagBadge } from './article-tag-badge';
 
 interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {
   thumbnailImagePriority?: boolean;

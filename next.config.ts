@@ -1,30 +1,24 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
-import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
 
-import { compact } from 'es-toolkit';
-
-const domains: string[] = compact([process.env.VERCEL_BLOB_STORAGE_DOMAIN]);
+const blobStorageDomain = process.env.VERCEL_BLOB_STORAGE_DOMAIN;
 
 const nextConfig: NextConfig = {
   images: {
-    domains,
+    remotePatterns: blobStorageDomain === undefined ? [] : [{ hostname: blobStorageDomain }],
   },
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
+  turbopack: {
+    rules: {
+      '*.svg': {
+        as: '*.js',
+        loaders: ['@svgr/webpack'],
+      },
+    },
   },
 };
-
-const withMDX = createMDX({});
 
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default bundleAnalyzer(withMDX(nextConfig));
+export default bundleAnalyzer(nextConfig);

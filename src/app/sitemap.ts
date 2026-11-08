@@ -12,12 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
       url: BASE_URL,
     },
-    {
-      changeFrequency: 'weekly',
-      lastModified: new Date(),
-      priority: 0.8,
-      url: `${BASE_URL}/about`,
-    },
   ] as const;
 
   const { articleList } = await getPublishedArticleList({
