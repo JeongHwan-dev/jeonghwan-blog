@@ -1,3 +1,90 @@
+## [1.6.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.6.0...v1.6.1) (2026-03-27)
+
+### 🐛 Bug Fixes
+
+* **article:** rehypePlugins 선언 순서 이슈 수정 ([#186](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/186)) ([05c7f1b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/05c7f1bb9c215a2e75a7ce2969ddcc5eaba3dade))
+
+## [1.6.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.1...v1.6.0) (2026-02-01)
+
+### ✨ Features
+
+* **article:** CustomMDX의 커스텀 컴포넌트에 YouTubePlayer 추가 ([#184](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/184)) ([86737e5](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/86737e5d247860b3753b0aaea51af6c3fc6c7a43))
+* **shared:** AuthorAvatar 컴포넌트 사용 시 aria-hidden 활성화 ([#178](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/178)) ([a5f2cab](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a5f2cabb4990f08e96107fc175828c6e4420edc4))
+
+### ♻️ Code Refactoring
+
+* **shared:** JeonghwanAvatar svg 파일 사용 코드를 AuthorAvatar 컴포넌트로 대체 ([#177](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/177)) ([d04e552](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/d04e552637f500f1af7fad53be62bf7067932373))
+* **shared:** ScrollFloatingActionButtonGroup 컴포넌트에 ButtonGroup 컴포넌트 활용 ([#185](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/185)) ([8eab0fd](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/8eab0fd1a0a2861c511a35dd18b0c720af890ccc))
+
+### 🔧 Miscellaneous Chores
+
+* **biome:** biome에 Tailwind CSS class 선언 순서 규칙 추가 ([#179](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/179)) ([2d104db](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2d104db75db17a04b18a004231e7cb13169b3fc7))
+* **core:** ESLint 설정 및 패키지 삭제 ([#173](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/173)) ([98f4cd7](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/98f4cd756c3cc6200358b7b70478ad566c53d5c9))
+* **core:** ESLint, Prettier를 Biome으로 마이그레이션 ([#172](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/172)) ([dc19eda](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/dc19eda762ecbd1992e5e109dabbe17585133997))
+* **core:** lint-staged에 gitleaks 확인 로직 추가 ([#171](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/171)) ([db3af37](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/db3af37a7175ca0f7076698672f5fc04e6a93f78))
+* **core:** Tailwind CSS Class Function VSCode 설정 추가 ([#174](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/174)) ([a68c653](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a68c653d9ad906eb354dc8405610f3502fc0d43b))
+* **github:** generate-label 스크립트의 import 경로 오타 수정 ([#181](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/181)) ([eb44c3d](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/eb44c3dbc1d864445c147995238df30a553a774e))
+* **github:** generate-labels 스크립트의 labeler 생성 로직 수정 ([#183](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/183)) ([1d4daf2](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/1d4daf28d2238ebdc1ac139276a238b6497f2b9b))
+* **label:** labels.config.mjs 업데이트에 따라 관련 파일 자동 동기화 ([e34483b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/e34483b9b349aff1a5f80c593757373446a6947b))
+* **label:** labels.config.mjs 업데이트에 따라 관련 파일 자동 동기화 ([a08e563](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/a08e56351e9f87e9bccc8411102744f7a96cc88d))
+* **lint-staged:** lint-staged 설정에 CI 환경 시 스킵 로직 추가 ([#182](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/182)) ([15dcdd6](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/15dcdd6504ceb14b3e8b37f6816b75eb13a0a6a6))
+* **tsconfig:** public 폴더 alias path 변경 ([#176](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/176)) ([518a709](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/518a709a7008507ec7fd86f0bb3ad760503b8de3))
+
+### 👷 CI
+
+* **core:** CI Workflow 추가 ([#175](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/175)) ([0185598](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/018559867246f1600e216cddeb47f5293f89315d))
+
+## [1.5.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.5.0...v1.5.1) (2026-01-18)
+
+### 📝 Documentation
+
+* **core:** AI Skills 문서 추가 ([#169](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/169)) ([91f4634](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/91f463445297c21c4635a6bf58346cb1aa61e7a9))
+
+### 🔧 Miscellaneous Chores
+
+* **core:** 보안 취약 패키지 업데이트 ([#168](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/168)) ([d230808](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/d2308084cb572645ed1c29d1fe0f07095406f6fc))
+
+## [1.5.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.4.0...v1.5.0) (2026-01-11)
+
+### ✨ Features
+
+* **article:** 아티클 조희 시 status 옵션에 Pre-Published 상태 로직 추가 ([#165](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/165)) ([cf24191](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/cf241911ba01761b01114d77d19aefc3cdc929e7))
+
+### 🔧 Miscellaneous Chores
+
+* **github:** main 브랜치 PR에 release 라벨 자동 적용 미동작 이슈 수정 ([#166](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/166)) ([f6ad7fb](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/f6ad7fbc80825ba991bd7498108da4aa785b949b))
+
+## [1.4.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.1...v1.4.0) (2026-01-11)
+
+### ✨ Features
+
+* **author:** ProfileCard 웹 접근성 요소 개선 ([#163](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/163)) ([4d67aa5](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/4d67aa5bae05cab36a6b8a060a3f3795ae1a1f4e))
+
+## [1.3.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.3.0...v1.3.1) (2026-01-11)
+
+### ⚡️ Performance Improvements
+
+* **article:** 아티클 목록 페이지의 무한 스크롤 prefetch 시점 개선 ([#160](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/160)) ([cb6426b](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/cb6426b44dd56f085d1ff3f91f3a00c808922ae6))
+
+## [1.3.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.2.0...v1.3.0) (2026-01-11)
+
+### ✨ Features
+
+* **article:** ArticleCard 컴포넌트 웹 접근성 요소 개선 ([#157](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/157)) ([05f3ecd](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/05f3ecd8675f64bcc28bd89e41da25092ca9b3f2))
+* **article:** 아티클 상세 페이지 웹 접근성 개선 ([#158](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/158)) ([2185e48](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2185e48ecd45da7622258df7486200511651216d))
+
+### 💄 Styles
+
+* **article:** TableOfContentsLink 컴포넌트의 className 선언 형식 변경 ([#154](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/154)) ([31579ed](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/31579ed6d82beefd55c4dfc9682c000d975d2783))
+
+### ♻️ Code Refactoring
+
+* **author:** ProfileCard 컴포넌트 코드 개선 ([#155](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/155)) ([f20d430](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/f20d430c656c148e6cb46e819556564e9a324faa))
+
+### 🔧 Miscellaneous Chores
+
+* **package:** Node.js 요구 버전을 24로 업데이트 ([#156](https://github.com/JeongHwan-dev/jeonghwan-blog/issues/156)) ([2b71fca](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/2b71fcad5059beb624a5795b0fa5227437dafbb0))
+
 ## [1.2.0](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.1.0...v1.2.0) (2026-01-04)
 
 ### ✨ Features
