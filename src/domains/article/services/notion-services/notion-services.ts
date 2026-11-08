@@ -1,6 +1,7 @@
 import { Client, type PageObjectResponse, type RichTextItemResponse } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
+import { fetchWithRetry } from './fetch-with-retry';
 import type {
   Article,
   ArticleTagFilterItem,
@@ -10,6 +11,7 @@ import type {
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  fetch: fetchWithRetry,
 });
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
