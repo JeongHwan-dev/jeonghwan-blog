@@ -19,11 +19,29 @@ const labelsJson = LABELS.map(({ color, description, emoji, value }) => ({
   name: formatLabelName(emoji, value),
 }));
 
-const labelerYml = LABELS.map(({ emoji, value }) => {
-  const pattern = value === 'release' ? `title: ['^release:']` : `base-branch: 'main'`;
+const getHeadBranchPattern = ({ isCommitType, value }) => {
+  if (isCommitType) {
+    return `^${value}/`;
+  }
 
-  return `${formatLabelName(emoji, value)}:\n  - ${pattern}`;
-}).join('\n\n');
+  if (value === 'release') {
+    return '^changeset-release/';
+  }
+
+  return null;
+};
+
+const labelerYml = LABELS.map((label) => {
+  const pattern = getHeadBranchPattern(label);
+
+  if (!pattern) {
+    return null;
+  }
+
+  return `${formatLabelName(label.emoji, label.value)}:\n  - head-branch: ['${pattern}']`;
+})
+  .filter(Boolean)
+  .join('\n\n');
 
 fs.writeFileSync(
   path.join(LABELS_DIRECTORY, 'labels.json'),

@@ -1,44 +1,41 @@
 ✨ feat:
-  - base-branch: 'main'
+  - head-branch: ['^feat/']
 
 🐛 fix:
-  - base-branch: 'main'
+  - head-branch: ['^fix/']
 
 🚑 hotfix:
-  - base-branch: 'main'
+  - head-branch: ['^hotfix/']
 
 💥 breaking:
-  - base-branch: 'main'
+  - head-branch: ['^breaking/']
 
 ⚡ perf:
-  - base-branch: 'main'
+  - head-branch: ['^perf/']
 
 ♻️ refactor:
-  - base-branch: 'main'
+  - head-branch: ['^refactor/']
 
 📝 docs:
-  - base-branch: 'main'
+  - head-branch: ['^docs/']
 
 ✅ test:
-  - base-branch: 'main'
+  - head-branch: ['^test/']
 
 💄 style:
-  - base-branch: 'main'
+  - head-branch: ['^style/']
 
 🔧 chore:
-  - base-branch: 'main'
+  - head-branch: ['^chore/']
 
 👷 ci:
-  - base-branch: 'main'
+  - head-branch: ['^ci/']
 
 🗑️ remove:
-  - base-branch: 'main'
+  - head-branch: ['^remove/']
 
 ⏪ revert:
-  - base-branch: 'main'
+  - head-branch: ['^revert/']
 
 🚀 release:
-  - title: ['^release:']
-
-🏷️ released:
-  - base-branch: 'main'
+  - head-branch: ['^changeset-release/']
