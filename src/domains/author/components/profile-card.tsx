@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import type { ElementType } from 'react';
 
-import { Github, Linkedin, type LucideIcon, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
+import GithubIcon from '#/svgs/icon-github.svg';
+import LinkedinIcon from '#/svgs/icon-linkedin.svg';
 import { AuthorAvatar, Button, Card, CardContent } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 
@@ -9,7 +12,7 @@ type SocialLinkType = 'email' | 'externalLink';
 
 interface SocialLinkItem {
   href: string;
-  icon: LucideIcon;
+  icon: ElementType;
   label: string;
   type: SocialLinkType;
 }
@@ -17,13 +20,13 @@ interface SocialLinkItem {
 const SOCIAL_LINK_LIST: SocialLinkItem[] = [
   {
     href: PROFILE.gitHubUrl,
-    icon: Github,
+    icon: GithubIcon,
     label: 'GitHub',
     type: 'externalLink',
   },
   {
     href: PROFILE.linkedInUrl,
-    icon: Linkedin,
+    icon: LinkedinIcon,
     label: 'LinkedIn',
     type: 'externalLink',
   },
@@ -40,12 +43,12 @@ function ProfileCard() {
     <Card className="shadow-none">
       <CardContent>
         <div className="space-y-4">
-          <div className="m-auto mb-4 max-h-36 max-w-36 rounded-full bg-muted p-2">
-            <AuthorAvatar size="full" role="img" className="rounded-full" aria-hidden="true" />
+          <div className="bg-muted m-auto mb-4 max-h-36 max-w-36 rounded-full p-2">
+            <AuthorAvatar size="full" className="rounded-full" aria-hidden="true" />
           </div>
 
           <div className="text-center">
-            <h2 className="font-bold text-lg">{PROFILE.koreanName}</h2>
+            <h2 className="text-lg font-bold">{PROFILE.koreanName}</h2>
             <p className="text-primary text-sm">{PROFILE.job}</p>
           </div>
 

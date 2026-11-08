@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { ComponentProps } from 'react';
 
 import { type MDXComponents, MDXRemote, type MDXRemoteProps } from 'next-mdx-remote-client/rsc';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { rehypePrettyCode } from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
@@ -18,7 +18,7 @@ function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
 
   const isInternal = isInternalLink(href);
   const linkClassName = cn(
-    'break-all text-muted-foreground transition-colors hover:text-primary',
+    'text-muted-foreground hover:text-primary break-all transition-colors',
     className,
   );
 
@@ -27,6 +27,7 @@ function CustomLink({ className, href, ...rest }: ComponentProps<'a'>) {
   }
 
   return (
+    // oxlint-disable-next-line jsx-a11y/anchor-has-content -- MDX가 children을 rest로 전달합니다.
     <a href={href} rel="noopener noreferrer" target="_blank" className={linkClassName} {...rest} />
   );
 }
@@ -40,7 +41,7 @@ function CustomCode({ className, ...rest }: ComponentProps<'code'>) {
 }
 
 function CustomImage({ alt, className, ...rest }: ComponentProps<'img'>) {
-  // biome-ignore lint/performance/noImgElement: next/image is not supported in the server component
+  // oxlint-disable-next-line nextjs/no-img-element -- next/image is not supported in the server component
   return <img alt={alt} className={cn('rounded-md', className)} {...rest} />;
 }
 

@@ -25,6 +25,5 @@ export interface GetPublishedArticleListRequestParams {
 
 export interface GetPublishedArticleListResponse {
   articleList: Article[];
-  hasMore: boolean;
   nextCursor: null | string;
 }

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "baseBranch": "main",
+  "access": "restricted",
+  "changelog": ["@changesets/changelog-github", { "repo": "JeongHwan-dev/jeonghwan-blog" }],
+  "commit": false,
+  "privatePackages": { "version": true, "tag": true }
+}

@@ -29,6 +29,6 @@ export default {
       return 'gitleaks protect --staged --redact';
     },
   ],
-  '*.{js,jsx,mjs,ts,tsx,mts}': ['pnpm check:fix'],
-  '*.{json,css,md}': ['pnpm format:fix'],
+  '*.{js,jsx,mjs,ts,tsx,mts}': ['oxlint --fix', 'oxfmt'],
+  '*.{json,css}': ['oxfmt'],
 };
