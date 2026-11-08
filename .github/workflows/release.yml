@@ -40,4 +40,4 @@ jobs:
           version-script: pnpm changeset version
           publish-script: pnpm changeset publish
           commit-message: 'chore(release): 버전 업데이트'
-          pr-title: 'release: 버전 업데이트'
+          pr-title: 'chore(package): version packages'
