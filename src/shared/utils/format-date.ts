@@ -1,4 +1,7 @@
-const koreanLongDate = new Intl.DateTimeFormat('ko-KR', { dateStyle: 'long' });
+const koreanLongDate = new Intl.DateTimeFormat('ko-KR', {
+  dateStyle: 'long',
+  timeZone: 'Asia/Seoul',
+});
 
 /**
  * 날짜를 한국어 로케일 형식의 문자열로 변환합니다 (예: 2025년 1월 5일)
