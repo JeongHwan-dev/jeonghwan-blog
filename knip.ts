@@ -5,10 +5,6 @@ const config: KnipConfig = {
   // 미사용 export/type은 shadcn 기반 UI 프리미티브(Card, Drawer, Select 등)가
   // 의도적으로 전체 API를 내보내는 구조라서 노이즈만 나와 제외했어요.
   exclude: ['exports', 'nsExports', 'types', 'nsTypes', 'enumMembers', 'duplicates'],
-  ignoreDependencies: [
-    // .releaserc.js의 preset: 'conventionalcommits' 문자열로만 참조돼요.
-    'conventional-changelog-conventionalcommits',
-  ],
   ignoreBinaries: [
     // lint-staged.config.mjs에서 실행하는 시스템 바이너리예요. (brew install gitleaks)
     'gitleaks',

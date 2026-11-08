@@ -1,3 +1,5 @@
+# Changelog
+
 ## [1.6.1](https://github.com/JeongHwan-dev/jeonghwan-blog/compare/v1.6.0...v1.6.1) (2026-03-27)
 
 ### 🐛 Bug Fixes

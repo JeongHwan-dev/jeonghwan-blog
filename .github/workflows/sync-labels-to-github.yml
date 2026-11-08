@@ -3,7 +3,7 @@ name: Sync Labels to GitHub
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
       - '.github/labels/labels.json'
   workflow_dispatch:

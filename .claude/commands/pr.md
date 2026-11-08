@@ -18,12 +18,12 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git r
 
 - `git rev-parse --abbrev-ref HEAD` — 현재 브랜치 확인
 - `git remote -v` — origin 존재 확인
-- `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'` — 기본 베이스 브랜치 확인 (이 프로젝트는 보통 `dev`)
+- `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'` — 기본 베이스 브랜치 확인 (이 프로젝트는 `main`)
 - `Read` `.github/pull_request_template.md` — 템플릿 구조 학습
 
 **검증:**
 
-- 현재 브랜치가 베이스 브랜치(`dev` 등)와 같으면 → `❌ 현재 브랜치가 베이스 브랜치(<base>)예요. feature 브랜치로 이동한 뒤 다시 실행해주세요.` 출력 후 종료.
+- 현재 브랜치가 베이스 브랜치(`main` 등)와 같으면 → `❌ 현재 브랜치가 베이스 브랜치(<base>)예요. feature 브랜치로 이동한 뒤 다시 실행해주세요.` 출력 후 종료.
 - `gh` 인증이 안 되어 있어서 위 명령이 실패하면 → 사용자에게 그대로 보여주고 `gh auth login`을 안내한 뒤 종료.
 
 ## 2. 변경사항 수집
