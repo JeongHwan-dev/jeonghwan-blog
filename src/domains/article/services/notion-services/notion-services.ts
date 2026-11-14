@@ -49,7 +49,7 @@ const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => 
     properties.Tags.type === 'multi_select'
       ? properties.Tags.multi_select.map(({ name }) => name)
       : [];
-  const date = properties.Date.type === 'date' ? (properties.Date.date?.start ?? '') : '';
+  const date = properties.Date.type === 'date' ? properties.Date.date?.start : undefined;
   const slug =
     properties.Slug.type === 'rich_text' ? getTextContent(properties.Slug.rich_text) || id : id;
   const thumbnailImageUrl =
