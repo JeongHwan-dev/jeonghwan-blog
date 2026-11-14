@@ -1,3 +1,5 @@
+import { unstable_cache } from 'next/cache';
+
 import { Client, type PageObjectResponse, type RichTextItemResponse } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
@@ -66,48 +68,52 @@ const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => 
   };
 };
 
-export const getPublishedArticleList = async ({
-  pageSize = 8,
-  sort = 'latest',
-  startCursor,
-  tag = '전체',
-}: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
-  const response = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
-    filter: {
-      and: [
-        getArticleStatusFilter(),
-        ...(tag && tag !== '전체'
-          ? [
-              {
-                multi_select: {
-                  contains: tag,
+export const getPublishedArticleList = unstable_cache(
+  async ({
+    pageSize = 8,
+    sort = 'latest',
+    startCursor,
+    tag = '전체',
+  }: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_DATABASE_ID!,
+      filter: {
+        and: [
+          getArticleStatusFilter(),
+          ...(tag && tag !== '전체'
+            ? [
+                {
+                  multi_select: {
+                    contains: tag,
+                  },
+                  property: 'Tags',
                 },
-                property: 'Tags',
-              },
-            ]
-          : []),
-      ],
-    },
-    page_size: pageSize,
-    sorts: [
-      {
-        direction: sort === 'latest' ? 'descending' : 'ascending',
-        property: 'Date',
+              ]
+            : []),
+        ],
       },
-    ],
-    start_cursor: startCursor,
-  });
+      page_size: pageSize,
+      sorts: [
+        {
+          direction: sort === 'latest' ? 'descending' : 'ascending',
+          property: 'Date',
+        },
+      ],
+      start_cursor: startCursor,
+    });
 
-  const articleList = response.results
-    .filter((page): page is PageObjectResponse => 'properties' in page)
-    .map(getArticleMetadata);
+    const articleList = response.results
+      .filter((page): page is PageObjectResponse => 'properties' in page)
+      .map(getArticleMetadata);
 
-  return {
-    articleList,
-    nextCursor: response.next_cursor,
-  };
-};
+    return {
+      articleList,
+      nextCursor: response.next_cursor,
+    };
+  },
+  ['published-article-list', String(isProductionEnv)],
+  { revalidate: 3600 },
+);
 
 export type ArticleWithMarkdown = {
   article: Article | null;
