@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.6.3
+
+### Patch Changes
+
+- [#201](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/201) [`418b4be`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/418b4beab192bf325c1998c199974bb1e367c57a) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - fix(article): 날짜가 비어 있는 글이 있으면 sitemap 빌드가 실패하던 문제 수정
+  
+  Notion Date가 비어 있으면 빈 문자열을 반환해 sitemap의 undefined 체크를 통과하지 못하고
+  new Date("").toISOString()에서 RangeError가 발생했어요. 글 상세의 formatDate도 같은 값으로 실패해요.
+  비어 있는 날짜는 타입 선언대로 undefined를 반환해 모든 사용처의 기존 분기가 동작하게 해요.
+
+- [#199](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/199) [`c227b07`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/c227b071c2d28a0856c7371fa600d632bacbbbda) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - fix(article): 다크모드에서 Giscus 댓글이 light 테마로 첫 렌더링되던 문제 수정
+  
+  theme 대신 resolvedTheme을 사용해 system 설정을 실제 테마로 해석하고,
+  클라이언트 마운트 후에만 Giscus를 렌더링해 첫 iframe이 올바른 테마로 로드되게 해요.
+  giscus 위젯은 iframe 로드 전의 테마 변경을 전달하지 않아 SSR 기본값(light)이 노출됐어요.
+
+- [#200](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/200) [`19ee635`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/19ee63546d1ef099d748e5e3735d2154b40f3bc6) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - fix(shared): 헤더의 GitHub·LinkedIn 아이콘이 잘려서 렌더링되던 문제 수정
+  
+  SVGR의 SVGO preset-default가 viewBox를 제거해, 24px 기준 아이콘이
+  Button의 size-4(16px)로 줄어들 때 확대되지 않고 잘려 보였어요.
+  removeViewBox를 비활성화해 viewBox를 유지해요.
+
+- [#196](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/196) [`25812f0`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/25812f036e19a9c9962804dcf2d6ee6ec6828b02) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - Version PR 머지 후 `v{version}` 태그와 GitHub Release가 생성되지 않던 문제를 수정했어요. changesets/action v2는 `publish-script`가 없으면 publish 단계를 건너뛰어서, `pnpm changeset publish`를 명시했어요. 이 저장소는 private 패키지라 npm 배포 없이 태그만 만들어요.
+
 ## 1.6.2
 
 ### Patch Changes
