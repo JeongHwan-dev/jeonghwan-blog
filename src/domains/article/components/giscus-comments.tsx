@@ -1,5 +1,7 @@
 'use client';
 
+import { useSyncExternalStore } from 'react';
+
 import Giscus from '@giscus/react';
 import { useTheme } from 'next-themes';
 
@@ -15,10 +17,17 @@ const isGiscusConfigInvalid =
   GISCUS_REPOSITORY_ID === undefined ||
   GISCUS_CATEGORY_ID === undefined;
 
-function GiscusComments() {
-  const { theme } = useTheme();
+const subscribe = () => () => {};
 
-  if (isGiscusConfigInvalid) {
+function GiscusComments() {
+  const { resolvedTheme } = useTheme();
+  const isClient = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
+
+  if (isGiscusConfigInvalid || !isClient) {
     return null;
   }
 
@@ -35,7 +44,7 @@ function GiscusComments() {
       repo={GISCUS_REPOSITORY as `${string}/${string}`}
       repoId={GISCUS_REPOSITORY_ID}
       strict="0"
-      theme={theme === 'dark' ? 'dark' : 'light'}
+      theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
     />
   );
 }
