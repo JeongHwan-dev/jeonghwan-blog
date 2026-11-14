@@ -68,52 +68,62 @@ const getArticleMetadata = ({ id, properties }: PageObjectResponse): Article => 
   };
 };
 
-export const getPublishedArticleList = unstable_cache(
-  async ({
-    pageSize = 8,
-    sort = 'latest',
-    startCursor,
-    tag = '전체',
-  }: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
-    const response = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID!,
-      filter: {
-        and: [
-          getArticleStatusFilter(),
-          ...(tag && tag !== '전체'
-            ? [
-                {
-                  multi_select: {
-                    contains: tag,
-                  },
-                  property: 'Tags',
-                },
-              ]
-            : []),
+const getAllPublishedArticleList = unstable_cache(
+  async (): Promise<Article[]> => {
+    const articleList: Article[] = [];
+    let startCursor: string | undefined;
+
+    do {
+      const response = await notion.databases.query({
+        database_id: process.env.NOTION_DATABASE_ID!,
+        filter: getArticleStatusFilter(),
+        page_size: 100,
+        sorts: [
+          {
+            direction: 'descending',
+            property: 'Date',
+          },
         ],
-      },
-      page_size: pageSize,
-      sorts: [
-        {
-          direction: sort === 'latest' ? 'descending' : 'ascending',
-          property: 'Date',
-        },
-      ],
-      start_cursor: startCursor,
-    });
+        start_cursor: startCursor,
+      });
 
-    const articleList = response.results
-      .filter((page): page is PageObjectResponse => 'properties' in page)
-      .map(getArticleMetadata);
+      articleList.push(
+        ...response.results
+          .filter((page): page is PageObjectResponse => 'properties' in page)
+          .map(getArticleMetadata),
+      );
+      startCursor = response.next_cursor ?? undefined;
+    } while (startCursor !== undefined);
 
-    return {
-      articleList,
-      nextCursor: response.next_cursor,
-    };
+    return articleList;
   },
   ['published-article-list', String(isProductionEnv)],
   { revalidate: 3600 },
 );
+
+export const getPublishedArticleList = async ({
+  pageSize = 8,
+  sort = 'latest',
+  startCursor,
+  tag = '전체',
+}: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
+  const allArticleList = await getAllPublishedArticleList();
+  const filteredArticleList =
+    !tag || tag === '전체'
+      ? allArticleList
+      : allArticleList.filter(({ tagList }) => tagList?.includes(tag));
+  const sortedArticleList =
+    sort === 'latest'
+      ? filteredArticleList
+      : filteredArticleList.toSorted((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
+  const start = Number(startCursor) || 0;
+  const end = start + pageSize;
+
+  return {
+    articleList: sortedArticleList.slice(start, end),
+    nextCursor: end < sortedArticleList.length ? String(end) : null,
+  };
+};
 
 export type ArticleWithMarkdown = {
   article: Article | null;
