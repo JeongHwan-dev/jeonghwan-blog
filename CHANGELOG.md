@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.5
+
+### Patch Changes
+
+- [#204](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/204) [`f27c3f2`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/f27c3f21febdce0ee2d4c3244c9b59ddefaa0dd4) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - perf(article): 태그 필터·정렬을 캐시된 전체 글 목록에서 처리해 조합마다 Notion을 호출하지 않도록 개선
+  
+  글 목록 캐시가 tag, sort 조합마다 따로 생겨 처음 누르는 조합은 매번 Notion을 호출했어요.
+  전체 글 목록 하나만 1시간 캐시하고 필터, 정렬, 페이지 나누기는 메모리에서 처리해요.
+  nextCursor는 Notion 커서 대신 오프셋 문자열로 바뀌어요.
+
 ## 1.6.4
 
 ### Patch Changes
