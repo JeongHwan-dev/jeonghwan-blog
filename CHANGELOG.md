@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.7.0
+
+### Minor Changes
+
+- [#208](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/208) [`8a0dcd5`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/8a0dcd50f5ddcade4aec027da0fc55a31c6e2f32) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - feat(article): 홈·글 상세 화면 UI 개편
+  
+  홈 상단에 대표 글을 보여주고, 태그 필터를 가로 목록으로 바꿔 정렬과 한 줄에 배치해요.
+  글 상세는 본문 폭을 좁히고 목차 레일과 코드 복사 버튼을 추가했으며, 프로필 카드를 글 하단으로 옮겼어요.
+  색상 토큰을 정리하고 쓰지 않는 Card, ScrollFloatingActionButtonGroup 컴포넌트를 삭제했어요.
+
+### Patch Changes
+
+- [#206](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/206) [`b2d963f`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/b2d963feeb208565b494e9946595d361a19420be) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - fix(shared): next-themes 테마 스크립트로 인한 React script 태그 경고 제거
+  
+  React 19는 클라이언트에서 렌더되는 script 태그에 경고를 띄워요.
+  테마 스크립트는 서버 HTML에서만 실행되면 되므로, 클라이언트에서는 type을 application/json으로 바꿔 경고를 없애요.
+
 ## 1.6.5
 
 ### Patch Changes
