@@ -6,9 +6,7 @@ import type { ComponentProps } from 'react';
 import type { ArticleSort } from '@/domains/article/services';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components';
 
-interface SortSelectProps extends ComponentProps<typeof Select> {
-  className?: string;
-}
+type SortSelectProps = ComponentProps<typeof Select>;
 
 interface SortOption {
   label: string;
@@ -26,11 +24,12 @@ const SORT_OPTION_LIST: SortOption[] = [
   },
 ];
 
-function SortSelect({ className, ...props }: SortSelectProps) {
+function SortSelect(props: SortSelectProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const selectedSort: ArticleSort = (searchParams.get('sort') as ArticleSort) || 'latest';
+  const selectedLabel = SORT_OPTION_LIST.find(({ value }) => value === selectedSort)?.label;
 
   const handleSelectValueChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -43,8 +42,11 @@ function SortSelect({ className, ...props }: SortSelectProps) {
 
   return (
     <Select value={selectedSort} onValueChange={handleSelectValueChange} {...props}>
-      <SelectTrigger aria-label="글 정렬 방식 선택" className={className}>
-        <SelectValue placeholder="정렬 방식 선택" />
+      <SelectTrigger
+        aria-label="글 정렬 방식 선택"
+        className="text-muted-foreground shrink-0 border-0 px-2 dark:bg-transparent"
+      >
+        <SelectValue placeholder="정렬 방식 선택">{selectedLabel}</SelectValue>
       </SelectTrigger>
       <SelectContent>
         {SORT_OPTION_LIST.map(({ label, value }) => (

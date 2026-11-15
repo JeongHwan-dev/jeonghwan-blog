@@ -1,23 +1,23 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { compile } from '@mdx-js/mdx';
 import withToc from '@stefanprobst/rehype-extract-toc';
 import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
-import { CalendarDays } from 'lucide-react';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 
 import {
   ArticleTagBadge,
+  ArticleThumbnail,
   CustomMDX,
   GiscusComments,
-  TableOfContentsCard,
+  TableOfContents,
 } from '@/domains/article/components';
 import { getArticleBySlug, getPublishedArticleList } from '@/domains/article/services';
-import { Separator } from '@/shared/components';
+import { ProfileCard } from '@/domains/author/components';
+import { AuthorAvatar } from '@/shared/components';
 import { PROFILE } from '@/shared/constants';
 import { formatDate } from '@/shared/utils';
 
@@ -117,23 +117,28 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   });
 
   return (
-    <div className="tossface grid grid-cols-1 gap-8 md:grid-cols-[1fr_240px]">
-      <div>
+    <div className="tossface">
+      <div className="max-w-article mx-auto w-full">
         <article>
-          {article.thumbnailImageUrl !== undefined && (
-            <div className="bg-muted relative mb-6 aspect-video rounded-md">
-              <Image
-                src={article.thumbnailImageUrl}
-                alt={article.title}
-                fill
-                priority
-                className="size-full rounded-md object-cover"
-              />
-            </div>
+          {article.thumbnailImageUrl && (
+            <ArticleThumbnail
+              src={article.thumbnailImageUrl}
+              alt={article.title}
+              priority
+              sizes="(max-width: 768px) 100vw, 720px"
+              className="motion-safe:animate-fade-in mb-8 rounded-xl"
+            />
           )}
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold md:text-4xl">{article.title}</h1>
-            <nav aria-label="태그 목록" className="flex gap-2">
+          <div className="motion-safe:animate-fade-in mb-10 flex flex-col gap-5">
+            <h1 className="text-4xl leading-tight font-bold tracking-tight break-keep md:text-5xl">
+              {article.title}
+            </h1>
+            <div className="text-muted-foreground flex items-center gap-2 text-sm">
+              <AuthorAvatar size="sm" aria-hidden="true" className="bg-muted rounded-full" />
+              <span className="text-foreground font-medium">{PROFILE.koreanName}</span>
+              <time dateTime={article.date}>{formatDate(article.date)}</time>
+            </div>
+            <nav aria-label="태그 목록" className="flex flex-wrap gap-2">
               {article.tagList?.map((tag) => (
                 <Link
                   key={tag}
@@ -148,39 +153,24 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 >
                   <ArticleTagBadge
                     tag={tag}
-                    className="hover:bg-primary/20 active:bg-primary/20 transition-colors"
+                    className="hover:bg-border active:bg-border transition-colors"
                   />
                 </Link>
               ))}
             </nav>
-            <div className="text-muted-foreground flex gap-4 text-sm">
-              <div className="flex items-center gap-1">
-                <CalendarDays aria-hidden="true" className="size-4" />
-                <time dateTime={article.date}>{formatDate(article.date)}</time>
-              </div>
-            </div>
           </div>
-          <Separator className="my-6 lg:my-8" />
-          {data?.toc !== undefined && (
-            <div className="mb-6 md:hidden">
-              <TableOfContentsCard itemList={data.toc} />
-            </div>
-          )}
-
-          <div className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-[var(--header-height)] max-w-none">
+          <div className="prose prose-headings:scroll-mt-[var(--header-height)] prose-headings:font-bold prose-headings:tracking-tight max-w-none">
             <CustomMDX source={markdown} />
           </div>
         </article>
 
-        <Separator className="my-16" />
+        <div className="my-16 border-y py-8">
+          <ProfileCard />
+        </div>
         <GiscusComments />
       </div>
 
-      {data?.toc !== undefined && (
-        <aside className="relative hidden md:block">
-          <TableOfContentsCard itemList={data.toc} className="sticky top-[var(--sticky-top)]" />
-        </aside>
-      )}
+      {data?.toc !== undefined && <TableOfContents itemList={data.toc} />}
     </div>
   );
 }
