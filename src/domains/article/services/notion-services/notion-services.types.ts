@@ -17,6 +17,7 @@ export interface ArticleTagFilterItem {
 }
 
 export interface GetPublishedArticleListRequestParams {
+  excludeFeatured?: boolean;
   pageSize?: number;
   sort?: string;
   startCursor?: string;

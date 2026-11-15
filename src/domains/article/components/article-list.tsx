@@ -13,13 +13,14 @@ import { ArticleCardSkeleton } from './article-card-skeleton';
 
 interface ArticleListProps {
   articleListPromise: Promise<GetPublishedArticleListResponse>;
+  excludeFeatured: boolean;
 }
 
 interface FetchArticleListProps {
   pageParam?: string;
 }
 
-function ArticleList({ articleListPromise }: ArticleListProps) {
+function ArticleList({ articleListPromise, excludeFeatured }: ArticleListProps) {
   const initialData = use(articleListPromise);
   const { ref } = useInView({
     onChange: (inView) => {
@@ -45,6 +46,10 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
       params.set('sort', sort);
     }
 
+    if (excludeFeatured) {
+      params.set('excludeFeatured', 'true');
+    }
+
     if (pageParam !== undefined) {
       params.set('startCursor', pageParam);
     }
@@ -66,31 +71,30 @@ function ArticleList({ articleListPromise }: ArticleListProps) {
     },
     initialPageParam: undefined,
     queryFn: fetchArticleList,
-    queryKey: ['GET_ARTICLE_LIST', tag, sort],
+    queryKey: ['GET_ARTICLE_LIST', tag, sort, excludeFeatured],
   });
 
   const articleList = data?.pages.flatMap((page) => page.articleList) ?? [];
 
   return (
-    <div className="space-y-6">
-      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div>
+      <ul className="divide-y">
         {articleList.map(
           ({ date, description, id, slug, tagList, thumbnailImageUrl, title }, index) => {
             const isLastItem = index === articleList.length - 1;
             const shouldObserve = isLastItem && hasNextPage && !isFetchingNextPage;
 
             return (
-              <li key={id} ref={shouldObserve ? ref : undefined}>
+              <li key={id} ref={shouldObserve ? ref : undefined} className="reveal-on-scroll">
                 <Link
                   href={`/articles/${slug}`}
                   aria-label={`${title} 글 읽기`}
-                  className="flex size-full"
+                  className="ease-out-quint block transition-transform duration-200 motion-safe:active:scale-98"
                 >
                   <ArticleCard
                     title={title}
                     date={date}
                     description={description}
-                    slug={slug}
                     tagList={tagList}
                     thumbnailImagePriority={index < 4}
                     thumbnailImageUrl={thumbnailImageUrl}

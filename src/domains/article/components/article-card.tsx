@@ -1,14 +1,13 @@
-import Image from 'next/image';
 import type { ComponentProps } from 'react';
 
-import { Calendar } from 'lucide-react';
-
 import type { Article } from '@/domains/article/services';
-import { Card, CardContent } from '@/shared/components';
 import { cn, formatDate } from '@/shared/utils';
+import { ArticleCardLayout } from './article-card-layout';
 import { ArticleTagBadge } from './article-tag-badge';
+import { ArticleThumbnail } from './article-thumbnail';
 
-interface ArticleCardProps extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id'> {
+interface ArticleCardProps
+  extends Omit<ComponentProps<'div'>, 'title'>, Omit<Article, 'id' | 'slug'> {
   thumbnailImagePriority?: boolean;
 }
 
@@ -25,53 +24,39 @@ function ArticleCard({
   ...rest
 }: ArticleCardProps) {
   return (
-    <Card
-      className={cn(
-        'group border-border bg-card/50 hover:border-primary/20 w-full cursor-pointer gap-0 overflow-hidden border p-0 shadow-none transition-all duration-300',
-        className,
-      )}
+    <ArticleCardLayout
+      className={cn('group', className)}
+      thumbnail={
+        thumbnailImageUrl ? (
+          <ArticleThumbnail
+            src={thumbnailImageUrl}
+            priority={thumbnailImagePriority}
+            sizes="(max-width: 768px) 100vw, 217px"
+            className="rounded-lg"
+          />
+        ) : undefined
+      }
       {...rest}
     >
-      {thumbnailImageUrl && (
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <Image
-            src={thumbnailImageUrl}
-            alt=""
-            fill
-            priority={thumbnailImagePriority}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="bg-accent object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+      {tagList.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {tagList.map((tag) => (
+            <ArticleTagBadge key={tag} tag={tag} />
+          ))}
         </div>
       )}
-      <CardContent className="flex flex-grow flex-col justify-between p-4 md:p-5">
-        <div>
-          {tagList.length > 0 && (
-            <div className="mb-3 flex flex-wrap gap-2 md:mb-4">
-              {tagList.map((tag) => (
-                <ArticleTagBadge key={tag} tag={tag} />
-              ))}
-            </div>
-          )}
-          <h2 className="group-hover:text-primary mb-2 text-lg font-bold tracking-tight transition-colors md:text-xl">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed md:text-base">
-              {description}
-            </p>
-          )}
-        </div>
-        <div className="text-muted-foreground mt-3 flex items-center gap-x-4 text-sm md:mt-4">
-          {date && (
-            <div className="flex items-center gap-1.5">
-              <Calendar aria-hidden="true" className="size-4" />
-              <time dateTime={date}>{formatDate(date)}</time>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      <h2 className="group-hover:text-link text-xl font-bold tracking-tight break-keep transition-colors md:text-2xl">
+        {title}
+      </h2>
+      {description && (
+        <p className="text-muted-foreground line-clamp-2 leading-relaxed">{description}</p>
+      )}
+      {date && (
+        <time dateTime={date} className="text-muted-foreground block text-sm">
+          {formatDate(date)}
+        </time>
+      )}
+    </ArticleCardLayout>
   );
 }
 

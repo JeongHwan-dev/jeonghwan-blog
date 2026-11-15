@@ -1,31 +1,24 @@
 import type { ComponentProps } from 'react';
 
-import { Card, Skeleton } from '@/shared/components';
-import { cn } from '@/shared/utils';
+import { Skeleton, SkeletonText } from '@/shared/components';
+import { ArticleCardLayout } from './article-card-layout';
 
 type ArticleCardSkeletonProps = ComponentProps<'div'>;
 
-function ArticleCardSkeleton({ className, ...rest }: ArticleCardSkeletonProps) {
+function ArticleCardSkeleton(props: ArticleCardSkeletonProps) {
   return (
-    <Card
-      className={cn(
-        'border-border bg-card/50 w-full gap-0 overflow-hidden border p-0 shadow-none',
-        className,
-      )}
-      {...rest}
-    >
-      <div className="aspect-[16/9]">
-        <Skeleton className="size-full rounded-none" />
+    <ArticleCardLayout thumbnail={<Skeleton className="aspect-video rounded-lg" />} {...props}>
+      <Skeleton className="h-5.5 w-14 rounded-sm" />
+      <div className="text-xl md:text-2xl">
+        <SkeletonText className="md:w-1/2" />
+        <SkeletonText className="w-1/2 md:hidden" />
       </div>
-      <div className="flex flex-grow flex-col justify-between p-4 md:p-5">
-        <div>
-          <Skeleton className="mb-3 h-5.5 w-18 md:mb-4" />
-          <Skeleton className="mb-2 h-7 w-full" />
-          <Skeleton className="h-5.5 w-full md:h-6.5" />
-        </div>
-        <Skeleton className="mt-3 h-5 w-30 md:mt-4" />
+      <div className="leading-relaxed">
+        <SkeletonText className="md:w-4/5" />
+        <SkeletonText className="w-2/3 md:hidden" />
       </div>
-    </Card>
+      <SkeletonText className="w-40 text-sm" />
+    </ArticleCardLayout>
   );
 }
 

@@ -12,4 +12,12 @@ function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
-export { Skeleton };
+function SkeletonText({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div className={cn('flex h-lh items-center', className)} {...props}>
+      <Skeleton className="h-[0.7em] w-full" />
+    </div>
+  );
+}
+
+export { Skeleton, SkeletonText };

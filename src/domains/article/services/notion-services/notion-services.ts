@@ -18,6 +18,8 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+export const ALL_TAG_NAME = '전체';
+
 const isProductionEnv = process.env.VERCEL_ENV === 'production';
 
 const createArticleStatusSelectFilter = (status: string) => ({
@@ -101,17 +103,25 @@ const getAllPublishedArticleList = unstable_cache(
   { revalidate: 3600 },
 );
 
+export const getFeaturedArticle = async (): Promise<Article | undefined> => {
+  const [featuredArticle] = await getAllPublishedArticleList();
+
+  return featuredArticle;
+};
+
 export const getPublishedArticleList = async ({
+  excludeFeatured = false,
   pageSize = 8,
   sort = 'latest',
   startCursor,
-  tag = '전체',
+  tag = ALL_TAG_NAME,
 }: GetPublishedArticleListRequestParams = {}): Promise<GetPublishedArticleListResponse> => {
   const allArticleList = await getAllPublishedArticleList();
+  const candidateArticleList = excludeFeatured ? allArticleList.slice(1) : allArticleList;
   const filteredArticleList =
-    !tag || tag === '전체'
-      ? allArticleList
-      : allArticleList.filter(({ tagList }) => tagList?.includes(tag));
+    !tag || tag === ALL_TAG_NAME
+      ? candidateArticleList
+      : candidateArticleList.filter(({ tagList }) => tagList?.includes(tag));
   const sortedArticleList =
     sort === 'latest'
       ? filteredArticleList
@@ -180,7 +190,7 @@ export const getArticleTagFilterList = async (): Promise<ArticleTagFilterItem[]>
   const allTagFilterItem: ArticleTagFilterItem = {
     count: articleList.length,
     id: 'all',
-    name: '전체',
+    name: ALL_TAG_NAME,
   };
   const tagFilterList: ArticleTagFilterItem[] = Object.entries(tagCount).map(([name, count]) => ({
     count,

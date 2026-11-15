@@ -7,7 +7,7 @@ import GithubIcon from '#/svgs/icon-github.svg';
 import LinkedinIcon from '#/svgs/icon-linkedin.svg';
 import { PROFILE } from '@/shared/constants';
 import { AuthorAvatar } from './author-avatar';
-import { Button } from './button';
+import { Button, buttonVariants } from './button';
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
 import { ThemeToggleButton } from './theme-toggle-button';
 
@@ -32,7 +32,7 @@ const SOCIAL_LINK_LIST: SocialLink[] = [
 
 function Header() {
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-dashed backdrop-blur">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 header-border-on-scroll sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-transparent backdrop-blur">
       <div className="container flex h-full items-center justify-between gap-2 md:gap-4">
         <Link href="/" className="mr-4 flex items-center gap-0.5">
           <AuthorAvatar size="sm" aria-hidden="true" />
@@ -61,16 +61,11 @@ function Header() {
           </div>
 
           <Drawer>
-            <DrawerTrigger asChild>
-              <Button
-                type="button"
-                size="icon"
-                variant="ghost"
-                aria-label="메뉴 열기"
-                className="md:hidden"
-              >
-                <Menu />
-              </Button>
+            <DrawerTrigger
+              aria-label="메뉴 열기"
+              className={buttonVariants({ className: 'md:hidden', size: 'icon', variant: 'ghost' })}
+            >
+              <Menu />
             </DrawerTrigger>
             <DrawerContent>
               <DrawerTitle className="sr-only">메뉴</DrawerTitle>
@@ -82,7 +77,7 @@ function Header() {
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label={`${label} 프로필 보기`}
-                    className="text-foreground/80 hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 flex items-center justify-center gap-1 rounded py-2 transition"
+                    className="text-foreground/80 hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 flex items-center justify-center gap-1 rounded-sm py-2 transition"
                   >
                     <Icon width={20} height={20} />
                     {label}
