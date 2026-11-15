@@ -9,7 +9,7 @@ interface ArticleTagBadgeProps extends ComponentProps<'span'> {
 function ArticleTagBadge({ className, tag, ...rest }: ArticleTagBadgeProps) {
   return (
     <Badge variant="secondary" className={className} {...rest}>
-      {`#${tag}`}
+      {tag}
     </Badge>
   );
 }

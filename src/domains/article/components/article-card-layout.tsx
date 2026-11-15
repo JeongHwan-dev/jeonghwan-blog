@@ -17,7 +17,7 @@ function ArticleCardLayout({ children, className, thumbnail, ...rest }: ArticleC
     >
       <div className="min-w-0 space-y-2 md:flex-1">{children}</div>
       {thumbnail && (
-        <div className="order-first w-full shrink-0 md:order-none md:w-48">{thumbnail}</div>
+        <div className="order-first w-full shrink-0 md:order-none md:w-[217px]">{thumbnail}</div>
       )}
     </div>
   );

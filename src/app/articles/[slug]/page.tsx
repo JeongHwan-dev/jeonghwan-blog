@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { compile } from '@mdx-js/mdx';
@@ -9,7 +8,6 @@ import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 
 import {
-  ArticleTagBadge,
   ArticleThumbnail,
   CustomMDX,
   GiscusComments,
@@ -138,26 +136,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               <span className="text-foreground font-medium">{PROFILE.koreanName}</span>
               <time dateTime={article.date}>{formatDate(article.date)}</time>
             </div>
-            <nav aria-label="태그 목록" className="flex flex-wrap gap-2">
-              {article.tagList?.map((tag) => (
-                <Link
-                  key={tag}
-                  href={{
-                    pathname: '/',
-                    query: {
-                      tag,
-                    },
-                  }}
-                  aria-label={`${tag} 태그가 있는 다른 글 보기`}
-                  className="flex"
-                >
-                  <ArticleTagBadge
-                    tag={tag}
-                    className="hover:bg-border active:bg-border transition-colors"
-                  />
-                </Link>
-              ))}
-            </nav>
           </div>
           <div className="prose prose-headings:scroll-mt-[var(--header-height)] prose-headings:font-bold prose-headings:tracking-tight max-w-none">
             <CustomMDX source={markdown} />

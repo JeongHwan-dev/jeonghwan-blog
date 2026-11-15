@@ -8,6 +8,7 @@ type ArticleCardSkeletonProps = ComponentProps<'div'>;
 function ArticleCardSkeleton(props: ArticleCardSkeletonProps) {
   return (
     <ArticleCardLayout thumbnail={<Skeleton className="aspect-video rounded-lg" />} {...props}>
+      <Skeleton className="h-5.5 w-14 rounded-sm" />
       <div className="text-xl md:text-2xl">
         <SkeletonText className="md:w-1/2" />
         <SkeletonText className="w-1/2 md:hidden" />

@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Article } from '@/domains/article/services';
 import { cn, formatDate } from '@/shared/utils';
 import { ArticleCardLayout } from './article-card-layout';
+import { ArticleTagBadge } from './article-tag-badge';
 import { ArticleThumbnail } from './article-thumbnail';
 
 interface ArticleCardProps
@@ -30,27 +31,31 @@ function ArticleCard({
           <ArticleThumbnail
             src={thumbnailImageUrl}
             priority={thumbnailImagePriority}
-            sizes="(max-width: 768px) 100vw, 192px"
+            sizes="(max-width: 768px) 100vw, 217px"
             className="rounded-lg"
           />
         ) : undefined
       }
       {...rest}
     >
+      {tagList.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {tagList.map((tag) => (
+            <ArticleTagBadge key={tag} tag={tag} />
+          ))}
+        </div>
+      )}
       <h2 className="group-hover:text-link text-xl font-bold tracking-tight break-keep transition-colors md:text-2xl">
         {title}
       </h2>
       {description && (
         <p className="text-muted-foreground line-clamp-2 leading-relaxed">{description}</p>
       )}
-      <div className="text-muted-foreground flex flex-wrap gap-x-2 text-sm">
-        {date && <time dateTime={date}>{formatDate(date)}</time>}
-        {tagList.map((tag) => (
-          <span key={tag} className="before:mr-2 before:content-['·'] first:before:content-none">
-            {tag}
-          </span>
-        ))}
-      </div>
+      {date && (
+        <time dateTime={date} className="text-muted-foreground block text-sm">
+          {formatDate(date)}
+        </time>
+      )}
     </ArticleCardLayout>
   );
 }

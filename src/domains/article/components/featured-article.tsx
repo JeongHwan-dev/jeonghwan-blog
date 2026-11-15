@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
 import type { Article } from '@/domains/article/services';
+import { Badge } from '@/shared/components';
 import { formatDate } from '@/shared/utils';
+import { ArticleTagBadge } from './article-tag-badge';
 import { ArticleThumbnail } from './article-thumbnail';
 import { FeaturedArticleLayout } from './featured-article-layout';
 
@@ -34,6 +36,12 @@ async function FeaturedArticle({ articlePromise }: FeaturedArticleProps) {
           />
         }
       >
+        <div className="flex flex-wrap gap-1.5">
+          <Badge>NEW</Badge>
+          {tagList?.map((tag) => (
+            <ArticleTagBadge key={tag} tag={tag} />
+          ))}
+        </div>
         <h2 className="group-hover:text-link line-clamp-3 text-3xl leading-snug font-bold tracking-tight break-keep transition-colors md:text-4xl">
           {title}
         </h2>
@@ -42,14 +50,11 @@ async function FeaturedArticle({ articlePromise }: FeaturedArticleProps) {
             {description}
           </p>
         )}
-        <div className="text-muted-foreground flex flex-wrap gap-x-2 text-sm">
-          {date && <time dateTime={date}>{formatDate(date)}</time>}
-          {tagList?.map((tag) => (
-            <span key={tag} className="before:mr-2 before:content-['·'] first:before:content-none">
-              {tag}
-            </span>
-          ))}
-        </div>
+        {date && (
+          <time dateTime={date} className="text-muted-foreground block text-sm">
+            {formatDate(date)}
+          </time>
+        )}
       </FeaturedArticleLayout>
     </Link>
   );
