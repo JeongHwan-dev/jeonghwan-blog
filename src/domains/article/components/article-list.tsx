@@ -89,7 +89,7 @@ function ArticleList({ articleListPromise, excludeFeatured }: ArticleListProps) 
                 <Link
                   href={`/articles/${slug}`}
                   aria-label={`${title} 글 읽기`}
-                  className="ease-out-quint block transition-transform duration-200 motion-safe:active:scale-(--press-scale)"
+                  className="ease-out-quint block transition-transform duration-200 motion-safe:active:scale-98"
                 >
                   <ArticleCard
                     title={title}

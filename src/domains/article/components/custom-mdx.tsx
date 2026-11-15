@@ -77,6 +77,9 @@ function CustomMDX({ components, options, ...rest }: CustomMDXProps) {
             [
               rehypePrettyCode,
               {
+                defaultLang: {
+                  block: 'plaintext',
+                },
                 keepBackground: false,
                 theme: {
                   dark: 'github-dark-dimmed',

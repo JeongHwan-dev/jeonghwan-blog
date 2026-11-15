@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { type MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { Toc } from '@stefanprobst/rehype-extract-toc';
 import { TextAlignStart } from 'lucide-react';
@@ -36,7 +36,7 @@ interface TableOfContentsProps {
 interface TableOfContentsNavProps {
   activeRange: ActiveRange | null;
   itemList: TableOfContentsItem[];
-  onItemClick?: () => void;
+  onItemClick?: (event: MouseEvent<HTMLAnchorElement>, id: string) => void;
 }
 
 const BAR_WIDTH_CLASS_NAME_LIST = ['w-4', 'w-3', 'w-2'];
@@ -90,7 +90,7 @@ function TableOfContentsNav({ activeRange, itemList, onItemClick }: TableOfConte
           aria-current={index === activeRange?.first ? 'location' : undefined}
           data-active={isInRange(index, activeRange)}
           className="text-muted-foreground hover:text-foreground data-[active=true]:text-primary truncate transition-colors"
-          onClick={onItemClick}
+          onClick={(event) => onItemClick?.(event, id)}
           style={{
             height: ROW_HEIGHT,
             lineHeight: `${ROW_HEIGHT}px`,
@@ -116,6 +116,22 @@ function TableOfContentsLabel() {
 function TableOfContents({ itemList: toc }: TableOfContentsProps) {
   const { activeRange, itemList } = useTableOfContents(toc);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const pendingHashRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const hash = pendingHashRef.current;
+
+    if (isDrawerOpen || hash === null) {
+      return;
+    }
+
+    pendingHashRef.current = null;
+    const frame = requestAnimationFrame(() => {
+      window.location.hash = hash;
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [isDrawerOpen]);
 
   return (
     <>
@@ -161,7 +177,9 @@ function TableOfContents({ itemList: toc }: TableOfContentsProps) {
             <TableOfContentsNav
               activeRange={activeRange}
               itemList={itemList}
-              onItemClick={() => {
+              onItemClick={(event, id) => {
+                event.preventDefault();
+                pendingHashRef.current = id;
                 setIsDrawerOpen(false);
               }}
             />

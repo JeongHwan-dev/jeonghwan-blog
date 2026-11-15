@@ -24,7 +24,7 @@ async function FeaturedArticle({ articlePromise }: FeaturedArticleProps) {
     <Link
       href={`/articles/${slug}`}
       aria-label={`${title} 글 읽기`}
-      className="group ease-out-quint motion-safe:animate-fade-in block transition-transform duration-200 motion-safe:active:scale-(--press-scale)"
+      className="group ease-out-quint motion-safe:animate-fade-in block transition-transform duration-200 motion-safe:active:scale-98"
     >
       <FeaturedArticleLayout
         thumbnail={

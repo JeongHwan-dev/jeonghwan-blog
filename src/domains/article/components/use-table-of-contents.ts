@@ -75,6 +75,7 @@ function useTableOfContents(toc: Toc) {
       const visibleRange = getVisibleRange(itemList);
 
       if (visibleRange === null) {
+        setActiveRange(null);
         return;
       }
 
