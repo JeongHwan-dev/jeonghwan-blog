@@ -8,7 +8,7 @@ import LinkedinIcon from '#/svgs/icon-linkedin.svg';
 import { PROFILE } from '@/shared/constants';
 import { AuthorAvatar } from './author-avatar';
 import { Button, buttonVariants } from './button';
-import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
+import { Drawer, DrawerClose, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
 import { ThemeToggleButton } from './theme-toggle-button';
 
 interface SocialLink {
@@ -30,6 +30,11 @@ const SOCIAL_LINK_LIST: SocialLink[] = [
   },
 ];
 
+const PAGE_LINK_LIST = [
+  { href: '/', label: 'Posts' },
+  { href: '/talks', label: 'Talks' },
+] as const;
+
 function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 header-border-on-scroll sticky top-0 z-50 h-[var(--header-height)] w-full border-b border-transparent backdrop-blur">
@@ -42,6 +47,11 @@ function Header() {
         <div className="flex items-center gap-0.5 md:gap-4">
           <div className="flex items-center gap-0.5">
             <nav className="hidden items-center gap-0.5 md:flex">
+              {PAGE_LINK_LIST.map(({ href, label }) => (
+                <Button key={href} asChild variant="ghost">
+                  <Link href={href}>{label}</Link>
+                </Button>
+              ))}
               {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                 <Button key={label} asChild size="icon" variant="ghost">
                   <Link
@@ -70,6 +80,16 @@ function Header() {
             <DrawerContent>
               <DrawerTitle className="sr-only">메뉴</DrawerTitle>
               <div className="mx-auto flex w-full flex-col gap-2 p-6">
+                {PAGE_LINK_LIST.map(({ href, label }) => (
+                  <DrawerClose key={href} asChild>
+                    <Link
+                      href={href}
+                      className="text-foreground/80 hover:bg-accent hover:text-foreground/100 active:bg-accent active:text-foreground/100 flex items-center justify-center rounded-sm py-2 transition"
+                    >
+                      {label}
+                    </Link>
+                  </DrawerClose>
+                ))}
                 {SOCIAL_LINK_LIST.map(({ href, icon: Icon, label }) => (
                   <Link
                     key={label}

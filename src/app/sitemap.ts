@@ -12,6 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
       url: BASE_URL,
     },
+    {
+      changeFrequency: 'monthly',
+      lastModified: new Date(),
+      priority: 0.8,
+      url: `${BASE_URL}/talks`,
+    },
   ] as const;
 
   const { articleList } = await getPublishedArticleList({
