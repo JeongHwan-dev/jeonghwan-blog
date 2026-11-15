@@ -13,6 +13,7 @@ function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       defaultTheme="system"
       disableTransitionOnChange
       enableSystem
+      scriptProps={typeof window === 'undefined' ? undefined : { type: 'application/json' }}
       {...props}
     >
       {children}
