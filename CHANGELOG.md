@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.0
+
+### Minor Changes
+
+- [#209](https://github.com/JeongHwan-dev/jeonghwan-blog/pull/209) [`00b5e5d`](https://github.com/JeongHwan-dev/jeonghwan-blog/commit/00b5e5d7237190104c6c6edbfa32c80bda3d68c2) Thanks [@JeongHwan-dev](https://github.com/JeongHwan-dev)! - feat(author): 발표 영상 페이지 추가
+  
+  컨퍼런스 발표 영상을 모아 페이지 안에서 바로 볼 수 있는 발표 페이지(/talks)를 추가했어요.
+  헤더와 모바일 메뉴에 Posts, Talks 링크를 넣고, 사이트맵에도 등록했어요.
+
 ## 1.7.0
 
 ### Minor Changes
